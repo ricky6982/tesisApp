@@ -1,0 +1,40 @@
+
+#####################################
+# carpetas a excluir del seguimiento
+
+/vendor/
+/bin/
+/app/bootstrap.php.cache
+/app/cache/*
+/app/cache
+/app/logs/*
+/web/bundles/
+/web/bower_components
+/web/public/temp
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+
+
+######################################
+# archivos de configuracion a excluir 
+# del seguimiento
+/app/phpunit.xml
+/app/SymfonyRequirements.php
+/app/bootstrap.php.cache
+/app/check.php
+/web/config.php
+
+/app/config/parameters.yml
+/composer.phar
+composer.lock
+
+######################################
+# archivos a excluir 
+
+*.pdf
+*.log
+*.cache
+*.php~
+*.rar
+*.orig
+*.db

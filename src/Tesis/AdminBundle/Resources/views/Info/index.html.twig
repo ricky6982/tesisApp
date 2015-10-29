@@ -1,0 +1,37 @@
+{% extends '::base.html.twig' %}
+
+{% block titulo %}Información del Edificio{% endblock %}
+
+{% block contenido %}
+    
+    <form action="{{ path('info_save') }}" method="POST" class="form-horizontal">
+        {{ _self.fieldForm(infoForm.nombre, 'Nombre') }}
+        {{ _self.fieldForm(infoForm.direccion, 'Dirección') }}
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Descripción</label>
+            <div class="col-sm-4">
+                {{ form_widget(infoForm.descripcion, {attr: {'class': 'form-control', 'rows': '8'}}) }}
+            </div>
+        </div>
+        {{ _self.fieldForm(infoForm.telefono, 'Teléfono') }}
+        {{ _self.fieldForm(infoForm.email, 'Email') }}
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-4">
+                <input type="submit" value="Guardar" class="btn btn-primary">
+                <a href="{{ path('admin_homepage') }}" class="btn btn-default">Cancelar</a>
+            </div>
+        </div>
+        {{ form_widget(infoForm) }}
+    </form>
+
+    
+{% endblock %}
+
+{% macro fieldForm(field, label) %}
+    <div class="form-group">
+        <label class="col-sm-2 control-label">{{ label }}</label>
+        <div class="col-sm-4">
+            {{ form_widget(field, {attr: {'class': 'form-control'}}) }}
+        </div>
+    </div>
+{% endmacro %}

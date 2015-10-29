@@ -1,3 +1,7 @@
 admin_homepage:
     path:     /
     defaults: { _controller: AdminBundle:Default:index }
+
+info:
+    resource:   "@AdminBundle/Resources/config/routing/info.yml"
+    prefix:     /Info

@@ -1,0 +1,8 @@
+info_homepage:
+    path:     /
+    defaults: { _controller: AdminBundle:Info:index }
+
+info_save:
+    path:     /Save
+    defaults: { _controller: AdminBundle:Info:save }
+    methods:   [POST]

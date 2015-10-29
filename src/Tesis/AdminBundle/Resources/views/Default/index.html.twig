@@ -1,3 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block titulo %}Administración{% endblock %}
+
+{% block contenido %}
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-2">
+            <a href="{{ path('info_homepage') }}" class="btn btn-block btn-default">Información General del Edificio</a>
+            <a href="#" class="btn btn-block btn-default">Ubicación de Servicios</a>
+        </div>
+        <div class="col-sm-4">
+            <a href="#" class="btn btn-block btn-default">Mapa de Recorridos</a>
+            <a href="#" class="btn btn-block btn-default">Cartas de Menú</a>
+        </div>
+    </div>
+
+{% endblock %}

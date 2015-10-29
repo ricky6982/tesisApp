@@ -1,0 +1,17 @@
+{# Caja de Busqueda 
+
+    Utiliza include de twig
+
+    Variables Necesarias:
+        - boton: false/true muestra un boton de "Buscar"
+#}
+
+<div class="form-inline pull-right" style="margin-bottom: 20px;">
+    <div class="input-group">
+        <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+        <input type="text" class="form-control" ng-model="search.texto">
+    </div>
+    {% if boton is defined and boton %}
+        <button class="btn btn-default">Buscar</button>
+    {% endif %}
+</div>

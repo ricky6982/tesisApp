@@ -1,0 +1,50 @@
+<header style="background-color: #2ebaea; color: white">
+    <div class="background-grid"></div>
+    <h1>Distribution Center</h1>
+</header>
+
+{% if is_granted('ROLE_USER') %}
+<div class="btn-group">
+    <div class="btn-group">
+        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-user"></i>
+            {% if is_granted('ROLE_SUPERADMIN') %}
+                Super Administrador
+            {% elseif is_granted('ROLE_ADMIN') %}
+                Administrador
+            {% elseif is_granted('ROLE_USER') %}
+                Usuario
+            {% endif %}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="{{ path('logout') }}"><span class="glyphicon glyphicon-eject"></span> Cerrar Sesión</a></li>
+        </ul>
+    </div>
+    <div class="btn-group">
+        <a href="{{ path('frontend_homepage') }}" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-th-large"></span>
+            Menú 
+        </a>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="{{ path('frontend_homepage') }}"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+        </ul>
+    </div>
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-cog"></span> Configuración
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#"><span class="glyphicon glyphicon-info-sign"></span> Información del Comercio</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-stats"></span> Estadisticas</a></li>
+            <li><a href=""><span class="glyphicon glyphicon-user"></span> Administrar Usuarios</a></li>
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endif %}

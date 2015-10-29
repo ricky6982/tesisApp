@@ -1,0 +1,13 @@
+<div class="navbar-default fix-navbar-default">
+    <div class="navbar-header">
+      <button data-toggle="collapse" data-target="#menu-lateral" class="navbar-toggle collapsed"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+    </div>
+    <div id="menu-lateral" class="navbar-collapse collapse">
+      <ul role="tablist" class="nav nav-pills animated bounce">
+          {% block items %}
+              <li style="width: 120px; text-align: center;"><a href="#home" data-toggle="tab"><img src="{{ asset('public/img/icons/ico.png') }}" style="width: 80%;">Entregas Pendientes</a></li>
+              <li style="width: 120px; text-align: center;"><a href="#tab2" data-toggle="tab"><img src="{{ asset('public/img/icons/ico.png') }}" style="width: 80%;">Entregas Finalizadas</a></li>
+          {% endblock %}
+      </ul>
+    </div>
+</div>

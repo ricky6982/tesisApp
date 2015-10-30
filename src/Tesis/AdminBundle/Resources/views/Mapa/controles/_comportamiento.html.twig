@@ -1,0 +1,10 @@
+
+<div class="checkbox">
+  <label>
+    <input type="checkbox" ng-model="comportamiento.movimiento" ng-change="comportamiento.toggleMovimiento()"/>Deshabilitar Movimiento de Nodos
+  </label>
+</div>
+<button ng-click="comportamiento.savePositions()" class="btn btn-info btn-block">Guardar posición de Nodos</button>
+<button ng-click="comportamiento.restorePositions()" class="btn btn-info btn-block">Restaurar posición de Nodos</button>
+<button ng-click="nodo.remove()" class="btn btn-danger btn-block">Eliminar Nodo Seleccionado</button>
+<button ng-click="arco.remove()" class="btn btn-warning btn-block">Eliminar Arco/s Seleccionado/s</button>

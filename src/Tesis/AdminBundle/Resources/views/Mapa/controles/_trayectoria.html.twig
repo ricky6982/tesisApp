@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="form-inline text-center">
+    <div ng-repeat="nodo in trayecto" style="margin-bottom: 15px; display: inline-block">
+      <input type="number" style="width: 75px;" ng-model="nodo.id" class="form-control text-center"/>
+      <label><i ng-hide="($index + 1) == trayecto.length" class="glyphicon glyphicon-menu-right"></i></label>
+    </div>
+  </div>
+</div>
+<div class="text-center">
+  <button ng-click="trayectoria.addField()" class="btn btn-success btn-block"> <i class="glyphicon glyphicon-plus"></i> Agregar Nodo</button>
+  <button ng-click="trayectoria.removeField()" class="btn btn-danger btn-block"> <i class="glyphicon glyphicon-minus"></i> Quitar Nodo</button>
+  <button ng-click="trayectoria.clean()" class="btn btn-info btn-block">
+     
+     Limpiar Trayecto
+  </button>
+  <button ng-click="trayectoria.reestablecer()" class="btn btn-warning btn-block">
+     
+     Reestablecer
+  </button>
+  <button ng-click="trayectoria.crear()" class="btn btn-primary btn-block"> <i class="glyphicon glyphicon-floppy-disk"></i> Crear Trayecto</button>
+</div>

@@ -1,0 +1,16 @@
+{% verbatim %}
+<div class="text-center form-group">
+  <label>Nodo Inicial</label>
+  <select ng-options="item.label for item in nodes._data track by item.id" ng-model="nodoInicial" class="form-control"></select>
+</div>
+<div class="text-center form-group">
+  <label>Nodo Final</label>
+  <select ng-options="item.label for item in nodes._data track by item.id" ng-model="nodoFinal" class="form-control"></select>
+</div>
+<div class="text-center form-group">
+  <button ng-click="shortestPath()" class="btn btn-primary">Calcular Camino más Corto</button>
+</div>
+<div class="well well-sm text-center">
+  <h3 ng-repeat="item in camino" style="display: inline-block;">{{ item }} <i ng-hide="$index +1 == camino.length" class="glyphicon glyphicon-menu-right"></i></h3>
+</div>
+{% endverbatim %}

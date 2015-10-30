@@ -1,0 +1,25 @@
+{% macro tabCollapse(titulo, id, file) %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a href="#{{ id }}" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true">
+                    {{ titulo }}
+                </a>
+            </h4>
+        </div>
+        <div id="{{ id }}" class="panel-collapse collapse">
+            <div class="panel-body">
+                {% include 'AdminBundle:Mapa:controles/' ~ file %}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    {{ _self.tabCollapse('Trayectorias', 'trayectorias', '_trayectoria.html.twig') }}
+    {{ _self.tabCollapse('Comportamiento', 'comportamiento', '_comportamiento.html.twig') }}
+    {{ _self.tabCollapse('Distancia entre Nodos', 'distancia', '_distancia.html.twig') }}
+    {{ _self.tabCollapse('Camino más corto', 'shortestPath', '_shortestPath.html.twig') }}
+    {{ _self.tabCollapse('Orientación', 'orientacion', '_orientacion.html.twig') }}
+</div>

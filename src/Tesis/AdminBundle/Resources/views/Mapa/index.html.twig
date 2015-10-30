@@ -2,6 +2,21 @@
 
 {% block titulo %}Mapa de Recorridos{% endblock %}
 
-{% block contenido %}
+{% block headerJavascripts %}
+    <script src="{{ asset('bower_components/vis/dist/vis.min.js') }}"></script>
+    <script src="{{ asset('public/js/dijkstras.js') }}"></script>
+    <script src="{{ asset('public/js/mapa/app.js') }}"></script>
+{% endblock %}
 
+{% block contenido %}
+    <div class="row" ng-app="app" ng-controller="AppCtrl">
+        <div class="col-sm-4 col-md-3">
+            
+        </div>
+        <div class="col-sm-8 col-md-9">
+            <div id="network">
+                
+            </div>
+        </div>
+    </div>
 {% endblock %}

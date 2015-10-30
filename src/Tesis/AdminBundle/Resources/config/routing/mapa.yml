@@ -1,0 +1,3 @@
+mapa_homepage:
+    path:       /
+    defaults:   { _controller: "AdminBundle:Mapa:index" }

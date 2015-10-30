@@ -5,3 +5,7 @@ admin_homepage:
 info:
     resource:   "@AdminBundle/Resources/config/routing/info.yml"
     prefix:     /Info
+
+mapa:
+    resource:   "@AdminBundle/Resources/config/routing/mapa.yml"
+    prefix:     /MapaDeRecorridos

@@ -19,14 +19,14 @@
         {% include '::partials/header.html.twig' %}
 
         {% block contenidoMax %}
-        <div class="container Site-content">
-            <div>
+        <div class="Site-content">
+            <div class="container">
                 <h1 class="animated fadeInLeft">
                     {% block titulo %}{% endblock %}
                 </h1>
             </div>
 
-            <div>
+            <div class="container">
                 {% block msjFlas %}
                     {% include '::partials/alert.html.twig' %}
                 {% endblock %}

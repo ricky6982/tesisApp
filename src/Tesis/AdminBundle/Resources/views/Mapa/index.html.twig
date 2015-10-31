@@ -9,13 +9,15 @@
 {% endblock %}
 
 {% block contenido %}
-    <div class="row" ng-app="app" ng-controller="AppCtrl">
+    <div class="row" ng-app="app" ng-controller="AppCtrl"  style="margin: 10px;">
         <div class="col-sm-4 col-md-3">
             {% include 'AdminBundle:Mapa:controles/panel.html.twig' %}
         </div>
         <div class="col-sm-8 col-md-9">
-            <div id="network">
-                
+            <div class="panel panel-default">
+                <div id="network" class="panel-body">
+                    
+                </div>
             </div>
         </div>
     </div>

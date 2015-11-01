@@ -1,3 +1,8 @@
 mapa_homepage:
     path:       /
     defaults:   { _controller: "AdminBundle:Mapa:index" }
+
+mapa_save:
+    path:       /save
+    defaults:   { _controller: "AdminBundle:Mapa:save" }
+    methods:    [POST]

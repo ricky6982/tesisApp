@@ -1,7 +1,7 @@
 buttonSendTemplate = ""+
     "<button class='{{ xclass }}' ng-disabled='flag' ng-click='submit()'>"+
         "{{ label }}"+
-        " <i class='glyphicon glyphicon-refresh animated infinite rotateIn' ng-show='flag'></i> "+
+        " <i class='glyphicon glyphicon-refresh spinning' ng-show='flag'></i> "+
     "</button>"+
 
 

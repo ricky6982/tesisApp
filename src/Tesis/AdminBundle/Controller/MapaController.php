@@ -31,7 +31,7 @@ class MapaController extends Controller
         $mapa = new MapaRecorrido();
         $mapa
             ->setFechaModificacion(new \Datetime('now'))
-            ->setMapaJson($decode->mapa)
+            ->setMapaJson($decode)
         ;
 
         $em = $this->getDoctrine()->getManager();

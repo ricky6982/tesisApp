@@ -9,12 +9,13 @@
     <script src="{{ asset('public/js/dijkstras.js') }}"></script>
     <script src="{{ asset('public/js/mapa/app.js') }}"></script>
     <script src="{{ asset('public/js/mapa/saveController.js') }}"></script>
+    <script src="{{ asset('public/js/buttonSendDirective.js') }}"></script>
 {% endblock %}
 
 {% block contenido %}
 <div ng-app="app" ng-controller="AppCtrl">
     <div class="text-right" style="margin: 0 20px;" ng-controller="SaveCtrl">
-        <button class="btn btn-primary" ng-click="btnSave()">Guardar Mapa de Recorrido</button>
+        <btn-send label="Guardar Mapa de Recorrido" xclass="btn btn-primary" method="POST" url="{{ path('mapa_save') }}" data="data"></btn-send>
     </div>
     <div class="row" style="margin: 10px;">
         <div class="col-sm-4 col-md-3">

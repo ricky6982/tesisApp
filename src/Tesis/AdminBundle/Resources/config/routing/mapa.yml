@@ -6,3 +6,8 @@ mapa_save:
     path:       /save
     defaults:   { _controller: "AdminBundle:Mapa:save" }
     methods:    [POST]
+
+mapa_current:
+    path:       /getCurrent
+    defaults:   { _controller: "AdminBundle:Mapa:currentMap" }
+    methods:    [GET]

@@ -1,14 +1,40 @@
 var app = angular.module('app', []);
 
+var mapa_data;
+
 app.controller('AppCtrl',[
-    '$scope', '$timeout', '$filter',
-    function($scope, $timeout, $filter){
+    '$scope', '$timeout', '$filter', '$http',
+    function($scope, $timeout, $filter, $http){
 
         // =============================
         // Definición de Grafo con VisJs
         // =============================
         $scope.nodes = new vis.DataSet([]);
         $scope.edges = new vis.DataSet([]);
+        
+        $scope.getCurrentMap = function(){
+            $http({
+                url: datos.urlGetCurrenMap,
+                method: 'GET',
+                })
+                .success(function(data, status){
+                    angular.forEach(data[0].mapaJson.nodes._data, function(n){
+                        $scope.nodes.add(n);
+                    });
+                    angular.forEach(data[0].mapaJson.edges._data, function(e){
+                        $scope.edges.add(e);
+                    });
+                    network.setOptions({nodes: {physics: false }});
+                    $scope.comportamiento.restorePositions();
+                })
+                .error(function(data){
+                    console.log('no hay mapa');
+                })
+            ;
+        };
+
+        $scope.getCurrentMap();
+
         $scope.options = {};
         $scope.container = document.getElementById('network');
         $scope.data = {

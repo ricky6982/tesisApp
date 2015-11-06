@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * MapaRecorrido
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tesis\AdminBundle\Entity\Repository\MapaRecorridoRepository")
  */
 class MapaRecorrido
 {

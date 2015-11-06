@@ -10,6 +10,12 @@
     <script src="{{ asset('public/js/mapa/app.js') }}"></script>
     <script src="{{ asset('public/js/mapa/saveController.js') }}"></script>
     <script src="{{ asset('public/js/buttonSendDirective.js') }}"></script>
+    <script>
+        var datos = { 
+            urlGetCurrenMap: "{{ path('mapa_current') }}",
+            urlSaveMap: "{{ path('mapa_save') }}"
+        };
+    </script>
 {% endblock %}
 
 {% block contenido %}

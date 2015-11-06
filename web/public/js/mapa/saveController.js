@@ -4,13 +4,12 @@ app.controller('SaveCtrl', [
         $scope.btnSave = function(){
             $http({
                 method: 'POST',
-                url: 'http://localhost/tesisApp/web/app_dev.php/Admin/MapaDeRecorridos/save',
+                url: datos.urlSaveMap,
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 data: {
-                    mapa: $scope.data,
-                    algo: [3,3,3,3]
+                    mapa: network,
                 }
             });
         };

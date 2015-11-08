@@ -26,6 +26,7 @@ app.controller('AppCtrl',[
                     });
                     network.setOptions({nodes: {physics: false }});
                     $scope.comportamiento.restorePositions();
+                    network.fit();
                 })
                 .error(function(data){
                     console.log('no hay mapa');

@@ -1,0 +1,56 @@
+{% extends "::base.html.twig" %}
+
+{% import '::components/_modal.html.twig' as modal %}
+
+{% block titulo %}Cartas de Menu{% endblock %}
+
+{% block contenido %}
+    <div class="row">
+        <div class="col-sm-3 col-sm-offset-2" style="height: 350px; background-color: orange;">
+            
+        </div>
+        <div class="col-sm-5">
+            <legend>Locales Registrados</legend>
+            <div class="text-right">
+                {{ modal.button('nuevoUsuario', 'plus', 'Usuario') }}
+            </div>
+
+            <table class="table table-striped table-bordered" style="margin-top: 15px;">
+                <thead>
+                    <tr>
+                        <th>Usuario</th><th>Local Comercial</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{# Ventanas Modales #}
+    {{ modal.header('nuevoUsuario', path('carta_save'), 'Nuevo Usuario') }}
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Nombre del Local</label>
+            <div class="col-sm-7">
+                {{ form_widget(usuarioForm.local, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Usuario</label>
+            <div class="col-sm-7">
+                {{ form_widget(usuarioForm.usuario, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Contraseña</label>
+            <div class="col-sm-7">
+                {{ form_widget(usuarioForm.password, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        {{ form_widget(usuarioForm) }}
+    {{ modal.footer('Guardar') }}
+{% endblock %}
+

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block titulo %}Administración{% endblock %}
 
@@ -10,7 +10,7 @@
         </div>
         <div class="col-sm-4">
             <a href="{{ path('mapa_homepage') }}" class="btn btn-block btn-default">Mapa de Recorridos</a>
-            <a href="#" class="btn btn-block btn-default">Cartas de Menú</a>
+            <a href="{{ path('carta_homepage') }}" class="btn btn-block btn-default">Cartas de Menú</a>
         </div>
     </div>
 

@@ -1,0 +1,8 @@
+carta_homepage:
+    path:       /
+    defaults:   { _controller: AdminBundle:CartaMenu:index }
+
+carta_save:
+    path:       /save
+    defaults:   { _controller: AdminBundle:CartaMenu:save }
+    methods:    [POST]

@@ -1,0 +1,42 @@
+{# Modal by Bootstrap 3 
+
+Variables Necesaria para Agregar Modal
+    idModal: Id del Modal
+    icon: icono del boton
+    name: Nombre del boton que llama al cuadro de dialogo
+    path: url donde se envia el formulario
+    title: Titulo de la ventana Modal
+    confirm: Nombre del boton de confirmación del formulario
+#}
+
+{% macro button(idModal, icon, name) %}
+    {# Boton del Modal #}
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ idModal }}">
+        <span class="glyphicon glyphicon-{{ icon | default('')}}"></span> {{ name }}
+    </button>
+{% endmacro %}
+
+{% macro header(idModal, path, title) %}
+    {# Cuerpo del Modal #}
+    <form action="{{ path }}" method="POST" class="form-horizontal">
+        <div class="modal fade" id="{{ idModal }}" tabindex="-1" role="dialog" aria-labellebdy="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">{{ title }}</h4>
+                    </div>
+                    <div class="modal-body">
+{% endmacro %}
+
+{% macro footer(confirm) %}
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" value="{{ confirm }}" class="btn btn-primary">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endmacro %}

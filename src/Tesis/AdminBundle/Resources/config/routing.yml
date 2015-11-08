@@ -9,3 +9,7 @@ info:
 mapa:
     resource:   "@AdminBundle/Resources/config/routing/mapa.yml"
     prefix:     /MapaDeRecorridos
+
+cartaMenu:
+    resource:   "@AdminBundle/Resources/config/routing/cartaMenu.yml"
+    prefix:     /CartaMenu

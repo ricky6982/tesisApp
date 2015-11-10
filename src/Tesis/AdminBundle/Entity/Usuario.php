@@ -24,7 +24,7 @@ class Usuario
     /**
      * @var string
      *
-     * @ORM\Column(name="usuario", type="string", length=255)
+     * @ORM\Column(name="usuario", type="string", length=50)
      */
     private $usuario;
 
@@ -45,7 +45,7 @@ class Usuario
     /**
      * @var string
      *
-     * @ORM\Column(name="salt", type="string", length=255)
+     * @ORM\Column(name="salt", type="string", length=255, nullable=true)
      */
     private $salt;
 
@@ -59,7 +59,7 @@ class Usuario
     /**
      * @var string
      *
-     * @ORM\Column(name="rol", type="string", length=255)
+     * @ORM\Column(name="rol", type="string", length=255, nullable=true)
      */
     private $rol;
 

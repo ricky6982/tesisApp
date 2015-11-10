@@ -22,9 +22,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for usuario in usuarios %}
                     <tr>
-                        
+                        <td>{{ usuario.usuario }}</td>
+                        <td>{{ usuario.local }}</td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

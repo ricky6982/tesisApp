@@ -1,0 +1,3 @@
+local_homepage:
+    path:   /
+    defaults:   { _controller: "AdminBundle:LocalComercial:index" }

@@ -13,3 +13,4 @@ mapa:
 cartaMenu:
     resource:   "@AdminBundle/Resources/config/routing/cartaMenu.yml"
     prefix:     /CartaMenu
+

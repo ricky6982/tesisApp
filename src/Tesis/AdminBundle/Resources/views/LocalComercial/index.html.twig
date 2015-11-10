@@ -1,0 +1,39 @@
+{% extends "::base.html.twig" %}
+
+{% block titulo %}Local Comercial{% endblock %}
+
+{% block contenido %}
+    <div class="container">
+        <form action="#" class="form-horizontal" method="POST">
+            <div class="form-group">
+                <label for="" class="col-sm-3 control-label">Nombre del Local</label>
+                <div class="col-sm-5">
+                    {{ form_widget(localForm.local, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-3 control-label">Dirección</label>
+                <div class="col-sm-5">
+                    {{ form_widget(localForm.direccion, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-3 control-label">Teléfono</label>
+                <div class="col-sm-5">
+                    {{ form_widget(localForm.telefono, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-5">
+                    <input type="submit" class="btn btn-primary" value="Guardar Información">
+                </div>
+            </div>
+            {{ form_widget(localForm.telefono) }}
+        </form>
+
+        <legend>Edición de la Carta de Menú</legend>
+
+        
+    </div>
+
+{% endblock %}

@@ -1,3 +1,23 @@
 local_homepage:
     path:   /
     defaults:   { _controller: "AdminBundle:LocalComercial:index" }
+
+categoria_save:
+    path:   /GuardarCategoria
+    defaults:   { _controller: "AdminBundle:Categoria:save" }
+    methods: [POST]
+
+categoria_remove:
+    path:   /EliminarCategoria
+    defaults:   { _controller: "AdminBundle:Categoria:save" }
+    methods: [POST]
+
+producto_save:
+    path:   /GuardarProducto
+    defaults:   { _controller: "AdminBundle:Producto:save" }
+    methods: [POST]
+
+producto_remove:
+    path:   /EliminarProducto
+    defaults:   { _controller: "AdminBundle:Producto:save" }
+    methods: [POST]

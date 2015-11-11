@@ -14,13 +14,23 @@
             <div class="form-group">
                 <label for="" class="col-sm-3 control-label">Dirección</label>
                 <div class="col-sm-5">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-home"></span>
+                        </div>
                     {{ form_widget(localForm.direccion, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="" class="col-sm-3 control-label">Teléfono</label>
                 <div class="col-sm-5">
-                    {{ form_widget(localForm.telefono, {'attr': {'class': 'form-control'}}) }}
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-earphone"></span>
+                        </div>
+                        {{ form_widget(localForm.telefono, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -32,8 +42,22 @@
         </form>
 
         <legend>Edición de la Carta de Menú</legend>
+        <div class="well">
+            <legend>Formulario Categoria</legend>
+            <form action="{{ path('categoria_save') }}" method="POST">
+                {{ form_widget(categoriaForm) }}
+                <input type="submit" value="Crear Categoria" class="btn btn-primary">
+            </form>
+        </div>
 
-        
+        <div class="well">
+            <legend>Formulario Producto</legend>
+            <form action="{{ path('producto_save') }}" method="POST">
+                {{ form_widget(productoForm) }}
+                <input type="submit" value="Crear Producto" class="btn btn-primary">
+            </form>
+        </div>
+        {% include 'AdminBundle:LocalComercial:_edicionCarta.html.twig' %}
     </div>
 
 {% endblock %}

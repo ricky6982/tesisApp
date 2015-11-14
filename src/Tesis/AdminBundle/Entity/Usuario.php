@@ -24,7 +24,7 @@ class Usuario
     /**
      * @var string
      *
-     * @ORM\Column(name="usuario", type="string", length=50)
+     * @ORM\Column(name="usuario", type="string", length=50, unique=true)
      */
     private $usuario;
 
@@ -38,14 +38,14 @@ class Usuario
     /**
      * @var string
      *
-     * @ORM\Column(name="direccion", type="string", length=100)
+     * @ORM\Column(name="direccion", type="string", length=100, nullable=true)
      */
     private $direccion;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="telefono", type="string", length=30)
+     * @ORM\Column(name="telefono", type="string", length=30, nullable=true)
      */
     private $telefono;
 

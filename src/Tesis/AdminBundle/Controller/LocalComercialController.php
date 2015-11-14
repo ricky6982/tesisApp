@@ -26,4 +26,9 @@ class LocalComercialController extends Controller
             ));
     }
 
+    public function saveInfoAction(Request $request)
+    {
+        return $this->redirectToRoute('local_homepage');
+    }
+
 }

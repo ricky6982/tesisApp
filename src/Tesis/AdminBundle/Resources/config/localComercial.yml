@@ -2,6 +2,11 @@ local_homepage:
     path:   /
     defaults:   { _controller: "AdminBundle:LocalComercial:index" }
 
+local_save_info:
+    path:   /Info/Save
+    defaults:   { _controller: "AdminBundle:LocalComercial:saveInfo" }
+    methods: [POST]
+
 categoria_save:
     path:   /GuardarCategoria
     defaults:   { _controller: "AdminBundle:Categoria:save" }

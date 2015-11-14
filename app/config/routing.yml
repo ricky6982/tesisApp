@@ -2,6 +2,16 @@ frontend:
     resource: "@FrontendBundle/Resources/config/routing.yml"
     prefix:   /
 
+login:
+    path:     /Login
+    defaults: { _controller: "AdminBundle:Security:login" }
+
+login_check:
+    path:     /login_check
+
+logout:
+    path:     /logout
+
 admin:
     resource: "@AdminBundle/Resources/config/routing.yml"
     prefix:   /Admin
@@ -9,3 +19,4 @@ admin:
 local_comercial:
     resource: "@AdminBundle/Resources/config/localComercial.yml"
     prefix:   /LocalComercial
+

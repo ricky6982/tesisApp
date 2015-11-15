@@ -16,6 +16,10 @@ security:
             logout:
                 path: logout
                 target: /Login
+            remember_me:
+                key:    %secret%
+                lifetime: 604800
+                path: /
 
     access_control:
         - { path: ^/LocalComercial, roles: ROLE_LOCAL_COMERCIAL }

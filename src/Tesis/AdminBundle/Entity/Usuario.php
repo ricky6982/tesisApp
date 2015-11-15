@@ -3,6 +3,7 @@
 namespace Tesis\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Usuario
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Usuario
+class Usuario implements UserInterface
 {
     /**
      * @var integer
@@ -278,5 +279,20 @@ class Usuario
     public function getRol()
     {
         return $this->rol;
+    }
+
+    public function getRoles()
+    {
+        return array($this->rol);
+    }
+
+    public function getUsername()
+    {
+        return $this->usuario;
+    }
+
+    public function eraseCredentials()
+    {
+
     }
 }

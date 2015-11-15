@@ -12,8 +12,8 @@
                 Super Administrador
             {% elseif is_granted('ROLE_ADMIN') %}
                 Administrador
-            {% elseif is_granted('ROLE_USER') %}
-                Usuario
+            {% elseif is_granted('ROLE_LOCAL_COMERCIAL') %}
+                {{ app.user.username }}
             {% endif %}
             <span class="caret"></span>
         </button>
@@ -21,6 +21,7 @@
             <li><a href="{{ path('logout') }}"><span class="glyphicon glyphicon-eject"></span> Cerrar Sesión</a></li>
         </ul>
     </div>
+    {% if is_granted('ROLE_ADMIN') %}
     <div class="btn-group">
         <a href="{{ path('frontend_homepage') }}" type="button" class="btn btn-default">
             <span class="glyphicon glyphicon-th-large"></span>
@@ -33,7 +34,6 @@
             <li><a href="{{ path('frontend_homepage') }}"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
         </ul>
     </div>
-    {% if is_granted('ROLE_ADMIN') %}
     <div class="btn-group">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
             <span class="glyphicon glyphicon-cog"></span> Configuración

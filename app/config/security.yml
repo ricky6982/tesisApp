@@ -13,13 +13,12 @@ security:
             form_login:
                 login_path: login
                 check_path: login_check
-                default_target_path: /Admin
             logout:
                 path: logout
-                target: /
+                target: /Login
 
     access_control:
-        - { path: ^/LocalComercial, roles: ROLE_LOCAL }
+        - { path: ^/LocalComercial, roles: ROLE_LOCAL_COMERCIAL }
         - { path: ^/Admin, roles: ROLE_ADMIN }
         - { path: ^/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
@@ -27,7 +26,8 @@ security:
         users:
             memory:
                 users:
-                    admin: { password: 1234, roles: ROLE_ADMIN }
+                    admin: { password: admin, roles: ROLE_ADMIN }
+                    local: { password: local, roles: ROLE_LOCAL_COMERCIAL }
 
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext

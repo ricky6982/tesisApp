@@ -30,7 +30,8 @@ class CategoriaController extends Controller
         $categoriaForm->handleRequest($request);
         if ($categoriaForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $local = $em->getRepository('AdminBundle:Usuario')->findOneByUsuario($this->getUser());
+            $user = $this->getUser();
+            $local = $em->getRepository('AdminBundle:Usuario')->findOneByUsuario($user->getUsername());
             $categoria->setLocal($local);
             $em->persist($categoria);
             $em->flush();

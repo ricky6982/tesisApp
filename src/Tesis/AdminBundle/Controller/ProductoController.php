@@ -12,11 +12,13 @@ class ProductoController extends Controller
 {
     public function saveAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $local = $em->getRepository('AdminBundle:Usuario')->findOneByUsuario($user->getUsername());
         $producto = new Producto();
-        $productoForm = $this->createForm(new ProductoType(), $producto);
+        $productoForm = $this->createForm(new ProductoType(), $producto, array('vars' => array('idLocal' => $local->getId())));
         $productoForm->handleRequest($request);
         if ($productoForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($producto);
             $em->flush();
 

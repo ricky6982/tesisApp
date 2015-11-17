@@ -20,7 +20,7 @@ class LocalComercialController extends Controller
         $local = $em->getRepository('AdminBundle:Usuario')->findOneByUsuario($user->getUsername());
         $localForm = $this->createForm(new LocalComercialType(), $local);
         $categoriaForm = $this->createForm(new CategoriaType());
-        $productoForm = $this->createForm(new ProductoType());
+        $productoForm = $this->createForm(new ProductoType(), null, array('vars' => array('idLocal' => $local->getId())));
 
         return $this->render('AdminBundle:LocalComercial:index.html.twig', array(
                 'local' => $local,

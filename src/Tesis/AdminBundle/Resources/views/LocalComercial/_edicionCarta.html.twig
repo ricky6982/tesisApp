@@ -1,4 +1,8 @@
 
+
+{% for categoria in local.categorias %}
+
+<legend>{{ categoria.nombre }}</legend>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -9,8 +13,11 @@
         </tr>
     </thead>
     <tbody>
+        {% for producto in categoria.productos %}
         <tr>
-            <td></td>
+            <td>{{ loop.index }}</td>
         </tr>
+        {% endfor %}
     </tbody>
 </table>
+{% endfor %}

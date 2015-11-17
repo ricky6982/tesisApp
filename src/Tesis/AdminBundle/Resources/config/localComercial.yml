@@ -7,6 +7,11 @@ local_save_info:
     defaults:   { _controller: "AdminBundle:LocalComercial:saveInfo" }
     methods: [POST]
 
+categoria_list:
+    path:   /ListadoCategorias
+    defaults: { _controller: "AdminBundle:Categoria:list" }
+    methods: [GET]
+
 categoria_save:
     path:   /GuardarCategoria
     defaults:   { _controller: "AdminBundle:Categoria:save" }

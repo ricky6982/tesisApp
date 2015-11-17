@@ -78,6 +78,11 @@ class Usuario implements UserInterface
      */
     private $rol;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Categoria", mappedBy="local")
+     */
+    private $categorias;
+
 
     /**
      * Get id
@@ -294,5 +299,46 @@ class Usuario implements UserInterface
     public function eraseCredentials()
     {
 
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->categorias = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add categoria
+     *
+     * @param \Tesis\AdminBundle\Entity\Categoria $categoria
+     *
+     * @return Usuario
+     */
+    public function addCategoria(\Tesis\AdminBundle\Entity\Categoria $categoria)
+    {
+        $this->categorias[] = $categoria;
+
+        return $this;
+    }
+
+    /**
+     * Remove categoria
+     *
+     * @param \Tesis\AdminBundle\Entity\Categoria $categoria
+     */
+    public function removeCategoria(\Tesis\AdminBundle\Entity\Categoria $categoria)
+    {
+        $this->categorias->removeElement($categoria);
+    }
+
+    /**
+     * Get categorias
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategorias()
+    {
+        return $this->categorias;
     }
 }

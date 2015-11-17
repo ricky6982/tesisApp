@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Categoria
  *
- * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Table
+ * @ORM\Entity(repositoryClass="Tesis\AdminBundle\Entity\Repository\CategoriaRepository")
  */
 class Categoria
 {
@@ -27,6 +27,11 @@ class Categoria
      * @ORM\Column(name="nombre", type="string", length=50)
      */
     private $nombre;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Usuario", inversedBy="categorias")
+     */
+    private $local;
 
     /**
      * @ORM\OneToMany(targetEntity="Producto", mappedBy="categoria")
@@ -112,5 +117,29 @@ class Categoria
     public function getProductos()
     {
         return $this->productos;
+    }
+
+    /**
+     * Set local
+     *
+     * @param \Tesis\AdminBundle\Entity\Usuario $local
+     *
+     * @return Categoria
+     */
+    public function setLocal(\Tesis\AdminBundle\Entity\Usuario $local = null)
+    {
+        $this->local = $local;
+
+        return $this;
+    }
+
+    /**
+     * Get local
+     *
+     * @return \Tesis\AdminBundle\Entity\Usuario
+     */
+    public function getLocal()
+    {
+        return $this->local;
     }
 }

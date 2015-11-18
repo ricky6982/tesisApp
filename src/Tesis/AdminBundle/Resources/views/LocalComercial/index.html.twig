@@ -1,28 +1,67 @@
 {% extends "::base.html.twig" %}
 
+{% import '::components/_modal.html.twig' as modal %}
+
 {% block titulo %}Local Comercial {{ local.local }}{% endblock %}
 
 {% block contenido %}
     <div class="container">
         {% include 'AdminBundle:LocalComercial:forms/edit.html.twig' %}
 
-        <legend>Edición de la Carta de Menú</legend>
-        <div class="well">
-            <legend>Formulario Categoria</legend>
-            <form action="{{ path('categoria_save') }}" method="POST">
-                {{ form_widget(categoriaForm) }}
-                <input type="submit" value="Crear Categoria" class="btn btn-primary">
-            </form>
-        </div>
+        <legend>
+            Edición de la Carta de Menú
+            <div class="pull-right">
+                {{ modal.button('nuevaCategoria', 'plus', 'Categoria') }}
+                {% if (local.categorias |length) > 0 %}
+                    {{ modal.button('nuevoProducto', 'plus', 'Producto') }}
+                {% endif %}
+            </div>
+        </legend>
 
-        <div class="well">
-            <legend>Formulario Producto</legend>
-            <form action="{{ path('producto_save') }}" method="POST">
-                {{ form_widget(productoForm) }}
-                <input type="submit" value="Crear Producto" class="btn btn-primary">
-            </form>
-        </div>
         {% include 'AdminBundle:LocalComercial:_edicionCarta.html.twig' %}
+        
+        {# Definición de Modals #}
+        {{ modal.header('nuevaCategoria', path('categoria_save'), 'Nueva Categoria') }}
+            <div class="form-group">
+                <label class="col-sm-4 control-label">{{ form_label(categoriaForm.nombre) }}</label>
+                <div class="col-sm-6">
+                    {{ form_widget(categoriaForm.nombre, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_rest(categoriaForm) }}
+            </div>
+        {{ modal.footer('Guardar') }}
+
+        {{ modal.header('nuevoProducto', path('producto_save'), 'Nuevo Producto') }}
+            <div class="form-group">
+                <label for="" class="col-sm-4 control-label">
+                    {{ form_label(productoForm.categoria) }}
+                </label>
+                <div class="col-sm-6">
+                    {{ form_widget(productoForm.categoria, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-4 control-label">
+                    {{ form_label(productoForm.descripcion) }}
+                </label>
+                <div class="col-sm-6">
+                    {{ form_widget(productoForm.descripcion, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-4 control-label">
+                    {{ form_label(productoForm.precio) }}
+                </label>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        {{ form_widget(productoForm.precio, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+            {{ form_widget(productoForm) }}
+        {{ modal.footer('Guardar') }}
+        
     </div>
 
 {% endblock %}

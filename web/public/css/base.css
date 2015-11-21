@@ -38,6 +38,11 @@
 .info-nodo-warning {
   background-color: #FFBD66;
 }
+.tab-bordered > div {
+  border: 1px solid #ddd;
+  border-top: none;
+  padding: 20px;
+}
 .spinning {
   -webkit-animation-name: spin;
   -webkit-animation-duration: 1000ms;

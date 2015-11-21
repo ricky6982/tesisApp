@@ -25,9 +25,13 @@
             <li class="active"><a href="#servicios" data-toggle="tab" aria-expanded="true">Servicios</a></li>
             <li><a href="#localizacion" data-toggle="tab" aria-expanded="true">Localización de Servicios</a></li>
         </ul>
-        <div class="tab-content">
-            <div id="servicios" class="tab-pane active">incluir plantilla de servicios</div>
-            <div id="localizacion" class="tab-pane">incluir plantilla de localización de servicios</div>
+        <div class="tab-content tab-bordered">
+            <div id="servicios" class="tab-pane active">
+                {% include 'AdminBundle:Ubicacion:_servicios.html.twig' %}
+            </div>
+            <div id="localizacion" class="tab-pane">
+                {% include 'AdminBundle:Ubicacion:_localizacion.html.twig' %}
+            </div>
         </div>
     </div>
 </div>

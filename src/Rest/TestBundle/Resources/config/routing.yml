@@ -1,0 +1,7 @@
+test_homepage:
+    path:     /
+    defaults: { _controller: TestBundle:Default:index }
+
+article:
+    resource: "Rest\TestBundle\Controller\ArticleController"
+    type:     rest

@@ -19,6 +19,8 @@ class AppKernel extends Kernel
             new Tesis\AdminBundle\AdminBundle(),
             new Tesis\FrontendBundle\FrontendBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new Rest\TestBundle\TestBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

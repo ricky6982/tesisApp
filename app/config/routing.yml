@@ -20,3 +20,6 @@ local_comercial:
     resource: "@AdminBundle/Resources/config/localComercial.yml"
     prefix:   /LocalComercial
 
+test:
+    resource: "@TestBundle/Resources/config/routing.yml"
+    prefix:   /test

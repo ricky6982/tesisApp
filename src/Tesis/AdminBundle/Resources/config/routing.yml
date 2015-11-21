@@ -14,3 +14,6 @@ cartaMenu:
     resource:   "@AdminBundle/Resources/config/routing/cartaMenu.yml"
     prefix:     /CartaMenu
 
+ubicacion:
+    resource:   "@AdminBundle/Resources/config/routing/ubicacion.yml"
+    prefix:     /UbicacionDeServicios

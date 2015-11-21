@@ -1,0 +1,3 @@
+ubicacion_homepage:
+    path:     /
+    defaults: { _controller: AdminBundle:Ubicacion:index }

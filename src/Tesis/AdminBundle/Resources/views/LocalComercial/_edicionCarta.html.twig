@@ -2,24 +2,39 @@
 
 {% for categoria in local.categorias %}
 
-<legend>{{ categoria.nombre }}</legend>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for producto in categoria.productos %}
-        <tr>
-            <td>{{ loop.index }}</td>
-            <td>{{ producto.descripcion }}</td>
-            <td>{{ producto.precio }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<legend>
+    {{ categoria.nombre }}
+    <button class="btn btn-xs btn-info"><i class="glyphicon glyphicon-pencil"></i> Editar</button>
+    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Quitar</button>
+</legend>
+
+    {% if (categoria.productos | length) > 0 %}
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in categoria.productos %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>{{ producto.precio }}</td>
+                <td style="width: 150px;" class="text-center">
+                    <button class="btn btn-xs btn-info"><i class="glyphicon glyphicon-pencil"></i> Editar</button>
+                    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Quitar</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h3 class="text-center text-muted">
+        No hay productos cargados en esta categoria.
+    </h3>
+    {% endif %}
 {% endfor %}

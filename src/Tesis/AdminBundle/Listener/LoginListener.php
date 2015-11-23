@@ -26,8 +26,6 @@ class LoginListener
     {
         $token = $event->getAuthenticationToken();
         $this->roles = $token->getRoles();
-        throw new Exception("Error Processing Request", 1);
-        
     }
 
     public function onKernelResponse(FilterResponseEvent $event)

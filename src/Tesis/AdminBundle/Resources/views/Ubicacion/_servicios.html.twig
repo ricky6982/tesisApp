@@ -1,2 +1,71 @@
-<legend>servicios</legend>
-<div>algo aqui</div>
+<div class="pull-right">
+    {{ modal.button('nuevoServicio', 'plus', 'Servicio') }}
+    {{ modal.button('nuevoServicioItem', 'plus', 'Item Servicio') }}
+</div>
+
+
+{% if servicios|length == 0 %}
+    <h2 class="text-center text-muted">Todavia no se agregaron servicios</h2>
+{% else %}
+    {% for servicio in servicios %}
+        <legend>{{ servicio.nombre }}</legend>
+        {% if servicio.items | length == 0 %}
+            <h2 class="text-center text-muted">
+                Todavia no se han agregado items a este servicio.
+            </h2>
+        {% else %}
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Nombre</th><th>Descripción</th><th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{# Modal para Agregar Nuevo Servicio #}
+{{ modal.header('nuevoServicio', path('servicio_save'), 'Nuevo Servicio') }}
+    <div class="form-group">
+        <label for="" class="col-sm-4 control-label">{{ form_label(servForm.nombre) }}</label>
+        <div class="col-sm-6">
+            {{ form_widget(servForm.nombre, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="" class="col-sm-4 control-label">{{ form_label(servForm.descripcion) }}</label>
+        <div class="col-sm-6">
+            {{ form_widget(servForm.descripcion, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    {{ form_widget(servForm) }}
+{{ modal.footer('Guardar') }}
+
+{# Modal para Agregar Nuevo Servicio #}
+{{ modal.header('nuevoServicioItem', path('servicio_save'), 'Nuevo Servicio') }}
+    <div class="form-group">
+        <label for="" class="col-sm-4 control-label">{{ form_label(servItemForm.servicio) }}</label>
+        <div class="col-sm-6">
+            {{ form_widget(servItemForm.servicio, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="" class="col-sm-4 control-label">{{ form_label(servItemForm.nombre) }}</label>
+        <div class="col-sm-6">
+            {{ form_widget(servItemForm.nombre, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="" class="col-sm-4 control-label">{{ form_label(servItemForm.descripcion) }}</label>
+        <div class="col-sm-6">
+            {{ form_widget(servItemForm.descripcion, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    {{ form_widget(servItemForm) }}
+{{ modal.footer('Guardar') }}

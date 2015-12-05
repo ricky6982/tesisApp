@@ -1,0 +1,3 @@
+servicio_item_save:
+    path:   /save
+    defaults: { _controller: AdminBundle:ServicioItem:save }

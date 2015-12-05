@@ -8,7 +8,7 @@
     <h2 class="text-center text-muted">Todavia no se agregaron servicios</h2>
 {% else %}
     {% for servicio in servicios %}
-        <legend>{{ servicio.nombre }}</legend>
+        <legend> {{ _self.dropdown() }} {{ servicio.nombre }}</legend>
         {% if servicio.items | length == 0 %}
             <h2 class="text-center text-muted">
                 Todavia no se han agregado items a este servicio.
@@ -17,18 +17,43 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>#</th><th>Nombre</th><th>Descripción</th><th></th>
+                        <th>#</th><th>Nombre</th><th>Descripción</th>
+                        <th style="width: 180px"></th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for item in servicio.items %}
                     <tr>
-                        
+                        <td>{{ loop.index }}</td>
+                        <td>{{ item.nombre }}</td>
+                        <td>{{ item.descripcion }}</td>
+                        <td class="text-center">
+                            <button class="btn btn-xs btn-info"><i class="glyphicon glyphicon-pencil"></i> Editar</button>
+                            <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Eliminar</button>
+                        </td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         {% endif %}
     {% endfor %}
 {% endif %}
+
+{% macro dropdown() %}
+<div class="btn-group">
+    <div class="dropdown">
+      <button type="button" data-toggle="dropdown" class="btn btn-link dropdown-toggle"><i class="glyphicon glyphicon-cog"> </i></button>
+      <ul class="dropdown-menu">
+        <li> 
+          <button class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i> Editar servicio</button>
+        </li>
+        <li> 
+          <button class="btn btn-link"><i class="glyphicon glyphicon-trash"></i> Borrar servicio</button>
+        </li>
+      </ul>
+    </div>
+</div>
+{% endmacro %}
 
 {# Modal para Agregar Nuevo Servicio #}
 {{ modal.header('nuevoServicio', path('servicio_save'), 'Nuevo Servicio') }}
@@ -48,7 +73,7 @@
 {{ modal.footer('Guardar') }}
 
 {# Modal para Agregar Nuevo Servicio #}
-{{ modal.header('nuevoServicioItem', path('servicio_save'), 'Nuevo Servicio') }}
+{{ modal.header('nuevoServicioItem', path('servicio_item_save'), 'Nuevo Servicio') }}
     <div class="form-group">
         <label for="" class="col-sm-4 control-label">{{ form_label(servItemForm.servicio) }}</label>
         <div class="col-sm-6">

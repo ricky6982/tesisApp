@@ -21,3 +21,7 @@ ubicacion:
 servicio:
     resource:   "@AdminBundle/Resources/config/routing/servicio.yml"
     prefix:     /Servicio
+
+servicio_item:
+    resource:   "@AdminBundle/Resources/config/routing/servicioItem.yml"
+    prefix:     /ServicioItem

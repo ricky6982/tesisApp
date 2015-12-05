@@ -19,9 +19,6 @@
 
 {% block contenido %}
 <div ng-app="app" ng-controller="AppCtrl">
-    <div class="text-right" style="margin: 0 20px;" ng-controller="SaveCtrl">
-        <btn-send label="Guardar Información" xclass="btn btn-primary" method="POST" url="{{ path('mapa_save') }}" data="data"></btn-send>
-    </div>
     <div class="row" style="margin: 10px;">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#servicios" data-toggle="tab" aria-expanded="true">Servicios</a></li>

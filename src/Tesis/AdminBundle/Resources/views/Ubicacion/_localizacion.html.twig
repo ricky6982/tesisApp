@@ -1,4 +1,6 @@
-<legend>localización de los servicios</legend>
+<div class="text-right" style="margin-bottom: 10px;" ng-controller="SaveCtrl">
+    <btn-send label="Guardar Información" xclass="btn btn-primary" method="POST" url="{{ path('mapa_save') }}" data="data"></btn-send>
+</div>
 
 <div class="row">
     {% include 'AdminBundle:Ubicacion:localizacion/_control.html.twig' %}

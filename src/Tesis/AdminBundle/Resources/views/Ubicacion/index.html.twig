@@ -7,12 +7,16 @@
 {% block headerJavascripts %}
     <script src="{{ asset('bower_components/vis/dist/vis.min.js') }}"></script>
     <script src="{{ asset('public/js/ubicacion/app.js') }}"></script>
+    <script src="{{ asset('public/js/ubicacion/directives.js') }}"></script>
+    <script src="{{ asset('public/js/ubicacion/localizacionCtrl.js') }}"></script>
+    <script src="{{ asset('public/js/ubicacion/networkCtrl.js') }}"></script>
     <script src="{{ asset('public/js/mapa/saveController.js') }}"></script>
     <script src="{{ asset('public/js/buttonSendDirective.js') }}"></script>
     <script>
         var datos = { 
             urlGetCurrenMap: "{{ path('mapa_current') }}",
-            urlSaveMap: "{{ path('mapa_save') }}"
+            urlSaveMap: "{{ path('mapa_save') }}",
+            urlGetServicios: "{{ path('get_api_servicio') }}.json"
         };
     </script>
 {% endblock %}
@@ -35,3 +39,4 @@
     </div>
 </div>
 {% endblock %}
+

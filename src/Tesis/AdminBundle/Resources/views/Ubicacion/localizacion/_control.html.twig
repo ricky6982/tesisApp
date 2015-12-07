@@ -1,27 +1,26 @@
 {% verbatim %}
-<div ng-hide="showForm()" class="col-sm-5 localizacion">
-  <h2 style="margin-top: 30px;" class="text-center text-muted">Seleccione un arco para agregar los servicios que se ubican en el.</h2>
-</div>
-<div ng-show="showForm()" class="col-sm-5 localizacion">
-  <div class="nodo-origen">{{ arcoEdit.from }}</div>
-  <div class="panel-izq"> 
-    <div ng-repeat="lugar in guiLugares.izq track by $index">
-      <div ts-panel-servicio="ts-panel-servicio" direccion="left" listado-servicios="listadoServicios" lugar="lugar" remove="guiLugares.remove('izq', $index)"></div>
+  <div ng-hide="showForm()" class="col-sm-5 localizacion">
+    <h2 style="margin-top: 30px;" class="text-center text-muted">Seleccione un arco para agregar los servicios que se ubican en el.</h2>
+  </div>
+  <div ng-show="showForm()" class="col-sm-5 localizacion">
+    <div class="nodo-origen">{{ arcoEdit.from }}</div>
+    <div class="panel-izq"> 
+      <div ng-repeat="lugar in guiLugares.izq track by $index">
+        <div ts-panel-servicio="ts-panel-servicio" direccion="left" listado-servicios="listadoServicios" lugar="lugar" remove="guiLugares.remove('izq', $index)"></div>
+      </div>
+      <button ng-click="guiLugares.add('izq')" class="btn btn-success">Agregar</button>
     </div>
-    <button ng-click="guiLugares.add('izq')" class="btn btn-success">Agregar</button>
-  </div>
-  <div class="panel-der">
-    <div ng-repeat="lugar in guiLugares.der track by $index">
-      <div ts-panel-servicio="ts-panel-servicio" direccion="right" listado-servicios="listadoServicios" lugar="lugar" remove="guiLugares.remove('der', $index)"></div>
+    <div class="panel-der">
+      <div ng-repeat="lugar in guiLugares.der track by $index">
+        <div ts-panel-servicio="ts-panel-servicio" direccion="right" listado-servicios="listadoServicios" lugar="lugar" remove="guiLugares.remove('der', $index)"></div>
+      </div>
+      <button ng-click="guiLugares.add('der')" class="btn btn-success">Agregar</button>
     </div>
-    <button ng-click="guiLugares.add('der')" class="btn btn-success">Agregar</button>
+    <div class="nodo-destino">{{ arcoEdit.to }}</div>
+    <div style="margin-top: 20px;" class="text-center">
+      <button ng-click="guardar()" ng-hide="loader" class="btn btn-primary">Guardar</button><img src="{% endverbatim %}{{ asset('public/img/barloader.gif') }}{% verbatim %}" ng-show="loader"/>
+    </div>
   </div>
-  <div class="nodo-destino">{{ arcoEdit.to }}</div>
-  <div style="margin-top: 20px;" class="text-center">
-    <button ng-click="guardar()" ng-hide="loader" class="btn btn-primary">Guardar</button><img src="img/barloader.gif" ng-show="loader"/>
-  </div>
-</div>
-
 
 <script type="text/ng-template" id="panel-servicio.html">
   <div class="popover popover-item {{ direccion }}">

@@ -93,3 +93,61 @@
     transform: rotate(360deg);
   }
 }
+.localizacion .nodo-origen,
+.localizacion .nodo-destino {
+  border-radius: 50%;
+  border: 3px solid black;
+  clear: both;
+  height: 50px;
+  line-height: 45px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 50px;
+}
+.localizacion .panel-izq,
+.localizacion .panel-der {
+  float: left;
+  padding: 20px 0;
+  position: relative;
+  text-align: center;
+}
+.localizacion .panel-izq .item-remove,
+.localizacion .panel-der .item-remove {
+  background-color: #D02727;
+  border-radius: 50%;
+  border: 2px solid red;
+  color: white;
+  height: 30px;
+  position: absolute;
+  right: -10px;
+  top: -15px;
+  width: 30px;
+}
+.localizacion .panel-izq .item-remove:hover,
+.localizacion .panel-der .item-remove:hover {
+  background-color: #FC0404;
+}
+.localizacion .panel-izq .item-remove:active,
+.localizacion .panel-der .item-remove:active {
+  background-color: #CB0000;
+}
+.localizacion .panel-izq {
+  border-right: 3px solid black;
+  padding-right: 20px;
+  width: 50%;
+}
+.localizacion .panel-der {
+  border-left: 3px solid black;
+  left: -3px;
+  padding-left: 20px;
+  position: relative;
+  width: 50%;
+}
+.localizacion .popover-item {
+  position: relative;
+  margin: 20px 0;
+  min-height: 9
+        0px;
+  display: block;
+}

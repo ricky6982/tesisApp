@@ -1,8 +1,5 @@
-<div class="text-right" style="margin-bottom: 10px;" ng-controller="SaveCtrl">
-    <btn-send label="Guardar Información" xclass="btn btn-primary" method="POST" url="{{ path('mapa_save') }}" data="data"></btn-send>
-</div>
 
-<div class="row" ng-controller="LocalizacionCtrl">
+<div class="row">
     {% include 'AdminBundle:Ubicacion:localizacion/_control.html.twig' %}
     {% include 'AdminBundle:Ubicacion:localizacion/_network.html.twig' %}
 </div>

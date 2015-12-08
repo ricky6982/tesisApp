@@ -1,3 +1,8 @@
-<div class="col-sm-7">
-  <div id="network" ng-controller="NetworkCtrl" style="border: 1px solid #ddd"></div>
+<div ng-controller="NetworkCtrl">
+    <div class="text-right" style="margin-bottom: 10px;">
+        <btn-send label="Guardar Información" xclass="btn btn-primary" method="POST" url="{{ path('mapa_save') }}" data="data"></btn-send>
+    </div>
+    <div class="col-sm-7">
+      <div id="network" style="border: 1px solid #ddd"></div>
+    </div>
 </div>

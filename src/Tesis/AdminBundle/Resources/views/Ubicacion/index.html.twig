@@ -10,13 +10,12 @@
     <script src="{{ asset('public/js/ubicacion/directives.js') }}"></script>
     <script src="{{ asset('public/js/ubicacion/localizacionCtrl.js') }}"></script>
     <script src="{{ asset('public/js/ubicacion/networkCtrl.js') }}"></script>
-    <script src="{{ asset('public/js/mapa/saveController.js') }}"></script>
     <script src="{{ asset('public/js/buttonSendDirective.js') }}"></script>
     <script>
         var datos = { 
             urlGetCurrenMap: "{{ path('mapa_current') }}",
             urlSaveMap: "{{ path('mapa_save') }}",
-            urlGetServicios: "{{ path('get_api_servicio') }}.json"
+            urlGetServicios: "{{ path('get_api_servicios') }}.json"
         };
     </script>
 {% endblock %}
@@ -32,7 +31,7 @@
             <div id="servicios" class="tab-pane active">
                 {% include 'AdminBundle:Ubicacion:_servicios.html.twig' %}
             </div>
-            <div id="localizacion" class="tab-pane">
+            <div id="localizacion" class="tab-pane" ng-controller="LocalizacionCtrl">
                 {% include 'AdminBundle:Ubicacion:_localizacion.html.twig' %}
             </div>
         </div>

@@ -2,7 +2,6 @@
 app.controller('LocalizacionCtrl',[
     '$scope', '$timeout',
     function($scope, $timeout){
-
         $scope.arcoEdit = {};
 
         // ==============================================

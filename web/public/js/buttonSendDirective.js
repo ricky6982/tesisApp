@@ -22,6 +22,7 @@ app.directive('btnSend', [
                 function($scope, $http){
                     $scope.flag = false;
                     $scope.submit = function(){
+                        network.storePositions();
                         $scope.flag = true;
                         $http({
                             method: $scope.method,

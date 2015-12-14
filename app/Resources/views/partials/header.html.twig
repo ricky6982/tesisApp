@@ -23,7 +23,7 @@
     </div>
     {% if is_granted('ROLE_ADMIN') %}
     <div class="btn-group">
-        <a href="{{ path('frontend_homepage') }}" type="button" class="btn btn-default">
+        <a href="{{ path('admin_homepage') }}" type="button" class="btn btn-default">
             <span class="glyphicon glyphicon-th-large"></span>
             Menú 
         </a>
@@ -31,7 +31,7 @@
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-            <li><a href="{{ path('frontend_homepage') }}"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+            <li><a href="{{ path('frontend_homepage') }}"><span class="glyphicon glyphicon-home"></span> Vista del Usuario</a></li>
         </ul>
     </div>
     <div class="btn-group">

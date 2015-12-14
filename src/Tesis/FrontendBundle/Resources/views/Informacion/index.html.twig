@@ -1,0 +1,14 @@
+{% extends 'FrontendBundle:Default:layout.html.twig' %}
+
+{% block titulo %}
+    Información General
+{% endblock %}
+
+{% block contenido %}
+    <ol role="menubar" aria-haspopup="true" aria-labelledby="fileLabel" aria-label="Información General">
+        <li role="option" aria-setsize="4" aria-posinset="1"><a href="{{ path('informacion_edificio') }}">Información del Lugar</a></li>
+        <li role="option" aria-setsize="4" aria-posinset="2"><a href="{{ path('informacion_servicios') }}">Servicios</a></li>
+        <li role="option" aria-setsize="4" aria-posinset="3"><a href="http://www.w3.org/TR/wai-aria/roles">Listado de Servicios</a></li>
+        <li role="option" aria-setsize="4" aria-posinset="4"><a href="https://github.com/ricky6982/tesisApp">Como llegar a</a></li>
+    </ol>
+{% endblock %}

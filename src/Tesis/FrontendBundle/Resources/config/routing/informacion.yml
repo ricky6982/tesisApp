@@ -1,0 +1,23 @@
+informacion_homepage:
+    path:     /
+    defaults: { _controller: FrontendBundle:Informacion:index }
+
+informacion_edificio:
+    path:     /Edificio
+    defaults: { _controller: FrontendBundle:Informacion:edificio }
+
+informacion_servicios:
+    path: /Servicios
+    defaults: { _controller: FrontendBundle:Informacion:servicios }
+
+informacion_servicio_detalle:
+    path: /Servicio/{id}
+    defaults: { _controller: FrontendBundle:Informacion:servicioDetalle }
+
+# informacion_como_llegar:
+#     path: /ComoLlegar
+#     defaults: { _controller: FrontendBundle:Informacion:ComoLlegar }
+
+# informacion_buscar:
+#     path: /Buscar
+#     defaults: { _controller: FrontendBundle:Informacion:Buscar }

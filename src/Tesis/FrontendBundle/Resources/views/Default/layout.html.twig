@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>{% block title %}Software de Apoyo a la Informacion Referencial{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('public/css/css-for-symbian.css') }}">
+        {% block stylesheets %}{% endblock %}
+
+        <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ asset('bower_components/underscore/underscore-min.js') }}"></script>
+        <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bower_components/angular/angular.min.js') }}"></script>
+        {% block headerJavascripts %}{% endblock %}
+    </head>
+    <body ng-app="app" class="Site">
+
+        {% block contenidoMax %}
+        <div class="Site-content">
+            <div class="container">
+                {% block titulo %}{% endblock %}
+            </div>
+
+            <div class="container">
+                {% block msjFlas %}
+                    {% include '::partials/alert.html.twig' %}
+                {% endblock %}
+            </div>
+
+            <div>
+                {% block contenido %}
+                    contenido
+                {% endblock %}
+            </div>
+
+        </div>
+        {% endblock %}
+
+        <footer>Acerca de nosotros</footer>
+
+        {% block javascripts %}{% endblock %}
+        
+    </body>
+</html>

@@ -1,3 +1,10 @@
-frontend_homepage:
+app_homepage:
     path:     /
-    defaults: { _controller: FrontendBundle:Default:index }
+    defaults: 
+        _controller: FrameworkBundle:Redirect:redirect
+        route: informacion_homepage
+        permanent: true
+
+informacion:
+    resource:   '@FrontendBundle/Resources/config/routing/informacion.yml'
+    prefix:     /Informacion

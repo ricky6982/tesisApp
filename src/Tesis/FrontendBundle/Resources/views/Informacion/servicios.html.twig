@@ -8,4 +8,6 @@
         <li><a href="{{ path('informacion_servicio_detalle', {'id': servicio.id }) }}">{{ servicio.nombre }}</a></li>
         {% endfor %}
     </ul>
+
+    <a href="{{ path('informacion_homepage') }}">Volver</a>
 {% endblock %}

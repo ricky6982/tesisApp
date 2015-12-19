@@ -5,7 +5,9 @@
     <legend>Servicio {{ servicio.nombre }}</legend>
     <ul>
         {% for item in servicio.items %}
-        <li>{{ item.nombre }}</li>
+        <li><a href="{{ path('informacion_servicio_item', {'id': item.id }) }}">{{ item.nombre }}</a></li>
         {% endfor %}
     </ul>
+
+    <a href="{{ path('informacion_servicios') }}">Volver</a>
 {% endblock %}

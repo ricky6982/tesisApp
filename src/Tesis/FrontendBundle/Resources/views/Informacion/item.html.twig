@@ -1,0 +1,14 @@
+{% extends 'FrontendBundle:Default:layout.html.twig' %}
+
+{% block contenido %}
+<legend>Descripción del Servicio</legend>
+
+<h1>{{ item.nombre }}</h1>
+
+<dl>
+    <dt>Descripción</dt>
+    <dd>{{ item.descripcion }}</dd>
+</dl>
+
+<a href="{{ path('informacion_servicio_detalle', {'id': item.servicio.id }) }}">Volver</a>
+{% endblock %}

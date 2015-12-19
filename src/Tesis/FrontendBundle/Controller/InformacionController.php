@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Tesis\AdminBundle\Entity\Servicio;
+use Tesis\AdminBundle\Entity\ServicioItem;
 
 class InformacionController extends Controller
 {
@@ -52,6 +53,17 @@ class InformacionController extends Controller
     {
         return array(
                 'servicio' => $servicio
+            );
+    }
+
+    /**
+     * @Template("FrontendBundle:Informacion:item.html.twig")
+     * @ParamConverter("item", class="AdminBundle:ServicioItem")
+     */
+    public function servicioItemAction(ServicioItem $item)
+    {
+        return array(
+                'item' => $item
             );
     }
 

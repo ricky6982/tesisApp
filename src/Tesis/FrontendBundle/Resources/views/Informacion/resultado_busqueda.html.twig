@@ -1,0 +1,14 @@
+{% extends 'FrontendBundle:Default:layout.html.twig' %}
+
+{% block contenido %}
+    <h1>Resultado de la busqueda, {{ servicios | length }} elemntos.</h1>
+
+    <ul>
+        {% for item in servicios %}
+        <li>{{ item.nombre }}</li>
+        {% endfor %}
+    </ul>
+
+
+    <a href="{{ path('informacion_como_llegar') }}">Volver</a>
+{% endblock %}

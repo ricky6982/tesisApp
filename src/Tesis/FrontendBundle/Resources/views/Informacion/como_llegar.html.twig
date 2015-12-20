@@ -1,0 +1,13 @@
+{% extends "FrontendBundle:Default:layout.html.twig" %}
+
+{% block contenido %}
+
+Buscar Servicio
+
+<form action="{{ path('informacion_como_llegar') }}" method="POST">
+    {{ form_widget(form.search) }}
+    <input type="submit">
+    {{ form_widget(form._token) }}
+</form>
+
+{% endblock %}

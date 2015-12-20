@@ -7,6 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Tesis\AdminBundle\Entity\Servicio;
 use Tesis\AdminBundle\Entity\ServicioItem;
+use Tesis\FrontendBundle\Form\Filter\BusquedaType;
+use Symfony\Component\HttpFoundation\Request;
 
 class InformacionController extends Controller
 {
@@ -67,18 +69,26 @@ class InformacionController extends Controller
             );
     }
 
-    // public function comoLlegarAction()
-    // {
-    //     return array(
-    //             // ...
-    //         );
-    // }
+    /**
+     * Se encarga de mostrar un campo de busqueda y un listado con los resultado de las busqueda realizada.
+     */
+    public function comoLlegarAction(Request $request)
+    {
+        $form = $this->createForm(new BusquedaType());
+        $form->handleRequest($request);
 
-    // public function buscarAction()
-    // {
-    //     return array(
-    //             // ...
-    //         );
-    // }
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $servicios = $em->getRepository('AdminBundle:ServicioItem')->busqueda($form->get('search')->getData());
+            
+            return $this->render('FrontendBundle:Informacion:resultado_busqueda.html.twig', array(
+                    'servicios' => $servicios
+                ));
+        }
+
+        return $this->render("FrontendBundle:Informacion:como_llegar.html.twig", array(
+                'form' => $form->createView()
+            ));
+    }
 
 }

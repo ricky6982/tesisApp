@@ -1,0 +1,29 @@
+{% extends 'FrontendBundle:Default:layout.html.twig' %}
+
+{% block contenido %}
+    <h1>Listado de Confiterias</h1>
+
+    <ul>
+        {% for local in locales %}
+            {% if local.categorias | length > 0 %}
+            <li>
+                <a href="#">{{ local.local | title }}</a>
+                <ul>
+                    {% for categoria in local.categorias %}
+                        {% if categoria.productos | length > 0 %}
+                        <li>
+                            {{ categoria | title }}
+                            <ul>
+                                {% for producto in categoria.productos %}
+                                    <li>{{ producto }} - {{ producto.precio }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}

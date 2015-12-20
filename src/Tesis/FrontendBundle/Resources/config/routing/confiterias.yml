@@ -1,0 +1,3 @@
+confiteria_homepage:
+    path:   /
+    defaults: { _controller: FrontendBundle:Confiteria:index }

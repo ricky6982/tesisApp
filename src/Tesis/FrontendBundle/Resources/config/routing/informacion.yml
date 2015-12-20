@@ -18,10 +18,10 @@ informacion_servicio_item:
     path: /Servicio/Item/{id}
     defaults: { _controller: FrontendBundle:Informacion:servicioItem }
 
-# informacion_como_llegar:
-#     path: /ComoLlegar
-#     defaults: { _controller: FrontendBundle:Informacion:ComoLlegar }
+informacion_como_llegar:
+    path: /ComoLlegar
+    defaults: { _controller: FrontendBundle:Informacion:ComoLlegar }
 
-# informacion_buscar:
-#     path: /Buscar
-#     defaults: { _controller: FrontendBundle:Informacion:Buscar }
+confiterias:
+    resource:   '@FrontendBundle/Resources/config/routing/confiterias.yml'
+    prefix:     /Confiterias

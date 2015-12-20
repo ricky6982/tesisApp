@@ -34,7 +34,7 @@ class Categoria
     private $local;
 
     /**
-     * @ORM\OneToMany(targetEntity="Producto", mappedBy="categoria")
+     * @ORM\OneToMany(targetEntity="Producto", mappedBy="categoria", cascade={"remove"})
      */
     private $productos;
 

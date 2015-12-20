@@ -5,6 +5,7 @@ namespace Tesis\AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 use Tesis\AdminBundle\Entity\Categoria;
 use Tesis\AdminBundle\Form\CategoriaType;
@@ -44,8 +45,15 @@ class CategoriaController extends Controller
         return $this->redirectToRoute('local_homepage');
     }
 
-    public function removeAction(Request $request)
+    /**
+     * @ParamConverter("categoria", class="AdminBundle:Categoria")
+     */
+    public function removeAction(Categoria $categoria)
     {
-        return $this->render('.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($categoria);
+        $em->flush();
+
+        return $this->redirectToRoute('local_homepage');
     }
 }

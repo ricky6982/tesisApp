@@ -1,11 +1,11 @@
-
+<div ng-controller="CartaMenuCtrl">
 
 {% for categoria in local.categorias %}
 
 <legend>
     {{ categoria.nombre }}
     <button class="btn btn-xs btn-info"><i class="glyphicon glyphicon-pencil"></i> Editar</button>
-    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Quitar</button>
+    <button class="btn btn-xs btn-danger" ng-click="categoria.quitar({{ categoria.id }})"><i class="glyphicon glyphicon-trash"></i> Quitar</button>
 </legend>
 
     {% if (categoria.productos | length) > 0 %}
@@ -26,7 +26,7 @@
                 <td>{{ producto.precio }}</td>
                 <td style="width: 150px;" class="text-center">
                     <button class="btn btn-xs btn-info"><i class="glyphicon glyphicon-pencil"></i> Editar</button>
-                    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Quitar</button>
+                    <button class="btn btn-xs btn-danger" ng-click="producto.quitar({{ producto.id }})"><i class="glyphicon glyphicon-trash"></i> Quitar</button>
                 </td>
             </tr>
             {% endfor %}
@@ -38,3 +38,5 @@
     </h3>
     {% endif %}
 {% endfor %}
+
+</div>

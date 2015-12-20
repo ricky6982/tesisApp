@@ -4,6 +4,7 @@ namespace Tesis\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 use Tesis\AdminBundle\Entity\Producto;
 use Tesis\AdminBundle\Form\ProductoType;
@@ -30,8 +31,15 @@ class ProductoController extends Controller
         return $this->redirectToRoute('local_homepage');
     }
 
-    public function removeAction(Request $request)
+    /**
+     * @ParamConverter("producto", class="AdminBundle:Producto")
+     */
+    public function removeAction(Producto $producto)
     {
-        return $this->render('.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($producto);
+        $em->flush();
+
+        return $this->redirectToRoute('local_homepage');
     }
 }

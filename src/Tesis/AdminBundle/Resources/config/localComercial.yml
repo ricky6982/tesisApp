@@ -18,9 +18,8 @@ categoria_save:
     methods: [POST]
 
 categoria_remove:
-    path:   /EliminarCategoria
-    defaults:   { _controller: "AdminBundle:Categoria:save" }
-    methods: [POST]
+    path:   /EliminarCategoria/{id}
+    defaults:   { _controller: "AdminBundle:Categoria:remove" }
 
 producto_save:
     path:   /GuardarProducto
@@ -28,6 +27,5 @@ producto_save:
     methods: [POST]
 
 producto_remove:
-    path:   /EliminarProducto
-    defaults:   { _controller: "AdminBundle:Producto:save" }
-    methods: [POST]
+    path:   /EliminarProducto/{id}
+    defaults:   { _controller: "AdminBundle:Producto:remove" }

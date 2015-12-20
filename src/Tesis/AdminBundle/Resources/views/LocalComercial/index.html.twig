@@ -2,6 +2,16 @@
 
 {% import '::components/_modal.html.twig' as modal %}
 
+{% block headerJavascripts %}
+    <script>
+        var dataUrl = {
+            'quitar_categoria': '{{ path("categoria_remove", {"id": "__id__"}) }}',
+            'quitar_producto': '{{ path("producto_remove", {"id": "__id__"}) }}'
+        }
+    </script>
+    <script src="{{ asset('public/js/cartaMenu/app.js') }}"></script>
+{% endblock %}
+
 {% block titulo %}Local Comercial {{ local.local }}{% endblock %}
 
 {% block contenido %}

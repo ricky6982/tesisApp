@@ -15,7 +15,9 @@
                             {{ categoria | title }}
                             <ul>
                                 {% for producto in categoria.productos %}
-                                    <li>{{ producto }} - {{ producto.precio }}</li>
+                                    {# TODO: Crear filtro currency to word #}
+                                    {# <li>{{ producto }} - {{ producto.precio | toCurrencyWord }}</li> #}
+                                    <li>{{ producto }} - {{ producto.precio | wordPrice }}</li>
                                 {% endfor %}
                             </ul>
                         </li>

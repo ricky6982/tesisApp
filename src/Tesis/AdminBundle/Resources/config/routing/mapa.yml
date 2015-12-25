@@ -11,3 +11,8 @@ mapa_current:
     path:       /getCurrent
     defaults:   { _controller: "AdminBundle:Mapa:currentMap" }
     methods:    [GET]
+
+mapa_current_php:
+    path:       /getCurrentPhp
+    defaults:   { _controller: "AdminBundle:Mapa:currentMapPhp" }
+    methods:    [GET]

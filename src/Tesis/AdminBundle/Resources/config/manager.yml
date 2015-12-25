@@ -1,0 +1,5 @@
+services:
+    adminbundle.manager.maparecorrido:
+        class: Tesis\AdminBundle\Manager\MapaRecorridoManager
+        calls:
+            - [setEntityManager, [@doctrine.orm.entity_manager]]

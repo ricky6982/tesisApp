@@ -64,4 +64,18 @@ class MapaController extends Controller
 
         return $response;
     }
+
+    /**
+     * Obteniendo el ultimo mapa guardado - Json to PHP
+     */
+    public function currentMapPhpAction()
+    {
+        $manager = $this->get('adminbundle.manager.maparecorrido');
+        $mapa = $manager->getShortPath(2,9);
+
+        dump($mapa);
+        die('El camino mas corto de 2 a 9');
+
+        return $response;
+    }
 }

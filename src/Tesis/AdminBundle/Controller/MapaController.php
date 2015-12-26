@@ -71,11 +71,31 @@ class MapaController extends Controller
     public function currentMapPhpAction()
     {
         $manager = $this->get('adminbundle.manager.maparecorrido');
-        $mapa = $manager->getShortPath(2,9);
+        // $mapa = $manager->getShortestPath(2,9);
+        $mapa = $manager->getCurrentMap();
 
-        dump($mapa);
+        dump($mapa['mapaJson']['edges']['_data']);
         die('El camino mas corto de 2 a 9');
 
         return $response;
+    }
+
+    /**
+     * Controlador de Prueba para la Funcionalidad de 
+     * Busqueda de un servicio en el Mapa de Recorrido
+     */
+    public function buscarServicioAction($id)
+    {
+        $manager = $this->get('adminbundle.manager.maparecorrido');
+
+        $manager->getRutaCortaAlServicio(16, $id);
+
+        $distancia = $manager->getDistanciaTotalEntreNodos($manager->getShortestPath(1,9));
+        dump($distancia);
+        die('distancia');
+
+        $posicionUsuario = 1;   // Por el momento la posición del usuario va a estar en el nodo del mapa de recorrido
+
+        $ubicacionServicio = $manager->getUbicacionServicio($id);
     }
 }

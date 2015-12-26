@@ -16,3 +16,7 @@ mapa_current_php:
     path:       /getCurrentPhp
     defaults:   { _controller: "AdminBundle:Mapa:currentMapPhp" }
     methods:    [GET]
+
+buscar_servicio:
+    path:       /buscarServicio/{id}
+    defaults:   { _controller: "AdminBundle:Mapa:buscarServicio" }

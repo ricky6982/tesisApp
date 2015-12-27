@@ -102,17 +102,49 @@ class MapaRecorridoManager
         return $arcos;  // Devuelve un array con los arcos donde el servicio fue encontrado.
     }
 
-    /**
-     * Devuelve la distancia entre los nodos en caso de que exista un arco que los une, de otro modo devuelve null.
-     */
-    public function getDistanciaEntreNodosAdyacentes($nodoA, $nodoB)
+    public function getArco($nodoA, $nodoB)
     {
         $mapa = $this->getCurrentMap();
         $edges = $mapa['mapaJson']['edges']['_data'];
         foreach ($edges as $edge) {
             if (($edge['from'] == $nodoA and $edge['to'] == $nodoB) or ($edge['from'] == $nodoB and $edge['to'] == $nodoA )) {
-                return $edge['distancia'];
+                return $edge;
                 break;
+            }
+        }
+        return array();
+    }
+
+    /**
+     * Devuelve la distancia entre los nodos en caso de que exista un arco que los une, de otro modo devuelve null.
+     */
+    public function getDistanciaEntreNodosAdyacentes($nodoA, $nodoB)
+    {
+        $arco = $this->getArco($nodoA, $nodoB);
+
+        if (isset($arco['distancia'])) {
+            return $arco['distancia'];
+        }
+
+        return null;
+    }
+
+    /**
+     * Devuelve la dirección que existe entre dos nodos adyacentes
+     */
+    private function getDireccionEntreNodosAdyacentes($nodoA, $nodoB)
+    {
+        $mapa = $this->getCurrentMap();
+        $nodes = $mapa['mapaJson']['nodes']['_data'];
+
+        foreach ($nodes as $nodo) {
+            if ($nodo['id'] == $nodoA) {
+                if (isset($nodo['conexiones'])) {
+                    if (isset($nodo['conexiones'][$nodoB])) {
+                        return $nodo['conexiones'][$nodoB];
+                        break;
+                    }
+                }
             }
         }
 
@@ -173,6 +205,40 @@ class MapaRecorridoManager
     }
 
     /**
+     * Devuelve un array con indicaciones absolutas:
+     * 
+     * Ej: ir del nodo 16 al nodo 7, secuenciaNodos = (16,9,8,7)
+     *    array(
+     *      array(16, infRef, 0mts, ''),
+     *      array(9, infRef, 3mts, abajo),
+     *      array(8, infRef, 17.5mts, izq),
+     *      array(7, infRef, 11.mts, abajo),
+     *    )
+     */
+    private function getArrayIndicaciones($secuenciaNodos)
+    {
+        $indicaciones = array(array($secuenciaNodos[0], '', '', ''));
+
+        for ($i=0; $i < count($secuenciaNodos) - 1; $i++) {
+            $arco = $this->getArco($secuenciaNodos[$i], $secuenciaNodos[$i+1]);
+            $distancia = (isset($arco['distancia'])) ? $arco['distancia'] : null;
+            $infRef = (isset($arco['infRef']) ? $arco['infRef'] : '' );
+            $direccion = $this->getDireccionEntreNodosAdyacentes($secuenciaNodos[$i], $secuenciaNodos[$i+1]);
+            array_push($indicaciones, array($secuenciaNodos[$i+1], $infRef, $distancia, $direccion));
+        }
+
+        return $indicaciones;
+    }
+
+    /**
+     * Devuelve un array con indicaciones relativas a la posicion y direccion del usuario
+     */
+    private function getIndicaciones($secuenciaNodos)
+    {
+
+    }
+
+    /**
      * Obtiene las rutas desde la posicionActual del usuario hasta cada uno de los nodos que conforman
      * los arcos en los que se encuentra el servicio.
      */
@@ -198,10 +264,15 @@ class MapaRecorridoManager
             array_push($nodosCercanos, $nodoCercano);
         }
 
+        if (count($distancias) > 0 ) {
+            $path = $this->getShortestPath($posicionActual, $nodosCercanos[array_keys($distancias, min($distancias))[0]]);
+            dump($this->getArrayIndicaciones($path));
+        }
+
         dump($distancias);
         dump($nodosCercanos);
         dump($arcos);
-        dump($this->getShortestPath($posicionActual, $nodosCercanos[array_keys($distancias, min($distancias))[0]]));
+        dump($path);
         dump(array_keys($distancias, min($distancias)));
         die('array con distancias minimas a cada arco');
 

@@ -267,11 +267,44 @@ class MapaRecorridoManager
     }
 
     /**
+     * Determina hacia donde debe el usuario girar a su derecha o a su izquierda.
+     */
+    private function getRotacion($inicio, $fin)
+    {
+        $giroDerecha = "izq arr der abj izq";
+        $giroIzquierda = "der arr izq abj der";
+
+        $direccion = $inicio." ".$fin;
+        if (strpos($giroDerecha, $direccion)) {
+            return "derecha";
+        }elseif (strpos($giroIzquierda, $direccion)) {
+            return "izquierda";
+        }else{
+            return null;
+        }
+    }
+
+    /**
      * Devuelve un array con indicaciones relativas a la posicion y direccion del usuario
      */
     private function getIndicaciones($secuenciaNodos)
     {
+        $vectorIndicaciones = $this->getArrayIndicaciones($secuenciaNodos);
+        $guia = array();
+        for ($i=0; $i < count($vectorIndicaciones) - 1; $i++) { 
+            $spinStep = "Gire a su %s y camine %s metros";
+            if ($i == 0) {
+                $lugar = $vectorIndicaciones[$i+1]['infRef'][0];
+                $step = sprintf("Camine %s metros hacia adelante, por %s", $vectorIndicaciones[$i+1]['distancia'], $lugar);
+            }else{
+                $giro = $this->getRotacion($vectorIndicaciones[$i]['direccion'], $vectorIndicaciones[$i+1]['direccion']);
+                $lugares = implode(',', $vectorIndicaciones[$i+1]['infRef']);
+                $step = sprintf("Gire a su %s y camine %s metros en esa dirección, Ud recorrera %s", $giro, $vectorIndicaciones[$i+1]['distancia'], $lugares);
+            }
+            array_push($guia, $step);
+        }
 
+        return $guia;
     }
 
     /**
@@ -302,10 +335,16 @@ class MapaRecorridoManager
 
         if (count($distancias) > 0 ) {
             $path = $this->getShortestPath($posicionActual, $nodosCercanos[array_keys($distancias, min($distancias))[0]]);
-            dump($this->getArrayIndicaciones($path));
+            dump($this->getIndicaciones($path));
         }
         
-        dump($this->getArrayIndicaciones(array(26,21,22,17,18,19,10,7,3,4,5,6)));
+        // dump($this->getRotacion('izq', 'arr'));
+        // die('girar a');
+            
+        // dump($this->getIndicaciones(array(16,9,8,7,10,11,6,5,15,14,13,12,25)));
+        // dump($this->getArrayIndicaciones(array(16,9,8,7,10,11,6,5,15,14,13,12,25)));
+        // dump($this->getIndicaciones(array(26,21,22,17,18,19,10,7,3,4,5,6)));
+        // dump($this->getArrayIndicaciones(array(26,21,22,17,18,19,10,7,3,4,5,6)));
 
         dump($distancias);
         dump($nodosCercanos);

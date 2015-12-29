@@ -217,17 +217,53 @@ class MapaRecorridoManager
      */
     private function getArrayIndicaciones($secuenciaNodos)
     {
-        $indicaciones = array(array($secuenciaNodos[0], '', '', ''));
+        $indicaciones = array(array(
+            'nodo' => $secuenciaNodos[0],
+            'infRef' => array(),
+            'distancia' => '',
+            'direccion' => ''
+        ));
 
         for ($i=0; $i < count($secuenciaNodos) - 1; $i++) {
             $arco = $this->getArco($secuenciaNodos[$i], $secuenciaNodos[$i+1]);
             $distancia = (isset($arco['distancia'])) ? $arco['distancia'] : null;
             $infRef = (isset($arco['infRef']) ? $arco['infRef'] : '' );
             $direccion = $this->getDireccionEntreNodosAdyacentes($secuenciaNodos[$i], $secuenciaNodos[$i+1]);
-            array_push($indicaciones, array($secuenciaNodos[$i+1], $infRef, $distancia, $direccion));
+            array_push($indicaciones, array(
+                'nodo' => $secuenciaNodos[$i+1],
+                'infRef' => array($infRef),
+                'distancia' => $distancia,
+                'direccion' => $direccion
+            ));
         }
 
-        return $indicaciones;
+        $indicacionesMin = array();
+        $i = 0;
+        while ($i < count($indicaciones)) {
+            $j = $i + 1;
+            $agrupar = false;
+            while ($j < count($indicaciones) and $indicaciones[$i]['direccion'] == $indicaciones[$j]['direccion']){
+                $agrupar = true;
+                $j += 1;
+            }
+            if ($agrupar) {
+                $agrupacion = array('nodo' => null, 'infRef' => array(), 'distancia' => 0, 'direccion' => $indicaciones[$i]['direccion']);
+                for ($k = $i; $k < $j ; $k++) { 
+                    $agrupacion = array(
+                            'nodo' => $indicaciones[$k]['nodo'],
+                            'infRef' => array_unique(array_merge($agrupacion['infRef'], $indicaciones[$k]['infRef'])),
+                            'distancia' => $agrupacion['distancia'] + $indicaciones[$k]['distancia'],
+                            'direccion' => $indicaciones[$k]['direccion']
+                        );
+                }
+                array_push($indicacionesMin, $agrupacion);
+            }else{
+                array_push($indicacionesMin, $indicaciones[$i]);
+            }
+            $i = $j;
+        }
+
+        return $indicacionesMin;
     }
 
     /**
@@ -268,6 +304,8 @@ class MapaRecorridoManager
             $path = $this->getShortestPath($posicionActual, $nodosCercanos[array_keys($distancias, min($distancias))[0]]);
             dump($this->getArrayIndicaciones($path));
         }
+        
+        dump($this->getArrayIndicaciones(array(26,21,22,17,18,19,10,7,3,4,5,6)));
 
         dump($distancias);
         dump($nodosCercanos);

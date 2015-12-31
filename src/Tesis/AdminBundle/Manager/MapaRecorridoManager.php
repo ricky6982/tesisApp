@@ -9,6 +9,8 @@ class MapaRecorridoManager
 {
     protected $entityManager;
 
+    private $idServicio;    // Id del Servicio que se busca.
+
     public function setEntityManager(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
@@ -116,6 +118,22 @@ class MapaRecorridoManager
     }
 
     /**
+     * Devuelve el nodo con información referencial. 
+     */
+    private function getNodo($idNodo)
+    {
+        $mapa = $this->getCurrentMap();
+        $nodes = $mapa['mapaJson']['nodes']['_data'];
+        foreach ($nodes as $node) {
+            if ($node['id'] == $idNodo) {
+                return $node;
+                break;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Devuelve la distancia entre los nodos en caso de que exista un arco que los une, de otro modo devuelve null.
      */
     public function getDistanciaEntreNodosAdyacentes($nodoA, $nodoB)
@@ -190,16 +208,16 @@ class MapaRecorridoManager
             case 'from':
                 $min = min($distanciasMerge);
                 if (in_array($min, $distancias['der'])) {
-                    return array('distancia' => $min, 'direccion' => 'der');
-                }else{
                     return array('distancia' => $min, 'direccion' => 'izq');
+                }else{
+                    return array('distancia' => $min, 'direccion' => 'der');
                 }
             case 'to':
                 $max = max($distanciasMerge);
                 if (in_array($max, $distancias['der'])) {
-                    return array('distancia' => $arco['distancia'] - $max, 'direccion' => 'izq');
-                }else{
                     return array('distancia' => $arco['distancia'] - $max, 'direccion' => 'der');
+                }else{
+                    return array('distancia' => $arco['distancia'] - $max, 'direccion' => 'izq');
                 }
         }
     }
@@ -271,8 +289,8 @@ class MapaRecorridoManager
      */
     private function getRotacion($inicio, $fin)
     {
-        $giroDerecha = "izq arr der abj izq";
-        $giroIzquierda = "der arr izq abj der";
+        $giroDerecha = " izq arr der abj izq ";
+        $giroIzquierda = " der arr izq abj der ";
 
         $direccion = $inicio." ".$fin;
         if (strpos($giroDerecha, $direccion)) {
@@ -286,16 +304,18 @@ class MapaRecorridoManager
 
     /**
      * Devuelve un array con indicaciones relativas a la posicion y direccion del usuario
+     * 
+     * $secuenciaNodos: array con la secuencia de nodos desde el origen hasta el nodo final cercano al servicio.
      */
     private function getIndicaciones($secuenciaNodos)
     {
         $vectorIndicaciones = $this->getArrayIndicaciones($secuenciaNodos);
         $guia = array();
+        // Crea las indicaciones desde el nodo inicial hasta el nodo final
         for ($i=0; $i < count($vectorIndicaciones) - 1; $i++) { 
-            $spinStep = "Gire a su %s y camine %s metros";
             if ($i == 0) {
-                $lugar = $vectorIndicaciones[$i+1]['infRef'][0];
-                $step = sprintf("Camine %s metros hacia adelante, por %s", $vectorIndicaciones[$i+1]['distancia'], $lugar);
+                $lugares = implode(' y ', $vectorIndicaciones[$i+1]['infRef']);
+                $step = sprintf("Camine %s metros hacia adelante, por %s", $vectorIndicaciones[$i+1]['distancia'], $lugares);
             }else{
                 $giro = $this->getRotacion($vectorIndicaciones[$i]['direccion'], $vectorIndicaciones[$i+1]['direccion']);
                 $lugares = implode(',', $vectorIndicaciones[$i+1]['infRef']);
@@ -304,7 +324,39 @@ class MapaRecorridoManager
             array_push($guia, $step);
         }
 
+        $ultimaDireccion = $vectorIndicaciones[count($vectorIndicaciones)-1]['direccion'];
+
         return $guia;
+    }
+
+    /**
+     * Devuelve una cadena con la indicación desde el ultimo nodo hacia el servicio.
+     * $direccion: ultima dirección hasta el nodo final de la ruta
+     * $nodo: ultimo nodo desde el cual se llega al servicio
+     * $arco: arco con la información referencial para determinar que direccion debe tomar el usuario
+     * $idServicio: servicio al cual el usuario debe llegar.
+     */
+    private function getIndicacionFinal($direccion, $nodo, $arco, $idServicio)
+    {
+        if ($arco['from'] == $nodo) {
+            $distancia = $this->getDistanciaAlServicio('from', $idServicio, $arco);
+            $giro = $this->getDireccionEntreNodosAdyacentes($nodo, $arco['to']);
+        }else{
+            $distancia = $this->getDistanciaAlServicio('to', $idServicio, $arco);
+            $giro = $this->getDireccionEntreNodosAdyacentes($nodo, $arco['from']);
+        }
+
+        $posicionRespectoArco = $distancia['direccion'] == 'der' ? 'derecha' : 'izquierda';
+
+        if ($direccion == $giro) {
+            $instruccion = sprintf("Siga hacia adelante %s metros y a su mano %s esta el servicio", $distancia['distancia'], $posicionRespectoArco);
+        }else{
+            $rotacion = $this->getRotacion($direccion, $distancia['direccion']);
+            $rotacion = $rotacion == 'der' ? 'derecha' : 'izquierda';
+            $instruccion = sprintf("Gire a su %s, camine %s metros y a su mano %s se encuentra el servicio que ud solicito.", $rotacion, $distancia['distancia'], $posicionRespectoArco);
+        }
+
+        return $instruccion;
     }
 
     /**
@@ -335,7 +387,18 @@ class MapaRecorridoManager
 
         if (count($distancias) > 0 ) {
             $path = $this->getShortestPath($posicionActual, $nodosCercanos[array_keys($distancias, min($distancias))[0]]);
-            dump($this->getIndicaciones($path));
+            $direccionFinal = $this->getArrayIndicaciones($path);
+            $direccionFinal = array_pop($direccionFinal)['direccion'];
+            $instruccionFinal = $this->getIndicacionFinal(
+                                    $direccionFinal,
+                                    $nodosCercanos[array_keys($distancias, min($distancias))[0]],
+                                    $arcos[array_keys($distancias, min($distancias))[0]],
+                                    $servicio
+                                );
+            $instrucciones = $this->getIndicaciones($path);
+            array_push($instrucciones, $instruccionFinal);
+            dump($instrucciones);
+            
         }
         
         // dump($this->getRotacion('izq', 'arr'));

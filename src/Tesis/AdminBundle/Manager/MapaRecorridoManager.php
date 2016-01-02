@@ -403,4 +403,23 @@ class MapaRecorridoManager
 
         return $instrucciones;
     }
+
+    /**
+     * Obtener los puntos de referencias que estan establecidos en el Mapa de Recorrido
+     */
+    public function getPuntosReferencia()
+    {
+        $mapa = $this->getCurrentMap();
+
+        $nodos = $mapa["mapaJson"]["nodes"]["_data"];
+
+        $puntosReferencia = array();
+        foreach ($nodos as $nodo) {
+            if (isset($nodo["tipo"]) and $nodo["tipo"] == 0) {
+                array_push($puntosReferencia, $nodo);
+            }
+        }
+
+        return $puntosReferencia;
+    }
 }

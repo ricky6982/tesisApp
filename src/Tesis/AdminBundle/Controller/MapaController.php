@@ -92,8 +92,9 @@ class MapaController extends Controller
 
         $indicaciones = $manager->getRutaCortaAlServicio($posicionUsuario, $id);
 
-        dump($indicaciones);
-        die('indicaciones');
+        $puntosReferencia = $manager->getPuntosReferencia();
+        dump($puntosReferencia);
+        die('Puntos Referencia');
 
     }
 }

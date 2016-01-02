@@ -88,14 +88,12 @@ class MapaController extends Controller
     {
         $manager = $this->get('adminbundle.manager.maparecorrido');
 
-        $manager->getRutaCortaAlServicio(16, $id);
-
-        $distancia = $manager->getDistanciaTotalEntreNodos($manager->getShortestPath(1,9));
-        dump($distancia);
-        die('distancia');
-
         $posicionUsuario = 1;   // Por el momento la posición del usuario va a estar en el nodo del mapa de recorrido
 
-        $ubicacionServicio = $manager->getUbicacionServicio($id);
+        $indicaciones = $manager->getRutaCortaAlServicio($posicionUsuario, $id);
+
+        dump($indicaciones);
+        die('indicaciones');
+
     }
 }

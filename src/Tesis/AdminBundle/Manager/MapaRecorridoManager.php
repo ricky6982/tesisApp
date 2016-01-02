@@ -362,6 +362,8 @@ class MapaRecorridoManager
     /**
      * Obtiene las rutas desde la posicionActual del usuario hasta cada uno de los nodos que conforman
      * los arcos en los que se encuentra el servicio.
+     *
+     *  Devuelve un Array con las instrucciones que el usuario debe seguir para llegar a su destino.
      */
     public function getRutaCortaAlServicio($posicionActual, $servicio)
     {
@@ -397,24 +399,8 @@ class MapaRecorridoManager
                                 );
             $instrucciones = $this->getIndicaciones($path);
             array_push($instrucciones, $instruccionFinal);
-            dump($instrucciones);
-            
         }
-        
-        // dump($this->getRotacion('izq', 'arr'));
-        // die('girar a');
-            
-        // dump($this->getIndicaciones(array(16,9,8,7,10,11,6,5,15,14,13,12,25)));
-        // dump($this->getArrayIndicaciones(array(16,9,8,7,10,11,6,5,15,14,13,12,25)));
-        // dump($this->getIndicaciones(array(26,21,22,17,18,19,10,7,3,4,5,6)));
-        // dump($this->getArrayIndicaciones(array(26,21,22,17,18,19,10,7,3,4,5,6)));
 
-        dump($distancias);
-        dump($nodosCercanos);
-        dump($arcos);
-        dump($path);
-        dump(array_keys($distancias, min($distancias)));
-        die('array con distancias minimas a cada arco');
-
+        return $instrucciones;
     }
 }

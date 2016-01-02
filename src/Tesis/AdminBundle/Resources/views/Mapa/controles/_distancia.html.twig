@@ -2,23 +2,34 @@
 <div ng-hide="nodoEdit || arcoEdit">
   <p class="text-center">Seleccione un Nodo o Arco para editarlo.</p>
 </div>
+
 <div ng-show="nodoEdit">
-  <div class="form-group text-center"> 
-    <label>Nodo Seleccionado: {{ nodoEdit.label }}</label>
-  </div>
-  <div class="form-group">Tipo de Nodo: </div>
-  <div class="radio">
-    <label>
-      <input type="radio" name="tipoNodo" ng-model="nodoEdit.tipo" value="1"/>Intersección
-    </label>
-    <div class="radio">
-      <label>
-        <input type="radio" name="tipoNodo" ng-model="nodoEdit.tipo" value="0"/>Punto de Referencia
-      </label>
+    <div class="form-group text-center"> 
+        <label>Nodo Seleccionado: {{ nodoEdit.label }}</label>
     </div>
-  </div>
+    <div class="form-group">Tipo de Nodo: </div>
+        <div class="radio">
+            <label>
+              <input type="radio" name="tipoNodo" ng-model="nodoEdit.tipo" value="1"/>Intersección
+            </label>
+            <div class="radio">
+              <label>
+                <input type="radio" name="tipoNodo" ng-model="nodoEdit.tipo" value="0"/>Punto de Referencia
+              </label>
+            </div>
+        </div>
+    <div ng-show="nodoEdit.tipo == 0">
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="nodoEdit.infRef.titulo" placeholder="Ej: Acceso Principal">
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" rows="5" ng-model="nodoEdit.infRef.detalle" placeholder="Descripción breve sobre el lugar donde se encuentra el punto de referencia."></textarea>
+        </div>
+    </div>
+
   <button ng-click="nodo.update()" class="btn btn-info btn-block">Aplicar</button>
 </div>
+
 <div ng-show="arcoEdit">
   <div class="form-group text-center">
     <label>Arco Seleccionado desde Nodo {{ arcoEdit.from }} al {{ arcoEdit.to}}.</label>

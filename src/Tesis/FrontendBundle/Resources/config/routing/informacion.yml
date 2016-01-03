@@ -18,6 +18,10 @@ informacion_servicio_item:
     path: /Servicio/Item/{id}
     defaults: { _controller: FrontendBundle:Informacion:servicioItem }
 
+guiame:
+    path: /Servicio/Item/{id}/guiame
+    defaults: { _controller: FrontendBundle:Informacion:guiame }
+
 informacion_como_llegar:
     path: /ComoLlegar
     defaults: { _controller: FrontendBundle:Informacion:ComoLlegar }

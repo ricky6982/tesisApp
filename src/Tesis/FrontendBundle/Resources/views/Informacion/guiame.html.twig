@@ -1,0 +1,21 @@
+{% extends "FrontendBundle:Default:layout.html.twig" %}
+
+{% block title %}Guiarme hasta {{ item.nombre }}{% endblock %}
+
+{% block contenido %}
+
+<form action="{{ path('guiame', {'id': item.id }) }}" method="POST">
+    <label for="">Estoy en</label>
+
+    <select name="inicio" name="puntoReferencia">
+        {% for puntoRef in puntosReferencia %}
+            <option value="{{ puntoRef.id }}">{{ puntoRef.infRef.titulo }}</option>
+        {% endfor %}
+    </select>
+
+    <input type="submit" value="Mostrar Indicaciones">
+</form>
+
+
+
+{% endblock %}

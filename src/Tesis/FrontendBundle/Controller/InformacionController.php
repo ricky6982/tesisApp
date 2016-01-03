@@ -70,6 +70,31 @@ class InformacionController extends Controller
     }
 
     /**
+     * @ParamConverter("item", class="AdminBundle:ServicioItem")
+     */
+    public function guiameAction(ServicioItem $item, Request $request)
+    {
+        $manager = $this->get('adminbundle.manager.maparecorrido');
+
+        if ($request->getMethod() == 'POST') {
+            $puntoInicio = intval($request->get('inicio'));
+            $indicaciones = $manager->getRutaCortaAlServicio($puntoInicio, $item->getId());
+
+            return $this->render('FrontendBundle:Informacion:indicaciones.html.twig', array(
+                    'indicaciones' => $indicaciones,
+                    'servicio' => $item
+                ));
+        }
+
+        $puntosReferencia = $manager->getPuntosReferencia();
+
+        return $this->render('FrontendBundle:Informacion:guiame.html.twig', array(
+                'item' => $item,
+                'puntosReferencia' => $puntosReferencia
+            ));
+    }
+
+    /**
      * Se encarga de mostrar un campo de busqueda y un listado con los resultado de las busqueda realizada.
      */
     public function comoLlegarAction(Request $request)

@@ -415,7 +415,7 @@ class MapaRecorridoManager
 
         $puntosReferencia = array();
         foreach ($nodos as $nodo) {
-            if (isset($nodo["tipo"]) and $nodo["tipo"] == 0) {
+            if (isset($nodo["tipo"]) and intval($nodo["tipo"]) == 0) {
                 array_push($puntosReferencia, $nodo);
             }
         }

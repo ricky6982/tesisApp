@@ -1,7 +1,7 @@
 {% extends 'FrontendBundle:Default:layout.html.twig' %}
 
-{% block titulo %}
-    Información General
+{% block title %}
+    Información General del edificio Terminal de Omnibus de Jujuy
 {% endblock %}
 
 {% block contenido %}
@@ -10,5 +10,6 @@
         <li role="option" aria-setsize="4" aria-posinset="2"><a href="{{ path('informacion_servicios') }}">Servicios</a></li>
         <li role="option" aria-setsize="4" aria-posinset="3"><a href="{{ path('informacion_como_llegar') }}">Como llegar a</a></li>
         <li role="option" aria-setsize="4" aria-posinset="4"><a href="{{ path('confiteria_homepage') }}">Confiterias</a></li>
+        <li role="option" aria-setsize="4" aria-posinset="4"><a href="#">Acerca de la aplicación</a></li>
     </ol>
 {% endblock %}

@@ -1,8 +1,11 @@
 {% extends 'FrontendBundle:Default:layout.html.twig' %}
 
+{% block title %}
+    Servicio {{ servicio.nombre }}
+{% endblock %}    
+
 {% block contenido %}
 
-    <legend>Servicio {{ servicio.nombre }}</legend>
     <ul>
         {% for item in servicio.items %}
         <li><a href="{{ path('informacion_servicio_item', {'id': item.id }) }}">{{ item.nombre }}</a></li>

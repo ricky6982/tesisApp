@@ -1,14 +1,15 @@
 {% extends 'FrontendBundle:Default:layout.html.twig' %}
 
+{% block title %}Descripción del Servicio {{ item.nombre }}{% endblock %}
+
 {% block contenido %}
-<legend>Descripción del Servicio</legend>
 
-<h1>{{ item.nombre }}</h1>
+Descripción: {{ item.descripcion }}
+<br>
 
-<dl>
-    <dt>Descripción</dt>
-    <dd>{{ item.descripcion }}</dd>
-</dl>
+<a href="{{ path('guiame', {'id': item.id }) }}">Guíame hasta aqui</a>
+
+<br>
 
 <a href="{{ path('informacion_servicio_detalle', {'id': item.servicio.id }) }}">Volver</a>
 {% endblock %}

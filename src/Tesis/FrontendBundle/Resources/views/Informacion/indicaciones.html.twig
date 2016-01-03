@@ -1,0 +1,13 @@
+{% extends "FrontendBundle:Default:layout.html.twig" %}
+
+{% block title %}Indicaciones para llegar al servicio {{ servicio.nombre }}{% endblock %}
+
+{% block contenido %}
+
+<ol>
+    {% for item in indicaciones %}
+        <li>{{ item }}</li>
+    {% endfor %}
+</ol>
+
+{% endblock %}

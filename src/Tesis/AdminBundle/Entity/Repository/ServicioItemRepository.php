@@ -19,4 +19,22 @@ class ServicioItemRepository extends EntityRepository
 
         return $consulta->getResult();
     }
+
+    public function findItemFromService($idServicio, $idItem)
+    {
+        $em = $this->getEntityManager();
+
+        $consultaDql = 'SELECT i
+                        FROM AdminBundle:ServicioItem i
+                        LEFT JOIN i.servicio s
+                        WHERE i.id = :idItem and s.id = :idServicio
+                        ';
+        $consulta = $em->createQuery($consultaDql);
+        $consulta->setParameters(array(
+                'idItem' => $idItem,
+                'idServicio' => $idServicio
+            ));
+
+        return $consulta->getArrayResult();
+    }
 }

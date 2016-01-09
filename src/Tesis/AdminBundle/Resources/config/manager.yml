@@ -1,5 +1,17 @@
 services:
+    adminbundle.manager.base:
+        class: Tesis\AdminBundle\Manager\BaseManager
+        abstract: true
+        calls:
+            - [setEntityManager, [@doctrine.orm.entity_manager]]
+
     adminbundle.manager.maparecorrido:
         class: Tesis\AdminBundle\Manager\MapaRecorridoManager
         calls:
             - [setEntityManager, [@doctrine.orm.entity_manager]]
+
+    adminbundle.manager.servicio_item:
+        class: Tesis\AdminBundle\Manager\ServicioItemManager
+        parent: adminbundle.manager.base
+        calls:
+            - [setContainer, [@service_container]]

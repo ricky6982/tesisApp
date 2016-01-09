@@ -27,7 +27,8 @@ class ServicioItemType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tesis\AdminBundle\Entity\ServicioItem'
+            'data_class' => 'Tesis\AdminBundle\Entity\ServicioItem',
+            'csrf_protection' => false
         ));
     }
 
@@ -36,6 +37,6 @@ class ServicioItemType extends AbstractType
      */
     public function getName()
     {
-        return 'tesis_adminbundle_servicioitem';
+        return 'tesis_servicioitem';
     }
 }

@@ -4,6 +4,9 @@ namespace Tesis\AdminBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 
+/**
+ * TODO: Eliminar el servicio
+ */
 class ApiServicioController extends FOSRestController
 {
     public function getApiServiciosAction()

@@ -26,7 +26,8 @@ class ServicioType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tesis\AdminBundle\Entity\Servicio'
+            'data_class' => 'Tesis\AdminBundle\Entity\Servicio',
+            'csrf_protection' => false,
         ));
     }
 

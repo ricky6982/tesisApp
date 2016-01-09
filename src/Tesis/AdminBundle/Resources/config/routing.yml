@@ -26,6 +26,7 @@ servicio_item:
     resource:   "@AdminBundle/Resources/config/routing/servicioItem.yml"
     prefix:     /ServicioItem
 
-api_servicio:
+servicio_rest:
     type:       rest
-    resource:   "Tesis\AdminBundle\Controller\ApiServicioController"
+    resource:   "Tesis\AdminBundle\Controller\ServicioRestController"
+    prefix:     /api

@@ -10,6 +10,9 @@ use Tesis\AdminBundle\Form\ServicioType;
 
 class ServicioRestController extends FOSRestController
 {
+    /**
+     * Obtener todos los servicios
+     */
     public function getServiciosAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -20,6 +23,9 @@ class ServicioRestController extends FOSRestController
         return $this->handleView($view);
     }
 
+    /**
+     * Obtener un servicio
+     */
     public function getServicioAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -29,6 +35,29 @@ class ServicioRestController extends FOSRestController
         return $this->handleView($view);
     }
 
+    /**
+     * Edición del Servicio
+     *
+     * @ParamConverter("servicio", class="AdminBundle:Servicio")
+     */
+    public function putServicioAction(Servicio $servicio, Request $request)
+    {
+        $form = $this->getForm($servicio, array('method' => 'PUT'));
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $view = $this->view($servicio);
+        }else{
+            $view = $this->view($form);
+        }
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * Creación de un Servicio
+     */
     public function postServicioAction(Request $request)
     {
         $servicio = new Servicio();
@@ -45,12 +74,9 @@ class ServicioRestController extends FOSRestController
         return $this->get('fos_rest.view_handler')->handle($view);
     }
 
-    protected function getForm($servicio = null)
-    {
-        return $this->createForm(new ServicioType(), $servicio);
-    }
-
     /**
+     * Eliminación de un Servicio
+     *
      * @ParamConverter("servicio", class="AdminBundle:Servicio")
      */
     public function deleteServicioAction(Servicio $servicio)
@@ -62,5 +88,10 @@ class ServicioRestController extends FOSRestController
         $view = $this->view();
 
         return $this->get('fos_rest.view_handler')->handle($view);
+    }
+
+    protected function getForm($servicio = null, $options = null)
+    {
+        return $this->createForm(new ServicioType(), $servicio, $options);
     }
 }

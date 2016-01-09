@@ -36,6 +36,6 @@ class ServicioType extends AbstractType
      */
     public function getName()
     {
-        return 'tesis_adminbundle_servicio';
+        return 'tesis_servicio';
     }
 }

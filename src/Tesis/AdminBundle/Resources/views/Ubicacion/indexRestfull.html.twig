@@ -1,0 +1,101 @@
+{% extends "::base.html.twig" %}
+
+{% import '::components/_modal.html.twig' as modal %}
+
+{% block titulo %}Ubicación de Servicios{% endblock %}
+
+{% block headerJavascripts %}
+    <script src="{{ asset('bower_components/restangular/dist/restangular.min.js') }}"></script>
+    <script src="{{ asset('bower_components/vis/dist/vis.min.js') }}"></script>
+    <script src="{{ asset('public/app/ubicacion_servicios/serviciosFactory.js') }}"></script>
+    <script src="{{ asset('public/app/ubicacion_servicios/app.js') }}"></script>
+    <script type="text/javascript">
+        var apiUrl = "{{ path('admin_homepage') }}";
+    </script>
+{% endblock %}
+
+{% block contenido %}
+<div ng-app="app" ng-controller="AppCtrl">
+    <div class="row" style="margin: 10px;">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#servicios" data-toggle="tab" aria-expanded="true">Servicios</a></li>
+            <li><a href="#localizacion" data-toggle="tab" aria-expanded="true">Localización de Servicios</a></li>
+        </ul>
+        <div class="tab-content tab-bordered">
+            <div id="servicios" class="tab-pane active" ng-controller="ServiciosCtrl">
+                {# {% include 'AdminBundle:Ubicacion:_servicios.html.twig' %} #}
+                
+                {# Inicialización de Parametros que utilizara la aplicación angular #}
+                <script>
+                    (function(){
+                        angular.module('ts-parameters', [])
+                            .constant('Parameters', {
+                                urlApi: "{{ path('admin_homepage') }}"+"api"
+                            })
+                        ;
+                    }());
+                </script>
+                <div class="text-right">
+                    <button ng-click="crearServicio()" class="btn btn-success">
+                        <i class="glyphicon glyphicon-plus"> </i> 
+                        Categoría de Servicio
+                    </button>
+                </div>
+                {% verbatim %}
+                <div ng-repeat="servicio in servicios">
+                    <legend>
+                        <div class="dropdown pull-left" style="margin-right: 5px; margin-top: -2px;">
+                            <button class="btn btn-primary btn-xs" data-toggle="dropdown">
+                                <i class="glyphicon glyphicon-cog"></i> <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><i class="glyphicon glyphicon-pencil text-info"></i> Editar Categoría de Servicio</a></li>
+                                <li><a href="#"><i class="glyphicon glyphicon-trash text-danger"></i> Eliminar Categoría de Servicio</a></li>
+                                <li><a href="#"><i class="glyphicon glyphicon-plus text-success"></i> Agregar un Servicio</a></li>
+                            </ul>
+                        </div>
+                        {{ servicio.nombre }}
+                    </legend>
+                    <blockquote>
+                        <em>
+                            {{ servicio.descripcion }}
+                        </em>
+                    </blockquote>
+                    <table class="table table-bordered table-striped" ng-show="servicio.items.length > 0">
+                        <thead>
+                            <tr>
+                                <th>Nº</th><th>Nombre</th><th>Descripción</th><th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in servicio.items">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ item.nombre }}</td>
+                                <td>{{ item.descripcion }}</td>
+                                <td style="width: 175px;" class="text-center">
+                                    <button class="btn btn-info btn-xs">
+                                        <i class="glyphicon glyphicon-pencil"></i> Editar
+                                    </button>
+                                    <button class="btn btn-danger btn-xs">
+                                        <i class="glyphicon glyphicon-trash"></i> Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2 class="text-muted text-center" ng-hide="servicio.items.length > 0" style="margin: 40px;">
+                        Todavía no cargaste servicios para esta categoria.
+                    </h2>
+                </div>
+                {% endverbatim %}
+                <button class="btn btn-primary" ng-click="actualizarListado()">Actualizar Listado</button>
+            </div>
+            <div id="localizacion" class="tab-pane" >
+                {# {% include 'AdminBundle:Ubicacion:_localizacion.html.twig' %} #}
+                Mapa
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -90,8 +90,12 @@ class ServicioRestController extends FOSRestController
         return $this->get('fos_rest.view_handler')->handle($view);
     }
 
-    protected function getForm($servicio = null, $options = null)
+    protected function getForm($servicio = null, $options = array())
     {
-        return $this->createForm(new ServicioType(), $servicio, $options);
+        if (empty($options)) {
+            return $this->createForm(new ServicioType(), $servicio);
+        }else{
+            return $this->createForm(new ServicioType(), $servicio, $options);
+        }
     }
 }

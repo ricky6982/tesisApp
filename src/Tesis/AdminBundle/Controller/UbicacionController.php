@@ -15,10 +15,16 @@ class UbicacionController extends Controller
         $em = $this->getDoctrine()->getManager();
         $servicios = $em->getRepository('AdminBundle:Servicio')->findAll();
 
-        return $this->render('AdminBundle:Ubicacion:index.html.twig', array(
+        // return $this->render('AdminBundle:Ubicacion:index.html.twig', array(
+        //         'servForm' => $servForm->createView(),
+        //         'servItemForm' => $servItemForm->createView(),
+        //         'servicios' => $servicios,
+        //     ));
+
+        // Implementación RESTfull
+        return $this->render('AdminBundle:Ubicacion:indexRestfull.html.twig', array(
                 'servForm' => $servForm->createView(),
                 'servItemForm' => $servItemForm->createView(),
-                'servicios' => $servicios,
             ));
     }
 

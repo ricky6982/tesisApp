@@ -36,7 +36,7 @@ class Servicio
     private $descripcion;
 
     /**
-     * @ORM\OneToMany(targetEntity="ServicioItem", mappedBy="servicio")
+     * @ORM\OneToMany(targetEntity="ServicioItem", mappedBy="servicio", cascade={"remove"})
      */
     private $items;
 

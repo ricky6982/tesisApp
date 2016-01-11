@@ -47,7 +47,7 @@ app.controller('ServiciosCtrl', [
             obj.customPUT({tesis_servicio: {nombre: obj.nombre, descripcion: obj.descripcion}}).then(function(){
                 $scope.actualizarListado();
             }, function(){
-                console.log('no se edito');
+                console.log('no se modificó la categoria del servicio');
             });
         };
 
@@ -64,6 +64,23 @@ app.controller('ServiciosCtrl', [
                 console.log('No se pudo eliminar el servicio');
             });
 
+        };
+
+        $scope.newServicioItem = function(idServicio){
+            $('#crearServicioItem').modal('show');
+            $scope.nuevoServicioItem = {};
+            $scope.nuevoServicioItem.servicio = idServicio;
+        };
+
+        $scope.saveServicioItem = function(){
+            $('#crearServicioItem').modal('hide');
+            var obj = { tesis_servicioitem: angular.copy($scope.nuevoServicioItem)};
+            Restangular.one('servicios', $scope.nuevoServicioItem.servicio).customPOST(obj, 'items').then(function(){
+                $scope.actualizarListado();
+                console.log('Se creo el servicio');
+            }, function(){
+                console.log('no se pudo crear el sercicio');
+            });
         };
 
         // Inicializacion de funciones

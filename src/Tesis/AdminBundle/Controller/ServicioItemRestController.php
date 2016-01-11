@@ -92,8 +92,13 @@ class ServicioItemRestController extends FOSRestController
     /**
      * Creación del Formulario
      */
-    private function getForm($servicioItem = null, $options = null)
+    private function getForm($servicioItem = null, $options = array())
     {
-        return $this->createForm(new ServicioItemType(), $servicioItem, $options);
+        if (empty($options)) {
+            return $this->createForm(new ServicioItemType(), $servicioItem);
+        }else{
+            return $this->createForm(new ServicioItemType(), $servicioItem, $options);
+            
+        }
     }
 }

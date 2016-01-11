@@ -1,96 +1,170 @@
-<div class="pull-right">
-    {{ modal.button('nuevoServicio', 'plus', 'Servicio') }}
-    {{ modal.button('nuevoServicioItem', 'plus', 'Item Servicio') }}
+{# Inicialización de Parametros que utilizara la aplicación angular #}
+<script>
+    (function(){
+        angular.module('ts-parameters', [])
+            .constant('Parameters', {
+                urlApi: "{{ path('admin_homepage') }}"+"api"
+            })
+        ;
+    }());
+</script>
+
+
+<div class="text-right">
+    <button class="btn btn-success" data-toggle="modal" data-target="#crearServicio">
+        <i class="glyphicon glyphicon-plus"> </i> 
+        Categoría de Servicio
+    </button>
 </div>
 
+{% verbatim %}
+<div ng-repeat="servicio in servicios">
+    <legend>
+        <div class="dropdown pull-left" style="margin-right: 5px; margin-top: -2px;">
+            <button class="btn btn-primary btn-xs" data-toggle="dropdown">
+                <i class="glyphicon glyphicon-cog"></i> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a ng-click="editServicio($index)"><i class="glyphicon glyphicon-pencil text-info"></i> Editar Categoría de Servicio</a></li>
+                <li><a ng-click="deleteServicio($index)"><i class="glyphicon glyphicon-trash text-danger"></i> Eliminar Categoría de Servicio</a></li>
+                <li><a ng-click="newServicioItem(servicio.id)"><i class="glyphicon glyphicon-plus text-success"></i> Agregar un Servicio</a></li>
+            </ul>
+        </div>
+        {{ servicio.nombre }}
+    </legend>
+    <blockquote>
+        <em>
+            {{ servicio.descripcion }}
+        </em>
+    </blockquote>
+    <table class="table table-bordered table-striped" ng-show="servicio.items.length > 0">
+        <thead>
+            <tr>
+                <th>Nº</th><th>Nombre</th><th>Descripción</th><th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in servicio.items">
+                <td>{{ $index + 1 }}</td>
+                <td>{{ item.nombre }}</td>
+                <td>{{ item.descripcion }}</td>
+                <td style="width: 175px;" class="text-center">
+                    <button class="btn btn-info btn-xs">
+                        <i class="glyphicon glyphicon-pencil"></i> Editar
+                    </button>
+                    <button class="btn btn-danger btn-xs">
+                        <i class="glyphicon glyphicon-trash"></i> Eliminar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h2 class="text-muted text-center" ng-hide="servicio.items.length > 0" style="margin: 40px;">
+        Todavía no cargaste servicios para esta categoria.
+    </h2>
+</div>
+{% endverbatim %}
 
-{% if servicios|length == 0 %}
-    <h2 class="text-center text-muted">Todavia no se agregaron servicios</h2>
-{% else %}
-    {% for servicio in servicios %}
-        <legend> {{ _self.dropdown() }} {{ servicio.nombre }}</legend>
-        {% if servicio.items | length == 0 %}
-            <h2 class="text-center text-muted">
-                Todavia no se han agregado items a este servicio.
-            </h2>
-        {% else %}
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th><th>Nombre</th><th>Descripción</th>
-                        <th style="width: 180px"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in servicio.items %}
-                    <tr>
-                        <td>{{ loop.index }}</td>
-                        <td>{{ item.nombre }}</td>
-                        <td>{{ item.descripcion }}</td>
-                        <td class="text-center">
-                            <button class="btn btn-xs btn-info"><i class="glyphicon glyphicon-pencil"></i> Editar</button>
-                            <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Eliminar</button>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% endif %}
-    {% endfor %}
-{% endif %}
 
-{% macro dropdown() %}
-<div class="btn-group">
-    <div class="dropdown">
-      <button type="button" data-toggle="dropdown" class="btn btn-link dropdown-toggle"><i class="glyphicon glyphicon-cog"> </i></button>
-      <ul class="dropdown-menu">
-        <li> 
-          <button class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i> Editar servicio</button>
-        </li>
-        <li> 
-          <button class="btn btn-link"><i class="glyphicon glyphicon-trash"></i> Borrar servicio</button>
-        </li>
-      </ul>
+{# Definición de Ventanas Modales #}
+
+<!-- Modal Creación Categoria de Servicio -->
+<div class="modal fade" id="crearServicio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <form action="">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Nueva Categoria de Servicio</h4>
+            </div>
+            <div class="modal-body">
+                {{ form_widget(servicioForm) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" ng-click="saveServicio()" >Save changes</button>
+            </div>
+        </div>
+    </form>
+  </div>
+</div>
+
+{# Modal Edición de Categoria de Servicio #}
+<div class="modal fade" id="editServicio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-center" id="myModalLabel">
+                    Editar Categoria de Servicio
+                </h4>
+            </div>
+            <div class="modal-body text-center">
+                <form>
+                    <div class="form-group">
+                        <label for="">Nombre</label>
+                        <input type="text" ng-model="editarServicio.nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Descripción</label>
+                        <input type="text" ng-model="editarServicio.descripcion">
+                    </div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" ng-click="updateServicio()" >Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
-{% endmacro %}
 
-{# Modal para Agregar Nuevo Servicio #}
-{{ modal.header('nuevoServicio', path('servicio_save'), 'Nuevo Servicio') }}
-    <div class="form-group">
-        <label for="" class="col-sm-4 control-label">{{ form_label(servForm.nombre) }}</label>
-        <div class="col-sm-6">
-            {{ form_widget(servForm.nombre, {'attr': {'class': 'form-control'}}) }}
+{# Modal Eliminación de Categoria de Servicio #}
+<div class="modal fade" id="deleteServicio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-danger text-center" id="myModalLabel">
+                    <i class="glyphicon glyphicon-warning-sign"></i>
+                    Eliminación de la Categoria del Servicio
+                </h4>
+            </div>
+            <div class="modal-body text-center">
+                {% verbatim %}
+                    <p class="lead">¿Esta seguro de que quiere eliminar la Categoría <strong>{{ eliminarServicio.nombre }}</strong> junto a sus <strong>{{ eliminarServicio.items.length }}</strong> servicios?</p>
+                {% endverbatim %}
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" ng-click="removeServicio()" >Eliminar</button>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <label for="" class="col-sm-4 control-label">{{ form_label(servForm.descripcion) }}</label>
-        <div class="col-sm-6">
-            {{ form_widget(servForm.descripcion, {'attr': {'class': 'form-control'}}) }}
-        </div>
-    </div>
-    {{ form_widget(servForm) }}
-{{ modal.footer('Guardar') }}
+</div>
 
-{# Modal para Agregar Nuevo Servicio #}
-{{ modal.header('nuevoServicioItem', path('servicio_item_save'), 'Nuevo Servicio') }}
-    <div class="form-group">
-        <label for="" class="col-sm-4 control-label">{{ form_label(servItemForm.servicio) }}</label>
-        <div class="col-sm-6">
-            {{ form_widget(servItemForm.servicio, {'attr': {'class': 'form-control'}}) }}
+{# Modal Agregar un ServicioItem #}
+<div class="modal fade" id="crearServicioItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-center" id="myModalLabel">
+                    Creación de Servicio para la categoria
+                    {# {% verbatim %} {{  }} {% endverbatim %} #}
+                </h4>
+            </div>
+            <div class="modal-body text-center">
+                <form>
+                    <div class="form-group">
+                        <label for="">Nombre</label>
+                        <input type="text" ng-model="nuevoServicioItem.nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Descripción</label>
+                        <input type="text" ng-model="nuevoServicioItem.descripcion">
+                    </div>
+                    <input type="hidden" ng-model="nuevoServicioItem.servicio">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveServicioItem()" >Crear Servicio</button>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <label for="" class="col-sm-4 control-label">{{ form_label(servItemForm.nombre) }}</label>
-        <div class="col-sm-6">
-            {{ form_widget(servItemForm.nombre, {'attr': {'class': 'form-control'}}) }}
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="" class="col-sm-4 control-label">{{ form_label(servItemForm.descripcion) }}</label>
-        <div class="col-sm-6">
-            {{ form_widget(servItemForm.descripcion, {'attr': {'class': 'form-control'}}) }}
-        </div>
-    </div>
-    {{ form_widget(servItemForm) }}
-{{ modal.footer('Guardar') }}
+</div>

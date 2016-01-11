@@ -36,10 +36,24 @@ app.controller('ServiciosCtrl', [
             });
         };
 
+        $scope.editServicio = function(index){
+            $scope.editarServicio = angular.copy($scope.servicios[index]);
+            $('#editServicio').modal('show');
+        };
+
+        $scope.updateServicio = function(){
+            var obj = angular.copy($scope.editarServicio);
+            $('#editServicio').modal('hide');
+            obj.customPUT({tesis_servicio: {nombre: obj.nombre, descripcion: obj.descripcion}}).then(function(){
+                $scope.actualizarListado();
+            }, function(){
+                console.log('no se edito');
+            });
+        };
+
         $scope.deleteServicio = function(index){
             $scope.eliminarServicio = angular.copy($scope.servicios[index]);
-            var modal = $('#deleteServicio');
-            modal.modal('show');
+            $('#deleteServicio').modal('show');
         };
 
         $scope.removeServicio = function(){

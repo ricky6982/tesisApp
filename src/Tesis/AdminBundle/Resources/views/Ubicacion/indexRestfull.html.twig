@@ -64,6 +64,35 @@
                   </div>
                 </div>
 
+                {# Modal Edición de Categoria de Servicio #}
+                <div class="modal fade" id="editServicio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title text-center" id="myModalLabel">
+                                    Editar Categoria de Servicio
+                                </h4>
+                            </div>
+                            <div class="modal-body text-center">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="">Nombre</label>
+                                        <input type="text" ng-model="editarServicio.nombre">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Descripción</label>
+                                        <input type="text" ng-model="editarServicio.descripcion">
+                                    </div>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary" ng-click="updateServicio()" >Guardar Cambios</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {# Modal Eliminación de Categoria de Servicio #}
                 <div class="modal fade" id="deleteServicio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -93,7 +122,7 @@
                                 <i class="glyphicon glyphicon-cog"></i> <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a><i class="glyphicon glyphicon-pencil text-info"></i> Editar Categoría de Servicio</a></li>
+                                <li><a ng-click="editServicio($index)"><i class="glyphicon glyphicon-pencil text-info"></i> Editar Categoría de Servicio</a></li>
                                 <li><a ng-click="deleteServicio($index)"><i class="glyphicon glyphicon-trash text-danger"></i> Eliminar Categoría de Servicio</a></li>
                                 <li><a><i class="glyphicon glyphicon-plus text-success"></i> Agregar un Servicio</a></li>
                             </ul>

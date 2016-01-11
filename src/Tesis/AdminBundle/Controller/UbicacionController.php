@@ -23,8 +23,8 @@ class UbicacionController extends Controller
 
         // Implementación RESTfull
         return $this->render('AdminBundle:Ubicacion:indexRestfull.html.twig', array(
-                'servForm' => $servForm->createView(),
-                'servItemForm' => $servItemForm->createView(),
+                'servicioForm' => $servForm->createView(),
+                'servicioItemForm' => $servItemForm->createView(),
             ));
     }
 

@@ -15,8 +15,8 @@ class ServicioType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('descripcion')
+            ->add('nombre', null, array('attr' => array('ng-model' => 'newServicio.nombre')))
+            ->add('descripcion', null, array('attr' => array('ng-model' => 'newServicio.descripcion')))
         ;
     }
     

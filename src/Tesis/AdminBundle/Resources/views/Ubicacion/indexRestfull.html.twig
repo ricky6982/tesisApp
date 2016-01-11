@@ -35,12 +35,56 @@
                         ;
                     }());
                 </script>
+
+
                 <div class="text-right">
-                    <button ng-click="crearServicio()" class="btn btn-success">
+                    <button class="btn btn-success" data-toggle="modal" data-target="#crearServicio">
                         <i class="glyphicon glyphicon-plus"> </i> 
                         Categoría de Servicio
                     </button>
                 </div>
+                <!-- Modal Creación Categoria de Servicio -->
+                <div class="modal fade" id="crearServicio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <form action="">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Nueva Categoria de Servicio</h4>
+                            </div>
+                            <div class="modal-body">
+                                {{ form_widget(servicioForm) }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary" ng-click="saveServicio()" >Save changes</button>
+                            </div>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+
+                <div class="modal fade" id="deleteServicio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title text-danger text-center" id="myModalLabel">
+                                    <i class="glyphicon glyphicon-warning-sign"></i>
+                                    Eliminación de la Categoria del Servicio
+                                </h4>
+                            </div>
+                            <div class="modal-body text-center">
+                                {% verbatim %}
+                                    <p class="lead">¿Esta seguro de que quiere eliminar la Categoría <strong>{{ eliminarServicio.nombre }}</strong> junto a sus <strong>{{ eliminarServicio.items.length }}</strong> servicios?</p>
+                                {% endverbatim %}
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-danger" ng-click="removeServicio()" >Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {% verbatim %}
                 <div ng-repeat="servicio in servicios">
                     <legend>
@@ -49,9 +93,9 @@
                                 <i class="glyphicon glyphicon-cog"></i> <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="glyphicon glyphicon-pencil text-info"></i> Editar Categoría de Servicio</a></li>
-                                <li><a href="#"><i class="glyphicon glyphicon-trash text-danger"></i> Eliminar Categoría de Servicio</a></li>
-                                <li><a href="#"><i class="glyphicon glyphicon-plus text-success"></i> Agregar un Servicio</a></li>
+                                <li><a><i class="glyphicon glyphicon-pencil text-info"></i> Editar Categoría de Servicio</a></li>
+                                <li><a ng-click="deleteServicio($index)"><i class="glyphicon glyphicon-trash text-danger"></i> Eliminar Categoría de Servicio</a></li>
+                                <li><a><i class="glyphicon glyphicon-plus text-success"></i> Agregar un Servicio</a></li>
                             </ul>
                         </div>
                         {{ servicio.nombre }}

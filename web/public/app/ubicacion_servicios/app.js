@@ -22,10 +22,34 @@ app.controller('ServiciosCtrl', [
             });
         };
 
-        $scope.crearServicio = function(){
-            Restangular.all('servicios').post({tesis_servicio: { nombre: "nuevo", descripcion: "nuevo"}}).then(function(){
+        $scope.saveServicio = function(){
+            var obj = {tesis_servicio: angular.copy($scope.newServicio)};
+            var modal = $('#crearServicio');
+            modal.modal('hide');
+            Restangular.all('servicios').post(obj).then(function(){
                 $scope.actualizarListado();
+                $scope.newServicio.nombre = "";
+                $scope.newServicio.descripcion = "";
+            }, function(){
+                console.log('no se pudo guardar la nueva categoría de servicio.');
+                modal.modal('show');
             });
+        };
+
+        $scope.deleteServicio = function(index){
+            $scope.eliminarServicio = angular.copy($scope.servicios[index]);
+            var modal = $('#deleteServicio');
+            modal.modal('show');
+        };
+
+        $scope.removeServicio = function(){
+            $('#deleteServicio').modal('hide');
+            $scope.eliminarServicio.remove().then(function(){
+                $scope.actualizarListado();
+            }, function(){
+                console.log('No se pudo eliminar el servicio');
+            });
+
         };
 
         // Inicializacion de funciones

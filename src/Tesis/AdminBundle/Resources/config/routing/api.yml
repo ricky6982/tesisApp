@@ -1,0 +1,8 @@
+servicio_rest:
+    type:       rest
+    resource:   "Tesis\AdminBundle\Controller\ServicioRestController"
+
+servicio_item_rest:
+    type:       rest
+    parent:     servicio_rest
+    resource:   "Tesis\AdminBundle\Controller\ServicioItemRestController"

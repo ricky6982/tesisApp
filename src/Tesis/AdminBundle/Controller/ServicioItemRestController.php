@@ -14,7 +14,7 @@ class ServicioItemRestController extends FOSRestController
     /**
      * @ParamConverter("servicio", class="AdminBundle:Servicio")
      */
-    public function getServicioItemsAction(Servicio $servicio)
+    public function getItemsAction(Servicio $servicio)
     {
         $view = $this->view($servicio->getItems());
 
@@ -22,9 +22,9 @@ class ServicioItemRestController extends FOSRestController
     }
 
     /**
-     * @ParamConverter("servicioItem", class="AdminBundle:ServicioItem", options={"id" = "servicioItem"})
+     * @ParamConverter("item", class="AdminBundle:ServicioItem", options={"id" = "servicioItem"})
      */
-    public function getServicioItemAction($id, ServicioItem $servicioItem)
+    public function getItemAction($servicio, ServicioItem $item)
     {
         $manager = $this->get('adminbundle.manager.servicio_item');
         $item = $manager->findItemFromService($id, $servicioItem->getId());
@@ -36,7 +36,7 @@ class ServicioItemRestController extends FOSRestController
     /**
      * Actualización de datos en ServicioItem
      */
-    public function putServicioItemAction($id, $servicioItem, Request $request)
+    public function putItemAction($servicio, $servicioItem, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $item = $em->getRepository('AdminBundle:ServicioItem')->find($servicioItem);
@@ -56,7 +56,7 @@ class ServicioItemRestController extends FOSRestController
     /**
      * Creación de un nuevo ServicioItem
      */
-    public function postServicioItemAction($id, Request $request)
+    public function postItemAction($servicio, Request $request)
     {
         $servicioItem = new ServicioItem();
         $form = $this->getForm($servicioItem);
@@ -75,7 +75,7 @@ class ServicioItemRestController extends FOSRestController
     /**
      * @ParamConverter("servicioItem", class="AdminBundle:ServicioItem")
      */
-    public function deleteServicioItemAction($id, ServicioItem $servicioItem)
+    public function deleteItemAction($servicio, ServicioItem $servicioItem)
     {
         if ($servicioItem->getServicio()->getId() == $id) {
             $em = $this->getDoctrine()->getManager();

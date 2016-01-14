@@ -52,7 +52,7 @@
                     <button class="btn btn-info btn-xs">
                         <i class="glyphicon glyphicon-pencil"></i> Editar
                     </button>
-                    <button class="btn btn-danger btn-xs">
+                    <button class="btn btn-danger btn-xs" ng-click="deleteServicioItem(servicio.id, item.id)">
                         <i class="glyphicon glyphicon-trash"></i> Eliminar
                     </button>
                 </td>
@@ -164,6 +164,28 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-primary" ng-click="saveServicioItem()" >Crear Servicio</button>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Modal Eliminación de Servicio Item #}
+<div class="modal fade" id="deleteServicioItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-danger text-center" id="myModalLabel">
+                    <i class="glyphicon glyphicon-warning-sign"></i>
+                    Eliminación del Servicio
+                </h4>
+            </div>
+            <div class="modal-body text-center">
+                {% verbatim %}
+                    <p class="lead">¿Esta seguro de que quiere eliminar el servicio <strong>{{ eliminarServicioItem.nombre }}</strong>?</p>
+                {% endverbatim %}
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" ng-click="removeServicioItem()" >Eliminar</button>
             </div>
         </div>
     </div>

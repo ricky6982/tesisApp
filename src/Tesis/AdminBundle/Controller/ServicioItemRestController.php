@@ -73,11 +73,13 @@ class ServicioItemRestController extends FOSRestController
     }
 
     /**
-     * @ParamConverter("servicioItem", class="AdminBundle:ServicioItem")
+     * @ParamConverter("servicio", class="AdminBundle:Servicio", options={"id" = "servicio"})
+     * @ParamConverter("servicioItem", class="AdminBundle:ServicioItem", options={"id" = "servicioItem"})
      */
-    public function deleteItemAction($servicio, ServicioItem $servicioItem)
+    public function deleteItemAction(Servicio $servicio, ServicioItem $servicioItem)
     {
-        if ($servicioItem->getServicio()->getId() == $id) {
+
+        if ($servicioItem->getServicio()->getId() == $servicio->getId()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($servicioItem);
             $em->flush();

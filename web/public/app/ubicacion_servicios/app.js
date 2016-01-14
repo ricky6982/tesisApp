@@ -83,6 +83,20 @@ app.controller('ServiciosCtrl', [
             });
         };
 
+        $scope.deleteServicioItem = function(idServicio, idItem){
+            $scope.eliminarServicioItem = Restangular.one('servicios', idServicio).one('items', idItem);
+            $('#deleteServicioItem').modal('show');
+        };
+
+        $scope.removeServicioItem = function(){
+            $('#deleteServicioItem').modal('hide');
+            $scope.eliminarServicioItem.remove().then(function(){
+                $scope.actualizarListado();
+            }, function(){
+                console.log('no se pudo eliminar el servicio');
+            });
+        };
+
         // Inicializacion de funciones
         $scope.actualizarListado();
 

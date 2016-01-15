@@ -97,6 +97,30 @@ app.controller('ServiciosCtrl', [
             });
         };
 
+        $scope.editarServicioItem = function(indexServicio, idItem){
+            $('#editarServicioItemModal').modal('show');
+            $scope.edicionServicioItem = angular.copy($scope.servicios.plain()[indexServicio].items[idItem]);
+            $scope.edicionServicioItem.servicio_id = $scope.servicios.plain()[indexServicio].id;
+        };
+
+        $scope.updateServicioItem = function(){
+            $('#editarServicioItemModal').modal('hide');
+            Restangular.one('servicios', $scope.edicionServicioItem.servicio_id).one('items', $scope.edicionServicioItem.id).get().then(function(item){
+                var edicion = {
+                    nombre: $scope.edicionServicioItem.nombre,
+                    descripcion: $scope.edicionServicioItem.descripcion,
+                    servicio: $scope.edicionServicioItem.servicio_id,
+                };
+                item.customPUT({tesis_servicioitem: edicion}).then(function(){
+                    $scope.actualizarListado();
+                }, function(){
+                    console.log('no se pudo actualizar el servicio');
+                });
+            });
+
+            
+        };
+
         // Inicializacion de funciones
         $scope.actualizarListado();
 

@@ -22,33 +22,40 @@ class ServicioItemRestController extends FOSRestController
     }
 
     /**
-     * @ParamConverter("item", class="AdminBundle:ServicioItem", options={"id" = "servicioItem"})
+     * @ParamConverter("servicio", class="AdminBundle:Servicio", options={"id" = "servicio"})
+     * @ParamConverter("item", class="AdminBundle:ServicioItem", options={"id" = "item"})
      */
-    public function getItemAction($servicio, ServicioItem $item)
+    public function getItemAction(Servicio $servicio, ServicioItem $item)
     {
-        $manager = $this->get('adminbundle.manager.servicio_item');
-        $item = $manager->findItemFromService($id, $servicioItem->getId());
-        $view = $this->view($item);
+        // $manager = $this->get('adminbundle.manager.servicio_item');
+        // $item = $manager->findItemFromService($id, $servicioItem->getId());
+        if ($servicio->getId() == $item->getServicio()->getId()) {
+            $view = $this->view($item, 200);
+        }else{
+            $view = $this->view($item, 500);
+        }
 
         return $this->get('fos_rest.view_handler')->handle($view);
     }
 
     /**
      * Actualización de datos en ServicioItem
+     * @ParamConverter("servicio", class="AdminBundle:Servicio", options={"id" = "servicio"})
+     * @ParamConverter("item", class="AdminBundle:ServicioItem", options={"id" = "item"})
      */
-    public function putItemAction($servicio, $servicioItem, Request $request)
+    public function putItemAction(Servicio $servicio, ServicioItem $item, Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $item = $em->getRepository('AdminBundle:ServicioItem')->find($servicioItem);
-        $form = $this->getForm($item, array('method' => 'PUT'));
-        $form->handleRequest($request);
-        if ($form->isValid()) {
-            $em->flush();
-            $view = $this->view($item);
-        }else{
-            $view = $this->view($form, 500);
+        if ($item->getServicio()->getId() == $servicio->getId()) {
+            $form = $this->getForm($item, array('method' => 'PUT'));
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                $view = $this->view($item);
+            }else{
+                $view = $this->view($form, 500);
+            }
         }
-
 
         return $this->get('fos_rest.view_handler')->handle($view);
     }

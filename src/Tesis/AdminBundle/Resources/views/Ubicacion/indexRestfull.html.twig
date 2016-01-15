@@ -9,6 +9,8 @@
     <script src="{{ asset('bower_components/vis/dist/vis.min.js') }}"></script>
     <script src="{{ asset('public/app/ubicacion_servicios/serviciosFactory.js') }}"></script>
     <script src="{{ asset('public/app/ubicacion_servicios/app.js') }}"></script>
+    <script src="{{ asset('public/app/ubicacion_servicios/ServiciosCtrl.js') }}"></script>
+    <script src="{{ asset('public/app/ubicacion_servicios/LocalizacionCtrl.js') }}"></script>
     <script type="text/javascript">
         var apiUrl = "{{ path('admin_homepage') }}";
     </script>
@@ -25,9 +27,8 @@
             <div id="servicios" class="tab-pane active" ng-controller="ServiciosCtrl">
                 {% include 'AdminBundle:Ubicacion:_servicios.html.twig' %}
             </div>
-            <div id="localizacion" class="tab-pane" >
-                {# {% include 'AdminBundle:Ubicacion:_localizacion.html.twig' %} #}
-                Mapa
+            <div id="localizacion" class="tab-pane" ng-controller="LocalizacionCtrl">
+                {% include 'AdminBundle:Ubicacion:_localizacion.html.twig' %}
             </div>
         </div>
     </div>

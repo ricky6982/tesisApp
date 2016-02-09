@@ -23,6 +23,7 @@
     "vis": "~4.9.0",
     "underscore": "~1.8.3",
     "animate.css": "~3.4.0",
-    "restangular": "~1.5.1"
+    "restangular": "~1.5.1",
+    "mapa-recorrido": "https://github.com/ricky6982/mapa-recorrido-with-tests.git#1.0.1"
   }
 }

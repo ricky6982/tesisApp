@@ -1,15 +1,16 @@
-var app = angular.module('app', ['mapaRecorrido']);
+var app = angular.module('app', ['mapaRecorrido', 'ts-parameters']);
 
 var mapa_data;
 
 app.controller('AppCtrl',[
-    '$scope', '$timeout', '$filter', '$http', 'mapaService',
-    function($scope, $timeout, $filter, $http, Mapa){
+    '$scope', '$timeout', 'mapaService', 'Parameters',
+    function($scope, $timeout, Mapa, Parameters){
 
         Mapa.init(document.getElementById('network'));
-
-        Mapa.remote.setUrlMap("http://localhost/mapa-recorrido/example/mapa.json");
+        Mapa.remote.setUrlMap(Parameters.urlGetCurrentMap);
+        Mapa.remote.setUrlSave(Parameters.urlSaveMap);
         Mapa.remote.getMap();
+        $scope.data = Mapa.data;
 
         $scope.nodoEdit = null;
         $scope.arcoEdit = null;

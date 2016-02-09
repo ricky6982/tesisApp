@@ -18,11 +18,11 @@ app.directive('btnSend', [
                 data: "=data"
             },
             template: buttonSendTemplate,
-            controller: ['$scope', '$http',
-                function($scope, $http){
+            controller: ['$scope', '$http', 'mapaService',
+                function($scope, $http, Mapa){
                     $scope.flag = false;
                     $scope.submit = function(){
-                        network.storePositions();
+                        Mapa.savePositions();
                         $scope.flag = true;
                         $http({
                             method: $scope.method,

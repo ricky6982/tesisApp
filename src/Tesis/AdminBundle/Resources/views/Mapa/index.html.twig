@@ -7,15 +7,21 @@
 {% block headerJavascripts %}
     <script src="{{ asset('bower_components/vis/dist/vis.min.js') }}"></script>
     <script src="{{ asset('bower_components/mapa-recorrido/dist/mapa-recorrido.js') }}"></script>
+    <script>
+        (function(){
+            angular.module('ts-parameters', [])
+                .constant('Parameters', {
+                    urlGetCurrentMap: "{{ path('mapa_current') }}",
+                    urlSaveMap: "{{ path('mapa_save') }}"
+                })
+        }());
+    </script>
+{% endblock %}
+
+{% block javascripts %}
     <script src="{{ asset('public/js/mapa/app.js') }}"></script>
     <script src="{{ asset('public/js/mapa/saveController.js') }}"></script>
     <script src="{{ asset('public/js/buttonSendDirective.js') }}"></script>
-    <script>
-        var datos = { 
-            urlGetCurrenMap: "{{ path('mapa_current') }}",
-            urlSaveMap: "{{ path('mapa_save') }}"
-        };
-    </script>
 {% endblock %}
 
 {% block contenido %}

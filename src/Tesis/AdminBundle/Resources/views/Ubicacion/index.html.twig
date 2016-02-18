@@ -5,20 +5,22 @@
 {% block titulo %}Ubicación de Servicios{% endblock %}
 
 {% block headerJavascripts %}
-    <script src="{{ asset('bower_components/restangular/dist/restangular.min.js') }}"></script>
     <script src="{{ asset('bower_components/vis/dist/vis.min.js') }}"></script>
-    <script src="{{ asset('public/js/ubicacion/app.js') }}"></script>
-    <script src="{{ asset('public/js/ubicacion/directives.js') }}"></script>
-    <script src="{{ asset('public/js/ubicacion/localizacionCtrl.js') }}"></script>
-    <script src="{{ asset('public/js/ubicacion/networkCtrl.js') }}"></script>
-    <script src="{{ asset('public/js/buttonSendDirective.js') }}"></script>
+    <script src="{{ asset('bower_components/mapa-recorrido/dist/mapa-recorrido.js') }}"></script>
     <script>
-        var datos = { 
-            urlGetCurrenMap: "{{ path('mapa_current') }}",
-            urlSaveMap: "{{ path('mapa_save') }}",
-            urlGetServicios: "{{ path('get_servicios') }}"
-        };
+        (function(){
+            angular.module('ts-parameters', [])
+                .constant('Parameters', {
+                    urlGetCurrentMap: "{{ path('mapa_current') }}",
+                    urlSaveMap: "{{ path('mapa_save') }}",
+                    urlGetServicios: "{{ path('get_servicios') }}"
+                })
+            ;
+        }());
     </script>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('public/js/ubicacion/app.js') }}"></script>
 {% endblock %}
 
 {% block contenido %}
@@ -29,10 +31,10 @@
             <li><a href="#localizacion" data-toggle="tab" aria-expanded="true">Localización de Servicios</a></li>
         </ul>
         <div class="tab-content tab-bordered">
-            <div id="servicios" class="tab-pane active">
+            <div id="servicios" class="tab-pane active" ng-controller="ServiciosCtrl">
                 {% include 'AdminBundle:Ubicacion:_servicios.html.twig' %}
             </div>
-            <div id="localizacion" class="tab-pane" ng-controller="LocalizacionCtrl">
+            <div id="localizacion" class="tab-pane">
                 {% include 'AdminBundle:Ubicacion:_localizacion.html.twig' %}
             </div>
         </div>

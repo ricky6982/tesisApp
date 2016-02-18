@@ -17,7 +17,6 @@ app.directive('tsPanelServicio', ['$filter', function ($filter) {
             listadoServicios: '=listadoServicios',
             lugar: '=lugar',
             direccion: '@direccion',
-            index: '=index',
             remove: '&remove'
         },
         controller: ['$scope',
@@ -25,7 +24,7 @@ app.directive('tsPanelServicio', ['$filter', function ($filter) {
                 $scope.updateSublistaServicios = function(){
                     var result = $filter('filter')($scope.listadoServicios, {id: $scope.lugar.idCategoria });
                     if (result.length > 0) {
-                        $scope.sublistaServicios = result[0].items;
+                        $scope.servicios = result[0].items;
                     }
                 };
 

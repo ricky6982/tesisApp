@@ -1,4 +1,4 @@
-var app = angular.module('app', ['mapaRecorrido', 'ts-parameters']);
+var app = angular.module('app', ['mapaRecorrido', 'ts-parameters', 'localizacionServicio']);
 
 var mapa_data;
 

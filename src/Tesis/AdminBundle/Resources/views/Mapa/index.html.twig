@@ -20,14 +20,12 @@
 
 {% block javascripts %}
     <script src="{{ asset('public/js/mapa/app.js') }}"></script>
-    <script src="{{ asset('public/js/mapa/saveController.js') }}"></script>
-    <script src="{{ asset('public/js/buttonSendDirective.js') }}"></script>
 {% endblock %}
 
 {% block contenido %}
 <div ng-app="app" ng-controller="AppCtrl">
-    <div class="text-right" style="margin: 0 20px;" ng-controller="SaveCtrl">
-        <btn-send label="Guardar Mapa de Recorrido" xclass="btn btn-primary" method="POST" url="{{ path('mapa_save') }}" data="data"></btn-send>
+    <div class="text-right" style="margin: 0 20px;">
+        <save-button class="btn btn-primary" label="Guardar Mapa de Recorridos"></save-button>
     </div>
     <div class="row" style="margin: 10px;">
         <div class="col-sm-4 col-md-3">

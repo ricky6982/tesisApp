@@ -1,14 +1,22 @@
 <div class="row">
     <div class="col-sm-12 form-group">
         <div class="pull-left">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#establecerServicioModal">Establecer Servicios</button>
+            <div class="form">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#establecerServicioModal" ng-disabled="!arcoEdit">
+                    <i class="glyphicon glyphicon-flag"></i> Establecer Servicios
+                </button>
+                <p class="help-block"><strong>Importante:</strong>Seleccione un arco para establecer sus servicios</p>
+            </div>
+
         </div>
         <div class="pull-right">
             <button class="btn btn-primary">Guardar</button>
         </div>
     </div>
     <div class="col-sm-12">
-      <div id="network" style="border: 1px solid #ddd"></div>
+      <div class="panel panel-default">
+        <div id="network" class="panel-body"></div>
+      </div>
     </div>
 </div>
 
@@ -24,7 +32,7 @@
         <agregar-servicio arco="arcoEdit" listado-servicios="listadoServicios"></agregar-servicio>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateArco()">Guardar</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
       </div>
     </div>

@@ -11,6 +11,7 @@ app.controller('AppCtrl', [
         Mapa.remote.setUrlMap(Parameters.urlGetCurrentMap);
         Mapa.remote.setUrlSave(Parameters.urlSaveMap);
         Mapa.remote.getMap();
+
         $scope.data = Mapa.data;
 
         $scope.listadoServicios = $http({
@@ -48,5 +49,10 @@ app.controller('AppCtrl', [
                 },0);
             }
         });
+
+        $scope.updateArco = function(){
+            Mapa.edge.update($scope.arcoEdit);
+            // $('#establecerServicioModal').modal('hide');
+        };
     }
 ]);

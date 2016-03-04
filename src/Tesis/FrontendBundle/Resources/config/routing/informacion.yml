@@ -22,6 +22,10 @@ guiame:
     path: /Servicio/Item/{id}/guiame
     defaults: { _controller: FrontendBundle:Informacion:guiame }
 
+indicaciones:
+    path: /Servicio/Item/{id}/indicaciones/{puntoInicio}
+    defaults: { _controller: FrontendBundle:Informacion:indicaciones }
+
 informacion_como_llegar:
     path: /ComoLlegar
     defaults: { _controller: FrontendBundle:Informacion:ComoLlegar }

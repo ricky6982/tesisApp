@@ -75,22 +75,28 @@ class InformacionController extends Controller
     public function guiameAction(ServicioItem $item, Request $request)
     {
         $manager = $this->get('adminbundle.manager.maparecorrido');
-
-        if ($request->getMethod() == 'POST') {
-            $puntoInicio = intval($request->get('inicio'));
-            $indicaciones = $manager->getRutaCortaAlServicio($puntoInicio, $item->getId());
-
-            return $this->render('FrontendBundle:Informacion:indicaciones.html.twig', array(
-                    'indicaciones' => $indicaciones,
-                    'servicio' => $item
-                ));
-        }
-
         $puntosReferencia = $manager->getPuntosReferencia();
 
         return $this->render('FrontendBundle:Informacion:guiame.html.twig', array(
                 'item' => $item,
                 'puntosReferencia' => $puntosReferencia
+            ));
+    }
+
+    /**
+     * Muestra las indicaciones necesarias para llegar a un servicio seleccionado
+     * desde un punto de inicio seleccionado por el usuario.
+     */
+    public function indicacionesAction(ServicioItem $item, $puntoInicio)
+    {
+        $manager = $this->get('adminbundle.manager.maparecorrido');
+
+        $puntoInicio = intval($puntoInicio);
+        $indicaciones = $manager->getRutaCortaAlServicio($puntoInicio, $item->getId());
+
+        return $this->render('FrontendBundle:Informacion:indicaciones.html.twig', array(
+                'indicaciones' => $indicaciones,
+                'servicio' => $item
             ));
     }
 

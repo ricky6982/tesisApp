@@ -1,6 +1,6 @@
 {% extends "FrontendBundle:Default:layout.html.twig" %}
 
-{% block title %}Indicaciones para llegar al servicio {{ servicio.nombre }}{% endblock %}
+{% block title %}Indicaciones para llegar a {{ servicio.nombre }}{% endblock %}
 
 {% block contenido %}
 
@@ -9,5 +9,8 @@
         <li>{{ item }}</li>
     {% endfor %}
 </ol>
+
+<a href="{{ path('informacion_servicio_detalle', {'id': servicio.servicio.id }) }}">Volver</a>
+
 
 {% endblock %}

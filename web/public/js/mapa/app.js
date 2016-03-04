@@ -107,7 +107,7 @@ app.controller('AppCtrl',[
                 }
             },
             update: function(){
-                $scope.nodes.update($scope.nodoEdit);
+                Mapa.node.update($scope.nodoEdit);
             }
         };
 

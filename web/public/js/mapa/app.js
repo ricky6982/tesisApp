@@ -141,6 +141,10 @@ app.controller('AppCtrl',[
             Mapa.node.updateOrientacion($scope.nodoEdit);
             Mapa.node.validarOrientacion();
         };
+
+        $scope.actualizarConexiones = function(){
+            Mapa.node.refreshConexiones();
+        };
     }
 ]);
 

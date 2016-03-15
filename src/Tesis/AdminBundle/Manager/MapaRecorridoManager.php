@@ -346,13 +346,13 @@ class MapaRecorridoManager
             $giro = $this->getDireccionEntreNodosAdyacentes($nodo, $arco['from']);
         }
 
-        $posicionRespectoArco = $distancia['direccion'] == 'der' ? 'derecha' : 'izquierda';
+        $posicionRespectoArco = $distancia['direccion'] !== 'der' ? 'derecha' : 'izquierda';
 
         if ($direccion == $giro) {
             $instruccion = sprintf("Siga hacia adelante %s metros y a su mano %s esta el servicio", $distancia['distancia'], $posicionRespectoArco);
         }else{
             $rotacion = $this->getRotacion($direccion, $distancia['direccion']);
-            $rotacion = $rotacion == 'der' ? 'derecha' : 'izquierda';
+            $rotacion = $rotacion !== 'der' ? 'derecha' : 'izquierda';
             $instruccion = sprintf("Gire a su %s, camine %s metros y a su mano %s se encuentra el servicio que ud solicito.", $rotacion, $distancia['distancia'], $posicionRespectoArco);
         }
 

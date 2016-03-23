@@ -16,7 +16,7 @@ class ServicioType extends AbstractType
     {
         $builder
             ->add('nombre', null, array('attr' => array('ng-model' => 'newServicio.nombre')))
-            ->add('descripcion', null, array('attr' => array('ng-model' => 'newServicio.descripcion')))
+            ->add('descripcion', 'textarea', array('attr' => array('ng-model' => 'newServicio.descripcion', 'rows' => '6')))
         ;
     }
     

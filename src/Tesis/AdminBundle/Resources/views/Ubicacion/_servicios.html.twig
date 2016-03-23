@@ -63,12 +63,31 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Nueva Categoria de Servicio</h4>
+                <h4 class="modal-title text-center" id="myModalLabel">
+                    Nueva Categoria de Servicio
+                </h4>
             </div>
             <div class="modal-body">
-                {{ form_widget(servicioForm) }}
-                <button type="button" class="btn btn-primary" ng-click="saveServicio()" >Save changes</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        {{ form_label(servicioForm.nombre, null, { 'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                        <div class="col-sm-6">
+                            {{ form_widget(servicioForm.nombre, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(servicioForm.descripcion, null, { 'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                        <div class="col-sm-6">
+                            {{ form_widget(servicioForm.descripcion, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" ng-click="saveServicio()" >Crear Categoría</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </form>
@@ -85,20 +104,28 @@
                     Editar Categoria de Servicio
                 </h4>
             </div>
-            <div class="modal-body text-center">
-                <form>
+            <form class="form-horizontal">
+                <div class="modal-body">
                     <div class="form-group">
-                        <label for="">Nombre</label>
-                        <input type="text" ng-model="editarServicio.nombre">
+                        <label class="col-sm-4 control-label">Nombre</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" ng-model="editarServicio.nombre">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="">Descripción</label>
-                        <input type="text" ng-model="editarServicio.descripcion">
+                        <label class="col-sm-4 control-label">Descripción</label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" ng-model="editarServicio.descripcion" rows="6"></textarea>
+                        </div>
                     </div>
-                    <button type="button" class="btn btn-primary" ng-click="updateServicio()" >Guardar Cambios</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                </form>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary" ng-click="updateServicio()" >Guardar Cambios</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -136,21 +163,27 @@
                     {# {% verbatim %} {{  }} {% endverbatim %} #}
                 </h4>
             </div>
-            <div class="modal-body text-center">
-                <form>
+            <form class="form-horizontal">
+                <div class="modal-body text-center">
                     <div class="form-group">
-                        <label for="">Nombre</label>
-                        <input type="text" ng-model="nuevoServicioItem.nombre">
+                        <label class="col-sm-4 control-label">Nombre</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" ng-model="nuevoServicioItem.nombre">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="">Descripción</label>
-                        <input type="text" ng-model="nuevoServicioItem.descripcion">
+                        <label class="col-sm-4 control-label">Descripción</label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" ng-model="nuevoServicioItem.descripcion" rows="6"></textarea>
+                        </div>
                     </div>
                     <input type="hidden" ng-model="nuevoServicioItem.servicio">
+                </div>
+                <div class="modal-footer">
                     <button type="button" class="btn btn-primary" ng-click="saveServicioItem()" >Crear Servicio</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -187,20 +220,26 @@
                     Editar Servicio
                 </h4>
             </div>
-            <div class="modal-body text-center">
-                <form>
+            <form class="form-horizontal">
+                <div class="modal-body text-center">
                     <div class="form-group">
-                        <label for="">Nombre</label>
-                        <input type="text" ng-model="edicionServicioItem.nombre">
+                        <label class="col-sm-4 control-label">Nombre</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" ng-model="edicionServicioItem.nombre">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="">Descripción</label>
-                        <input type="text" ng-model="edicionServicioItem.descripcion">
+                        <label class="col-sm-4 control-label">Descripción</label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" ng-model="edicionServicioItem.descripcion" rows="6"></textarea>
+                        </div>
                     </div>
+                </div>
+                <div class="modal-footer">
                     <button type="button" class="btn btn-primary" ng-click="updateServicioItem()" >Guardar Cambios</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

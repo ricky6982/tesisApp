@@ -16,7 +16,7 @@ class ServicioItemType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('descripcion')
+            ->add('descripcion', 'textarea', array('attr' => array('rows' => '6')))
             ->add('servicio')
         ;
     }

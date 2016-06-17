@@ -20,6 +20,7 @@ class CartaMenuController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $usuarioForm = $this->createForm(new UsuarioType());
+
         $usuarios = $em->getRepository('AdminBundle:Usuario')->findAll();
 
         return $this->render('AdminBundle:CartaMenu:index.html.twig', array(

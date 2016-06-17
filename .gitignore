@@ -2,6 +2,7 @@
 #####################################
 # carpetas a excluir del seguimiento
 
+/.idea/
 /vendor/
 /bin/
 /node_modules/

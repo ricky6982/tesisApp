@@ -2,16 +2,17 @@
 
 namespace Tesis\AdminBundle\Manager;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Tesis\AdminBundle\Lib\Dijkstras\Graph;
 
-class MapaRecorridoManager
+class MapaRecorridoManager extends BaseManager
 {
     protected $entityManager;
 
     private $idServicio;    // Id del Servicio que se busca.
 
-    public function setEntityManager(EntityManager $entityManager)
+    public function setEntityManager(ObjectManager $entityManager)
     {
         $this->entityManager = $entityManager;
     }
@@ -104,6 +105,11 @@ class MapaRecorridoManager
         return $arcos;  // Devuelve un array con los arcos donde el servicio fue encontrado.
     }
 
+    /**
+     * @param $nodoA integer
+     * @param $nodoB integer
+     * @return array edge|emptyArray
+     */
     public function getArco($nodoA, $nodoB)
     {
         $mapa = $this->getCurrentMap();
@@ -118,9 +124,11 @@ class MapaRecorridoManager
     }
 
     /**
-     * Devuelve el nodo con información referencial. 
+     * Devuelve el nodo con información referencial.
+     * @param $idNodo
+     * @return null
      */
-    private function getNodo($idNodo)
+    public function getNodo($idNodo)
     {
         $mapa = $this->getCurrentMap();
         $nodes = $mapa['mapaJson']['nodes']['_data'];
@@ -135,9 +143,13 @@ class MapaRecorridoManager
 
     /**
      * Devuelve la distancia entre los nodos en caso de que exista un arco que los une, de otro modo devuelve null.
+     * @param $nodoA integer
+     * @param $nodoB integer
+     * @return mixed|null
      */
     public function getDistanciaEntreNodosAdyacentes($nodoA, $nodoB)
     {
+//        TODO: Deberia lanzar excepcion si los nodos no son adyacentes.
         $arco = $this->getArco($nodoA, $nodoB);
 
         if (isset($arco['distancia'])) {
@@ -149,9 +161,14 @@ class MapaRecorridoManager
 
     /**
      * Devuelve la dirección que existe entre dos nodos adyacentes
+     * (izq|der|arr|abj) según donde se encuentra el nodoB respecto el nodoA
+     * @param $nodoA integer
+     * @param $nodoB integer
+     * @return null
      */
-    private function getDireccionEntreNodosAdyacentes($nodoA, $nodoB)
+    public function getDireccionEntreNodosAdyacentes($nodoA, $nodoB)
     {
+//        TODO: Deberia lanzar excepcion si los nodos no son adyacentes.
         $mapa = $this->getCurrentMap();
         $nodes = $mapa['mapaJson']['nodes']['_data'];
 
@@ -171,9 +188,12 @@ class MapaRecorridoManager
 
     /**
      * Devuelve la distancia total de una secuencia de nodos adyacentes.
+     * @param array $secuenciaNodos
+     * @return int
      */
     public function getDistanciaTotalEntreNodos($secuenciaNodos)
     {
+//        TODO: deberia lanzar excepción o warning si la secuencia es invalida.
         $distanciaTotal = 0;
         for ($i=0; $i < count($secuenciaNodos) - 1; $i++) { 
             $distanciaTotal = $distanciaTotal + $this->getDistanciaEntreNodosAdyacentes($secuenciaNodos[$i], $secuenciaNodos[$i+1]);
@@ -304,8 +324,10 @@ class MapaRecorridoManager
 
     /**
      * Devuelve un array con indicaciones relativas a la posicion y direccion del usuario
-     * 
+     *
      * $secuenciaNodos: array con la secuencia de nodos desde el origen hasta el nodo final cercano al servicio.
+     * @param $secuenciaNodos
+     * @return array
      */
     private function getIndicaciones($secuenciaNodos)
     {

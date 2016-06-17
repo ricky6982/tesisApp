@@ -53,7 +53,6 @@ class MapaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $mapa = $em->getRepository('AdminBundle:MapaRecorrido')->findCurrentMap();
-
         $response = new JsonResponse();
         if ($mapa) {
             $response->setData($mapa);

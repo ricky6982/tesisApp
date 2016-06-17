@@ -1,47 +1,41 @@
-<header style="background-color: #2ebaea; color: white">
+<header style="background-color: #2ebaea;">
     <img src="{{ asset('public/img/icons/guiame_logo_horizontal.png') }}" alt="Guiame">
+    <div class="btn-group">
+        <div class="dropdown-toggle">
+            <div class="btn" data-toggle="dropdown" style="color: white">
+                <i class="glyphicon glyphicon-menu-hamburger"></i>
+                Menu
+            </div>
+            <ul class="dropdown-menu">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li>
+                        <a href="{{ path('info_homepage') }}">
+                            <span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp; Información del Edificio
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('mapa_homepage') }}">
+                            <span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp; Mapa de Recorridos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('ubicacion_homepage') }}">
+                            <span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp; Ubicación de Servicios
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('carta_homepage') }}">
+                            <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp; Cartas de Menú
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                {% endif %}
+                <li>
+                    <a href="{{ path('logout') }}">
+                        <span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp; Cerrar Sesión
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </header>
-
-{% if is_granted('ROLE_USER') %}
-<div class="btn-group">
-    <div class="btn-group">
-        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            <i class="glyphicon glyphicon-user"></i>
-            {% if is_granted('ROLE_SUPERADMIN') %}
-                Super Administrador
-            {% elseif is_granted('ROLE_ADMIN') %}
-                Administrador
-            {% elseif is_granted('ROLE_LOCAL_COMERCIAL') %}
-                {{ app.user.username }}
-            {% endif %}
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-            <li><a href="{{ path('logout') }}"><span class="glyphicon glyphicon-eject"></span> Cerrar Sesión</a></li>
-        </ul>
-    </div>
-    {% if is_granted('ROLE_ADMIN') %}
-    <div class="btn-group">
-        <a href="{{ path('admin_homepage') }}" type="button" class="btn btn-default">
-            <span class="glyphicon glyphicon-th-large"></span>
-            Menú 
-        </a>
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-            <li><a href="{{ path('informacion_homepage') }}"><span class="glyphicon glyphicon-home"></span> Vista del Usuario</a></li>
-        </ul>
-    </div>
-    <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            <span class="glyphicon glyphicon-cog"></span> Configuración
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-            <li><a href=""><span class="glyphicon glyphicon-user"></span> Administrar Usuarios</a></li>
-        </ul>
-    </div>
-    {% endif %}
-</div>
-{% endif %}

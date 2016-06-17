@@ -8,12 +8,12 @@
     <script src="{{ asset('bower_components/vis/dist/vis.min.js') }}"></script>
     <script src="{{ asset('bower_components/mapa-recorrido/dist/mapa-recorrido.js') }}"></script>
     <script>
-        (function(){
+        (function () {
             angular.module('ts-parameters', [])
-                .constant('Parameters', {
-                    urlGetCurrentMap: "{{ path('mapa_current') }}",
-                    urlSaveMap: "{{ path('mapa_save') }}"
-                })
+                    .constant('Parameters', {
+                        urlGetCurrentMap: "{{ path('mapa_current') }}",
+                        urlSaveMap: "{{ path('mapa_save') }}"
+                    })
         }());
     </script>
 {% endblock %}
@@ -23,21 +23,21 @@
 {% endblock %}
 
 {% block contenido %}
-<div ng-app="app" ng-controller="AppCtrl">
-    <div class="text-right" style="margin: 0 20px;">
-        <save-button class="btn btn-primary" label="Guardar Mapa de Recorridos"></save-button>
-    </div>
-    <div class="row" style="margin: 10px;">
-        <div class="col-sm-4 col-md-3">
-            {% include 'AdminBundle:Mapa:controles/panel.html.twig' %}
+    <div ng-app="app" ng-controller="AppCtrl">
+        <div class="text-right" style="margin: 0 20px;">
+            <save-button class="btn btn-primary" label="Guardar Mapa de Recorridos"></save-button>
         </div>
-        <div class="col-sm-8 col-md-9">
-            <div class="panel panel-default">
-                <div id="network" class="panel-body">
-                    
+        <div class="row" style="margin: 10px;">
+            <div class="col-sm-4 col-md-3">
+                {% include 'AdminBundle:Mapa:controles/panel.html.twig' %}
+            </div>
+            <div class="col-sm-8 col-md-9">
+                <div class="panel panel-default">
+                    <div id="network" class="panel-body" style="background-color: rgb(230,230,230); border: 2px dashed GrayText; border-radius: 5px;">
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

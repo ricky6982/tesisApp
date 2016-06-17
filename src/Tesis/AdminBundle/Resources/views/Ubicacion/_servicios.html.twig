@@ -1,11 +1,20 @@
-<div class="text-right">
-    <button class="btn btn-success" data-toggle="modal" data-target="#crearServicio">
-        <i class="glyphicon glyphicon-plus"> </i> 
-        Categoría de Servicio
-    </button>
+<div class="row">
+    <div class="col-sm-offset-6 col-sm-3">
+        <div class="input-group">
+            <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+            <input type="text" class="form-control" ng-model="searchText">
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <button class="btn btn-success btn-block" data-toggle="modal" data-target="#crearServicio">
+            <i class="glyphicon glyphicon-plus"> </i>
+            Categoría de Servicio
+        </button>
+    </div>
 </div>
 
 {% verbatim %}
+<!-- TODO: Agregar filtro de busqueda de servicios -->
 <div ng-repeat="servicio in servicios">
     <legend>
         <div class="dropdown pull-left" style="margin-right: 5px; margin-top: -2px;">
@@ -58,40 +67,41 @@
 
 <!-- Modal Creación Categoria de Servicio -->
 <div class="modal fade" id="crearServicio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <form action="">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title text-center" id="myModalLabel">
-                    Nueva Categoria de Servicio
-                </h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        {{ form_label(servicioForm.nombre, null, { 'label_attr': {'class': 'col-sm-4 control-label'}}) }}
-                        <div class="col-sm-6">
-                            {{ form_widget(servicioForm.nombre, {'attr': {'class': 'form-control'}}) }}
+    <div class="modal-dialog" role="document">
+        <form action="">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center" id="myModalLabel">
+                        Nueva Categoria de Servicio
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            {{ form_label(servicioForm.nombre, null, { 'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(servicioForm.nombre, {'attr': {'class': 'form-control'}}) }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(servicioForm.descripcion, null, { 'label_attr': {'class': 'col-sm-4 control-label'}}) }}
-                        <div class="col-sm-6">
-                            {{ form_widget(servicioForm.descripcion, {'attr': {'class': 'form-control'}}) }}
+                        <div class="form-group">
+                            {{ form_label(servicioForm.descripcion, null, { 'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+                            <div class="col-sm-6">
+                                {{ form_widget(servicioForm.descripcion, {'attr': {'class': 'form-control'}}) }}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <div class="text-center">
-                    <button type="button" class="btn btn-primary" ng-click="saveServicio()" >Crear Categoría</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary" ng-click="saveServicio()">Crear Categoría</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
-  </div>
+        </form>
+    </div>
 </div>
 
 {# Modal Edición de Categoria de Servicio #}
@@ -99,7 +109,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title text-center" id="myModalLabel">
                     Editar Categoria de Servicio
                 </h4>
@@ -121,7 +132,8 @@
                 </div>
                 <div class="modal-footer">
                     <div class="text-center">
-                        <button type="button" class="btn btn-primary" ng-click="updateServicio()" >Guardar Cambios</button>
+                        <button type="button" class="btn btn-primary" ng-click="updateServicio()">Guardar Cambios
+                        </button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
@@ -135,7 +147,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title text-danger text-center" id="myModalLabel">
                     <i class="glyphicon glyphicon-warning-sign"></i>
                     Eliminación de la Categoria del Servicio
@@ -146,7 +159,7 @@
                     <p class="lead">¿Esta seguro de que quiere eliminar la Categoría <strong>{{ eliminarServicio.nombre }}</strong> junto a sus <strong>{{ eliminarServicio.items.length }}</strong> servicios?</p>
                 {% endverbatim %}
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" ng-click="removeServicio()" >Eliminar</button>
+                <button type="button" class="btn btn-danger" ng-click="removeServicio()">Eliminar</button>
             </div>
         </div>
     </div>
@@ -157,7 +170,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title text-center" id="myModalLabel">
                     Creación de Servicio para la categoria
                     {# {% verbatim %} {{  }} {% endverbatim %} #}
@@ -180,7 +194,7 @@
                     <input type="hidden" ng-model="nuevoServicioItem.servicio">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-click="saveServicioItem()" >Crear Servicio</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveServicioItem()">Crear Servicio</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
@@ -193,7 +207,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title text-danger text-center" id="myModalLabel">
                     <i class="glyphicon glyphicon-warning-sign"></i>
                     Eliminación del Servicio
@@ -204,7 +219,7 @@
                     <p class="lead">¿Esta seguro de que quiere eliminar el servicio <strong>{{ eliminarServicioItem.nombre }}</strong>?</p>
                 {% endverbatim %}
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" ng-click="removeServicioItem()" >Eliminar</button>
+                <button type="button" class="btn btn-danger" ng-click="removeServicioItem()">Eliminar</button>
             </div>
         </div>
     </div>
@@ -215,7 +230,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title text-center" id="myModalLabel">
                     Editar Servicio
                 </h4>
@@ -231,12 +247,14 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Descripción</label>
                         <div class="col-sm-6">
-                            <textarea class="form-control" ng-model="edicionServicioItem.descripcion" rows="6"></textarea>
+                            <textarea class="form-control" ng-model="edicionServicioItem.descripcion"
+                                      rows="6"></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-click="updateServicioItem()" >Guardar Cambios</button>
+                    <button type="button" class="btn btn-primary" ng-click="updateServicioItem()">Guardar Cambios
+                    </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>

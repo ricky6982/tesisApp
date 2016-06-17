@@ -6,10 +6,20 @@
 
 {% block contenido %}
     <ol role="menubar" aria-haspopup="true" aria-labelledby="fileLabel" aria-label="Información General">
-        <li role="option" aria-setsize="4" aria-posinset="1"><a href="{{ path('informacion_edificio') }}">Información del Lugar</a></li>
-        <li role="option" aria-setsize="4" aria-posinset="2"><a href="{{ path('informacion_servicios') }}">Servicios</a></li>
-        <li role="option" aria-setsize="4" aria-posinset="3"><a href="{{ path('informacion_como_llegar') }}">Como llegar a</a></li>
-        <li role="option" aria-setsize="4" aria-posinset="4"><a href="{{ path('confiteria_homepage') }}">Confiterias</a></li>
-        <li role="option" aria-setsize="4" aria-posinset="4"><a href="#">Acerca de la aplicación</a></li>
+        <li role="option" aria-setsize="4" aria-posinset="1">
+            <a href="{{ path('informacion_edificio') }}">Información del Lugar</a>
+        </li>
+        <li role="option" aria-setsize="4" aria-posinset="2">
+            <a href="{{ path('informacion_servicios') }}">Servicios</a>
+        </li>
+        <li role="option" aria-setsize="4" aria-posinset="3">
+            <a href="{{ path('informacion_como_llegar') }}">Como llegar a</a>
+        </li>
+        <li role="option" aria-setsize="4" aria-posinset="4">
+            <a href="{{ path('confiteria_homepage') }}">Confiterias</a>
+        </li>
+        <li role="option" aria-setsize="4" aria-posinset="4">
+            <a href="#">Acerca de la aplicación</a>
+        </li>
     </ol>
 {% endblock %}

@@ -24,6 +24,7 @@
     "underscore": "~1.8.3",
     "animate.css": "~3.4.0",
     "restangular": "~1.5.1",
-    "mapa-recorrido": "https://github.com/ricky6982/mapa-recorrido-with-tests.git#1.2.6"
+    "mapa-recorrido": "https://github.com/ricky6982/mapa-recorrido-with-tests.git#1.2.6",
+    "malihu-custom-scrollbar-plugin": "^3.1.4"
   }
 }

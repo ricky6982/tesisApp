@@ -3,6 +3,7 @@
 # carpetas a excluir del seguimiento
 
 /.idea/
+/.sass-cache/
 /vendor/
 /bin/
 /node_modules/

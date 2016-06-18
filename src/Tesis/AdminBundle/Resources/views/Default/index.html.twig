@@ -3,26 +3,25 @@
 {% block titulo %}Administración{% endblock %}
 
 {% block contenido %}
-    {# TODO: Crear estilo para botones del menu principal #}
-    <div class="row">
+    <div class="row main-menu">
         <div class="col-sm-4 col-sm-offset-2">
             <a href="{{ path('info_homepage') }}" class="btn btn-block btn-default">
                 <img src="{{ asset('public/img/icons/menu_informacion.png') }}" alt="">
-                Información General del Edificio
+                <p style="width: 30px;!important">Información del Edificio</p>
             </a>
             <a href="{{ path('ubicacion_homepage') }}" class="btn btn-block btn-default">
                 <img src="{{ asset('public/img/icons/menu_servicios.png') }}" alt="">
-                Ubicación de Servicios
+                <p>Ubicación de Servicios</p>
             </a>
         </div>
         <div class="col-sm-4">
             <a href="{{ path('mapa_homepage') }}" class="btn btn-block btn-default">
                 <img src="{{ asset('public/img/icons/menu_mapa.png') }}" alt="">
-                Mapa de Recorridos
+                <p>Mapa de Recorridos</p>
             </a>
             <a href="{{ path('carta_homepage') }}" class="btn btn-block btn-default">
                 <img src="{{ asset('public/img/icons/menu_carta.png') }}" alt="">
-                Cartas de Menú
+                <p>Cartas de Menú</p>
             </a>
         </div>
     </div>

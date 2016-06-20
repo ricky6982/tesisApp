@@ -75,6 +75,8 @@ class MapaRecorridoManager extends BaseManager
 
     /**
      * Devuelve un array de Arcos (Edges) en los cuales se encuentra el id de servicio
+     * @param integer $id del servicio a buscar
+     * @return array Arcos
      */
     public function getUbicacionServicio($id)
     {
@@ -99,10 +101,8 @@ class MapaRecorridoManager extends BaseManager
                 }
             }
         }
-        // dump($arcos);
-        // die('arcos encontrados');
 
-        return $arcos;  // Devuelve un array con los arcos donde el servicio fue encontrado.
+        return $arcos;
     }
 
     /**
@@ -203,13 +203,15 @@ class MapaRecorridoManager extends BaseManager
     }
 
     /**
-     * Devuelve la distancia que existe entre el nodo de un arco hasta el servicio localizado en el mismo arco
+     * Devuelve la distancia que existe entre el "nodo de un arco" hasta
+     * el "servicio" localizado en el mismo arco
      *
-     * $nodo: Especifica si es el nodo From o el nodo To del arco
-     * $servicio: Id del servicio que se encuentra en el arco
-     * $arco: arco que contiene toda la información
+     * @param string $tipoNodo Especifica si es el nodo From o el nodo To del arco
+     * @param integer $idServicio del servicio que se encuentra en el arco
+     * @param array $arco que contiene toda la información
+     * @return array
      */
-    public function getDistanciaAlServicio($nodo, $idServicio, $arco)
+    public function getDistanciaAlServicio($tipoNodo, $idServicio, $arco)
     {
         $distancias = array('der' => array(), 'izq' => array());
         foreach ($arco['lugares']['der'] as $servicio) {
@@ -224,27 +226,27 @@ class MapaRecorridoManager extends BaseManager
         }
         $distanciasMerge = array_merge($distancias['der'], $distancias['izq']);
 
-        switch ($nodo) {
+        switch ($tipoNodo) {
             case 'from':
                 $min = min($distanciasMerge);
                 if (in_array($min, $distancias['der'])) {
-                    return array('distancia' => $min, 'direccion' => 'izq');
-                }else{
                     return array('distancia' => $min, 'direccion' => 'der');
+                }else{
+                    return array('distancia' => $min, 'direccion' => 'izq');
                 }
             case 'to':
                 $max = max($distanciasMerge);
                 if (in_array($max, $distancias['der'])) {
-                    return array('distancia' => $arco['distancia'] - $max, 'direccion' => 'der');
-                }else{
                     return array('distancia' => $arco['distancia'] - $max, 'direccion' => 'izq');
+                }else{
+                    return array('distancia' => $arco['distancia'] - $max, 'direccion' => 'der');
                 }
         }
     }
 
     /**
      * Devuelve un array con indicaciones absolutas:
-     * 
+     *
      * Ej: ir del nodo 16 al nodo 7, secuenciaNodos = (16,9,8,7)
      *    array(
      *      array(16, infRef, 0mts, ''),
@@ -252,8 +254,10 @@ class MapaRecorridoManager extends BaseManager
      *      array(8, infRef, 17.5mts, izq),
      *      array(7, infRef, 11.mts, abajo),
      *    )
+     * @param array $secuenciaNodos
+     * @return array
      */
-    private function getArrayIndicaciones($secuenciaNodos)
+    public function getArrayIndicaciones($secuenciaNodos)
     {
         $indicaciones = array(array(
             'nodo' => $secuenciaNodos[0],
@@ -306,11 +310,16 @@ class MapaRecorridoManager extends BaseManager
 
     /**
      * Determina hacia donde debe el usuario girar a su derecha o a su izquierda.
+     * @param string $inicio
+     * @param string $fin
+     * @return null|string
      */
     private function getRotacion($inicio, $fin)
     {
         $giroDerecha = " izq arr der abj izq ";
         $giroIzquierda = " der arr izq abj der ";
+
+//      TODO: Deberia lanzar excepción si $inicio o $fin son cadenas invalidas
 
         $direccion = $inicio." ".$fin;
         if (strpos($giroDerecha, $direccion)) {
@@ -325,8 +334,7 @@ class MapaRecorridoManager extends BaseManager
     /**
      * Devuelve un array con indicaciones relativas a la posicion y direccion del usuario
      *
-     * $secuenciaNodos: array con la secuencia de nodos desde el origen hasta el nodo final cercano al servicio.
-     * @param $secuenciaNodos
+     * @param array $secuenciaNodos array con la secuencia de nodos desde el origen hasta el nodo final cercano al servicio.
      * @return array
      */
     private function getIndicaciones($secuenciaNodos)
@@ -353,10 +361,11 @@ class MapaRecorridoManager extends BaseManager
 
     /**
      * Devuelve una cadena con la indicación desde el ultimo nodo hacia el servicio.
-     * $direccion: ultima dirección hasta el nodo final de la ruta
-     * $nodo: ultimo nodo desde el cual se llega al servicio
-     * $arco: arco con la información referencial para determinar que direccion debe tomar el usuario
-     * $idServicio: servicio al cual el usuario debe llegar.
+     * @param $direccion ultima dirección hasta el nodo final de la ruta
+     * @param integer $nodo ultimo nodo desde el cual se llega al servicio
+     * @param array $arco arco con la información referencial para determinar que direccion debe tomar el usuario
+     * @param integer $idServicio servicio al cual el usuario debe llegar.
+     * @return string
      */
     private function getIndicacionFinal($direccion, $nodo, $arco, $idServicio)
     {

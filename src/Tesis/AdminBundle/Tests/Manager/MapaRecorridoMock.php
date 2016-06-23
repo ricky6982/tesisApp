@@ -119,7 +119,6 @@ class MapaRecorridoMock
         ),
     );
 
-//    TODO: Crear mock de mapa de recorrido con servicios
     /**
      * Representación Grafica:
      *                     s2
@@ -243,7 +242,7 @@ class MapaRecorridoMock
                             'to' => 4,
                             'id' => '7f3088a0-d58b-41f4-a4aa-aec074abf13c',
                             'distancia' => 20,
-                            'infRef' => 'Arco Vertical',
+                            'infRef' => 'Arco Vertical 1',
                             'lugares' => array(
                                 'izq' => array(
                                     array(
@@ -285,6 +284,259 @@ class MapaRecorridoMock
                             'id' => '888415af-71a3-4459-a52a-51c6fb8334be',
                             'distancia' => 15,
                             'infRef' => 'Arco Vertical 2',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    );
+
+    /**
+     * Representación Grafica:
+     *                     s2
+     *      (1)------(2)------(3)
+     *           s1            |
+     *                         |
+     *                         |s3
+     *                         |
+     *                         |                           s6
+     *                        (4)---------(5)       (10)--------(9)
+     *                               s4    |                     |
+     *                                     |                     |
+     *                                     |                     |
+     *                                     |               s5    |
+     *                                    (6)--------(7)--------(8)
+     */
+    public static $currentMapWithServicesInEachEdges = array(
+        0 => array(
+            'id' => 1,
+            'mapaJson' => array(
+                'nodes' => array(
+                    '_data' => array(
+                        1 => array(
+                            'id' => 1,
+                            'label' => 'N-1',
+                            'conexiones' => array(
+                                2 => 'der',
+                            ),
+                        ),
+                        2 => array(
+                            'id' => 2,
+                            'label' => 'N-2',
+                            'conexiones' => array(
+                                1 => 'izq',
+                                3 => 'der',
+                            ),
+                        ),
+                        3 => array(
+                            'id' => 3,
+                            'label' => 'N-3',
+                            'conexiones' => array(
+                                2 => 'izq',
+                                4 => 'abj',
+                            ),
+                        ),
+                        4 => array(
+                            'id' => 4,
+                            'label' => 'N-4',
+                            'conexiones' => array(
+                                3 => 'arr',
+                                5 => 'der',
+                            ),
+                        ),
+                        5 => array(
+                            'id' => 5,
+                            'label' => 'N-5',
+                            'conexiones' => array(
+                                4 => 'izq',
+                                6 => 'abj',
+                            ),
+                        ),
+                        6 => array(
+                            'id' => 6,
+                            'label' => 'N-6',
+                            'conexiones' => array(
+                                5 => 'arr',
+                                7 => 'der',
+                            ),
+                        ),
+                        7 => array(
+                            'id' => 7,
+                            'label' => 'N-7',
+                            'conexiones' => array(
+                                6 => 'izq',
+                                8 => 'der',
+                            ),
+                        ),
+                        8 => array(
+                            'id' => 8,
+                            'label' => 'N-8',
+                            'conexiones' => array(
+                                7 => 'izq',
+                                9 => 'arr',
+                            ),
+                        ),
+                        9 => array(
+                            'id' => 9,
+                            'label' => 'N-9',
+                            'conexiones' => array(
+                                8 => 'abj',
+                                10 => 'izq',
+                            ),
+                        ),
+                        10 => array(
+                            'id' => 10,
+                            'label' => 'N-10',
+                            'conexiones' => array(
+                                9 => 'der',
+                            ),
+                        ),
+                    ),
+                ),
+                'edges' => array(
+                    '_data' => array(
+                        'arco01' => array(
+                            'from' => 1,
+                            'to' => 2,
+                            'id' => 'arco01',
+                            'distancia' => 10,
+                            'infRef' => 'Arco Horizontal 1',
+                            'lugares' => array(
+                                'izq' => array(),
+                                'der' => array(
+                                    array(
+                                        'idCategoria' => '1',
+                                        'idServicio' => '1',
+                                        'categoria' => 'Boleteria',
+                                        'servicio' => 'Servicio S1',
+                                        'distancia' => '1',
+                                    ),
+                                ),
+                            ),
+                        ),
+                        'arco02' => array(
+                            'from' => 2,
+                            'to' => 3,
+                            'id' => 'arco02',
+                            'distancia' => 10,
+                            'infRef' => 'Arco Horizontal 1',
+                            'lugares' => array(
+                                'izq' => array(
+                                    array(
+                                        'idCategoria' => '1',
+                                        'idServicio' => '2',
+                                        'categoria' => 'Boleteria',
+                                        'servicio' => 'Servicio S2',
+                                        'distancia' => '2',
+                                    ),
+                                ),
+                                'der' => array(),
+                            ),
+                        ),
+                        'arco03' => array(
+                            'from' => 3,
+                            'to' => 4,
+                            'id' => 'arco03',
+                            'distancia' => 15,
+                            'infRef' => 'Arco Vertical 1',
+                            'lugares' => array(
+                                'izq' => array(
+                                    array(
+                                        'idCategoria' => '1',
+                                        'idServicio' => '3',
+                                        'categoria' => 'Boleteria',
+                                        'servicio' => 'Servicio S3',
+                                        'distancia' => '3',
+                                    ),
+                                ),
+                                'der' => array(),
+                            ),
+                        ),
+                        'arco04' => array(
+                            'from' => 4,
+                            'to' => 5,
+                            'id' => 'arco04',
+                            'distancia' => 10,
+                            'infRef' => 'Arco Horizontal 2',
+                            'lugares' => array(
+                                'izq' => array(),
+                                'der' => array(
+                                    array(
+                                        'idCategoria' => '1',
+                                        'idServicio' => '4',
+                                        'categoria' => 'Boleteria',
+                                        'servicio' => 'Servicio S4',
+                                        'distancia' => '4',
+                                    ),
+                                ),
+                            ),
+                        ),
+                        'arco05' => array(
+                            'from' => 5,
+                            'to' => 6,
+                            'id' => 'arco05',
+                            'distancia' => 15,
+                            'infRef' => 'Arco Vertical 2',
+                            'lugares' => array(
+                                'izq' => array(),
+                                'der' => array(),
+                            ),
+                        ),
+                        'arco06' => array(
+                            'from' => 6,
+                            'to' => 7,
+                            'id' => 'arco06',
+                            'distancia' => 10,
+                            'infRef' => 'Arco Horizontal 3',
+                        ),
+                        'arco07' => array(
+                            'from' => 7,
+                            'to' => 8,
+                            'id' => 'arco07',
+                            'distancia' => 10,
+                            'infRef' => 'Arco Horizontal 3',
+                            'lugares' => array(
+                                'izq' => array(
+                                    array(
+                                        'idCategoria' => '1',
+                                        'idServicio' => '5',
+                                        'categoria' => 'Boleteria',
+                                        'servicio' => 'Servicio S5',
+                                        'distancia' => '7',
+                                    ),
+                                ),
+                                'der' => array(),
+                            ),
+                        ),
+                        'arco08' => array(
+                            'from' => 8,
+                            'to' => 9,
+                            'id' => 'arco08',
+                            'distancia' => 15,
+                            'infRef' => 'Arco Vertical 3',
+                            'lugares' => array(
+                                'izq' => array(),
+                                'der' => array(),
+                            ),
+                        ),
+                        'arco09' => array(
+                            'from' => 9,
+                            'to' => 10,
+                            'id' => 'arco09',
+                            'distancia' => 10,
+                            'infRef' => 'Arco Horizontal 4',
+                            'lugares' => array(
+                                'izq' => array(),
+                                'der' => array(
+                                    array(
+                                        'idCategoria' => '1',
+                                        'idServicio' => '6',
+                                        'categoria' => 'Boleteria',
+                                        'servicio' => 'Servicio S6',
+                                        'distancia' => '9',
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                 ),

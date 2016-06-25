@@ -396,7 +396,8 @@ class MapaRecorridoManager
 
         if (count($distancias) > 0) {
             $indexDistanciaMin = array_keys($distancias, min($distancias))[0];
-            $path = $this->getShortestPath($posicionActual, $nodosLejanos[$indexDistanciaMin]);
+            $path = $this->getShortestPath($posicionActual, $nodosCercanos[$indexDistanciaMin]);
+            array_push($path, $nodosLejanos[$indexDistanciaMin]);
             $arrayIndicaciones = $this->getArrayIndicaciones($path);
             $ultimoNodo = $path[count($path) - 1];
             $penultimoNodo = $path[count($path) - 2];
@@ -430,9 +431,9 @@ class MapaRecorridoManager
         array_shift($arrayIndicaciones);
         for ($i = 0; $i < count($arrayIndicaciones); $i++) {
             $caminar = sprintf(
-                "Camine %s metros por %s",
+                "Camine %s metros siguiendo %s",
                 $arrayIndicaciones[$i]['distancia'],
-                implode(", ", $arrayIndicaciones[$i]['infRef'])
+                implode(", luego ", $arrayIndicaciones[$i]['infRef'])
             );
             array_push($guia, $caminar);
             if ($i == count($arrayIndicaciones) - 1) {

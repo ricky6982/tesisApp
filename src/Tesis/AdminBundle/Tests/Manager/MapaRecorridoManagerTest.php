@@ -4,17 +4,17 @@ namespace Tesis\AdminBundle\Tests\Manager;
 
 use Tesis\AdminBundle\Entity\Repository\MapaRecorridoRepository;
 use Tesis\AdminBundle\Manager\MapaRecorridoManager;
-use PHPUnit\Framework\TestCase;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class MapaRecorridoManagerTest extends TestCase
+class MapaRecorridoManagerTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var $manager MapaRecorridoManager
+     */
     private $manager;
 
     public function setUp()
     {
-        $this->manager = new MapaRecorridoManager();
-
         $mapas = MapaRecorridoMock::$currentMap;
 
         $mapaRecorridoRepository = $this
@@ -45,7 +45,7 @@ class MapaRecorridoManagerTest extends TestCase
     }
 
     /**
-     * @covers MapaRecorridoManager::getArco
+     * MapaRecorridoManager::getArco
      */
     public function testGetArco_ConNodosAdyacentes_DeberiaDevolverArco()
     {
@@ -59,7 +59,7 @@ class MapaRecorridoManagerTest extends TestCase
     }
 
     /**
-     * @covers MapaRecorridoManager::getArco
+     * MapaRecorridoManager::getArco
      */
     public function testGetArco_ConNodoRepetido_DeberiaDevolverArrayVacio()
     {
@@ -68,7 +68,7 @@ class MapaRecorridoManagerTest extends TestCase
     }
 
     /**
-     * @covers MapaRecorridoManager::getNodo
+     * MapaRecorridoManager::getNodo
      */
     public function testGetNodo_ConNodoExistente_DeberiaDevolverNodo()
     {
@@ -77,7 +77,7 @@ class MapaRecorridoManagerTest extends TestCase
     }
 
     /**
-     * @covers MapaRecorridoManager::getNodo
+     * MapaRecorridoManager::getNodo
      */
     public function testGetNodo_ConNodoInexistente_DeberiaDevolverNulo()
     {
@@ -86,7 +86,7 @@ class MapaRecorridoManagerTest extends TestCase
     }
 
     /**
-     * @covers MapaRecorridoManager::getDistanciaEntreNodosAdyacentes
+     * MapaRecorridoManager::getDistanciaEntreNodosAdyacentes
      */
     public function testGetDistanciaEntreNodosAdyacentes_DebeDevolverDistancia()
     {
@@ -95,7 +95,7 @@ class MapaRecorridoManagerTest extends TestCase
     }
 
     /**
-     * @covers MapaRecorridoManager::getDistanciaEntreNodosAdyacentes
+     * MapaRecorridoManager::getDistanciaEntreNodosAdyacentes
      */
     public function testGetDistanciaEntreNodosNoAdyacentes_DebeDevolverNulo()
     {
@@ -104,7 +104,7 @@ class MapaRecorridoManagerTest extends TestCase
     }
 
     /**
-     * @covers MapaRecorridoManager::getDireccionEntreNodosAdyacentes
+     * MapaRecorridoManager::getDireccionEntreNodosAdyacentes
      */
     public function testGetDireccion_ConNodosAdyacentes_DebeDevolverDireccion()
     {
@@ -122,7 +122,7 @@ class MapaRecorridoManagerTest extends TestCase
     }
 
     /**
-     * @covers MapaRecorridoManager::getDireccionEntreNodosAdyacentes
+     * MapaRecorridoManager::getDireccionEntreNodosAdyacentes
      */
     public function testGetDireccion_ConNodosNoAdyacentes_DebeDevolverNulo()
     {
@@ -131,7 +131,7 @@ class MapaRecorridoManagerTest extends TestCase
     }
 
     /**
-     * @cover MapaRecorridoManager::getDistanciaTotalEntreNodos
+     * MapaRecorridoManager::getDistanciaTotalEntreNodos
      */
     public function testGetDistanciaTotalEntreNodos_ConSecuenciaNodosValida_DeberiaDevolverLaDistanciaTotal()
     {
@@ -149,7 +149,7 @@ class MapaRecorridoManagerTest extends TestCase
     }
 
     /**
-     * @cover MapaRecorridoManager::getDistanciaTotalEntreNodos
+     * MapaRecorridoManager::getDistanciaTotalEntreNodos
      */
     public function testGetDistanciaTotalEntreNodos_ConSecuenciaNodosInvalida_DeberiaLanzarExcepcion()
     {

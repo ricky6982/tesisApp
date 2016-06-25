@@ -9,6 +9,9 @@ use Tesis\AdminBundle\Manager\MapaRecorridoManager;
 
 class MapaRecorridoManagerConServiciosTest extends TestCase
 {
+    /**
+     * @var $manager MapaRecorridoManager
+     */
     private $manager;
 
     public function setUp()
@@ -45,7 +48,7 @@ class MapaRecorridoManagerConServiciosTest extends TestCase
     }
 
     /**
-     * @covers MapaRecorridoManager::getUbicacionServicio
+     * MapaRecorridoManager::getUbicacionServicio()
      */
     public function testGetUbicacionServicio()
     {
@@ -60,7 +63,7 @@ class MapaRecorridoManagerConServiciosTest extends TestCase
      * Obtiene la distancia minima a un servicio en el lado derecho del arco
      * y debe devolver la orientación correcta segun el punto de partida from o to del arco
      *
-     * @covers MapaRecorridoManager::getDistanciaAlServicio
+     * MapaRecorridoManager::getDistanciaAlServicio
      */
     public function testGetDistanciaAlServicioLadoDerecho()
     {
@@ -105,7 +108,7 @@ class MapaRecorridoManagerConServiciosTest extends TestCase
      * Obtiene la distancia minima a un servicio en el lado izquierdo del arco
      * y debe devolver la orientación correcta segun el punto de partida from o to del arco
      *
-     * @covers MapaRecorridoManager::getDistanciaAlServicio
+     * MapaRecorridoManager::getDistanciaAlServicio
      */
     public function testGetDistanciaAlServicioLadoIzquierdo()
     {
@@ -150,7 +153,7 @@ class MapaRecorridoManagerConServiciosTest extends TestCase
      * Obtiene la distancia minima a un servicio en el lado derecho del arco
      * y debe devolver la orientación correcta segun el punto de partida from o to del arco
      *
-     * @covers MapaRecorridoManager::getDistanciaAlServicio
+     * MapaRecorridoManager::getDistanciaAlServicio
      */
     public function testGetDistanciaAlServicioLadoDerechoConServicioRepetido()
     {
@@ -209,7 +212,7 @@ class MapaRecorridoManagerConServiciosTest extends TestCase
      * Obtiene la distancia minima a un servicio en el lado izquierdo del arco
      * y debe devolver la orientación correcta segun el punto de partida from o to del arco
      *
-     * @covers MapaRecorridoManager::getDistanciaAlServicio
+     * MapaRecorridoManager::getDistanciaAlServicio
      */
     public function testGetDistanciaAlServicioLadoIzquierdoConServicioRepetido()
     {
@@ -269,7 +272,7 @@ class MapaRecorridoManagerConServiciosTest extends TestCase
      * debe devolver la orientación correcta segun el punto de partida from o to del arco y
      * la distancia minima
      *
-     * @covers MapaRecorridoManager::getDistanciaAlServicio
+     * MapaRecorridoManager::getDistanciaAlServicio
      */
     public function testGetDistanciaAlServicioConServicioRepetidoEnAmbosLados()
     {
@@ -319,8 +322,10 @@ class MapaRecorridoManagerConServiciosTest extends TestCase
     }
 
     /**
-     * De una secuencia valida de nodos obtiene un array de indicaciones minima
-     * Indicaciones minima significa que los arcos que tienen la misma dirección se unen
+     * De una secuencia valida de nodos, obtiene un array de indicaciones minima
+     * Indicaciones minima significa que los arcos que tienen la misma dirección se unen.
+     *
+     * MapaRecorridoManager::getArrayIndicaciones
      */
     public function testGetArrayIndicaciones()
     {

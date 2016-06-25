@@ -6,7 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Tesis\AdminBundle\Lib\Dijkstras\Graph;
 
-class MapaRecorridoManager extends BaseManager
+class MapaRecorridoManager
 {
     protected $entityManager;
 
@@ -46,21 +46,21 @@ class MapaRecorridoManager extends BaseManager
         $totalConexiones = array();
         foreach ($arcos as $arco) {
             if (isset($totalConexiones[$arco['from']])) {
-                $totalConexiones[$arco['from']][$arco['to']] = isset($arco['distancia'])? $arco['distancia'] : 1000;
-            }else{
-                $totalConexiones[$arco['from']] = array($arco['to'] => (isset($arco['distancia'])?$arco['distancia']:1000));
+                $totalConexiones[$arco['from']][$arco['to']] = isset($arco['distancia']) ? $arco['distancia'] : 1000;
+            } else {
+                $totalConexiones[$arco['from']] = array($arco['to'] => (isset($arco['distancia']) ? $arco['distancia'] : 1000));
             };
         }
         foreach ($arcos as $arco) {
             if (isset($totalConexiones[$arco['to']])) {
-                $totalConexiones[$arco['to']][$arco['from']] = isset($arco['distancia'])? $arco['distancia'] : 1000;
-            }else{
-                $totalConexiones[$arco['to']] = array($arco['from'] => (isset($arco['distancia'])?$arco['distancia']:1000));
+                $totalConexiones[$arco['to']][$arco['from']] = isset($arco['distancia']) ? $arco['distancia'] : 1000;
+            } else {
+                $totalConexiones[$arco['to']] = array($arco['from'] => (isset($arco['distancia']) ? $arco['distancia'] : 1000));
             };
         }
 
         foreach ($totalConexiones as $nodo => $conexiones) {
-            $graph->add_vertex( $nodo, $conexiones );
+            $graph->add_vertex($nodo, $conexiones);
         }
 
         return $graph;
@@ -115,11 +115,12 @@ class MapaRecorridoManager extends BaseManager
         $mapa = $this->getCurrentMap();
         $edges = $mapa['mapaJson']['edges']['_data'];
         foreach ($edges as $edge) {
-            if (($edge['from'] == $nodoA and $edge['to'] == $nodoB) or ($edge['from'] == $nodoB and $edge['to'] == $nodoA )) {
+            if (($edge['from'] == $nodoA and $edge['to'] == $nodoB) or ($edge['from'] == $nodoB and $edge['to'] == $nodoA)) {
                 return $edge;
                 break;
             }
         }
+
         return array();
     }
 
@@ -138,6 +139,7 @@ class MapaRecorridoManager extends BaseManager
                 break;
             }
         }
+
         return null;
     }
 
@@ -195,8 +197,11 @@ class MapaRecorridoManager extends BaseManager
     {
 //        TODO: deberia lanzar excepción o warning si la secuencia es invalida.
         $distanciaTotal = 0;
-        for ($i=0; $i < count($secuenciaNodos) - 1; $i++) { 
-            $distanciaTotal = $distanciaTotal + $this->getDistanciaEntreNodosAdyacentes($secuenciaNodos[$i], $secuenciaNodos[$i+1]);
+        for ($i = 0; $i < count($secuenciaNodos) - 1; $i++) {
+            $distanciaTotal = $distanciaTotal + $this->getDistanciaEntreNodosAdyacentes(
+                    $secuenciaNodos[$i],
+                    $secuenciaNodos[$i + 1]
+                );
         }
 
         return $distanciaTotal;
@@ -231,14 +236,14 @@ class MapaRecorridoManager extends BaseManager
                 $min = min($distanciasMerge);
                 if (in_array($min, $distancias['der'])) {
                     return array('distancia' => $min, 'direccion' => 'der');
-                }else{
+                } else {
                     return array('distancia' => $min, 'direccion' => 'izq');
                 }
             case 'to':
                 $max = max($distanciasMerge);
                 if (in_array($max, $distancias['der'])) {
                     return array('distancia' => $arco['distancia'] - $max, 'direccion' => 'izq');
-                }else{
+                } else {
                     return array('distancia' => $arco['distancia'] - $max, 'direccion' => 'der');
                 }
         }
@@ -259,24 +264,29 @@ class MapaRecorridoManager extends BaseManager
      */
     public function getArrayIndicaciones($secuenciaNodos)
     {
-        $indicaciones = array(array(
-            'nodo' => $secuenciaNodos[0],
-            'infRef' => array(),
-            'distancia' => '',
-            'direccion' => ''
-        ));
+        $indicaciones = array(
+            array(
+                'nodo' => $secuenciaNodos[0],
+                'infRef' => array(),
+                'distancia' => '',
+                'direccion' => '',
+            ),
+        );
 
-        for ($i=0; $i < count($secuenciaNodos) - 1; $i++) {
-            $arco = $this->getArco($secuenciaNodos[$i], $secuenciaNodos[$i+1]);
+        for ($i = 0; $i < count($secuenciaNodos) - 1; $i++) {
+            $arco = $this->getArco($secuenciaNodos[$i], $secuenciaNodos[$i + 1]);
             $distancia = (isset($arco['distancia'])) ? $arco['distancia'] : null;
-            $infRef = (isset($arco['infRef']) ? $arco['infRef'] : '' );
-            $direccion = $this->getDireccionEntreNodosAdyacentes($secuenciaNodos[$i], $secuenciaNodos[$i+1]);
-            array_push($indicaciones, array(
-                'nodo' => $secuenciaNodos[$i+1],
-                'infRef' => array($infRef),
-                'distancia' => $distancia,
-                'direccion' => $direccion
-            ));
+            $infRef = (isset($arco['infRef']) ? $arco['infRef'] : '');
+            $direccion = $this->getDireccionEntreNodosAdyacentes($secuenciaNodos[$i], $secuenciaNodos[$i + 1]);
+            array_push(
+                $indicaciones,
+                array(
+                    'nodo' => $secuenciaNodos[$i + 1],
+                    'infRef' => array($infRef),
+                    'distancia' => $distancia,
+                    'direccion' => $direccion,
+                )
+            );
         }
 
         $indicacionesMin = array();
@@ -284,22 +294,27 @@ class MapaRecorridoManager extends BaseManager
         while ($i < count($indicaciones)) {
             $j = $i + 1;
             $agrupar = false;
-            while ($j < count($indicaciones) and $indicaciones[$i]['direccion'] == $indicaciones[$j]['direccion']){
+            while ($j < count($indicaciones) and $indicaciones[$i]['direccion'] == $indicaciones[$j]['direccion']) {
                 $agrupar = true;
                 $j += 1;
             }
             if ($agrupar) {
-                $agrupacion = array('nodo' => null, 'infRef' => array(), 'distancia' => 0, 'direccion' => $indicaciones[$i]['direccion']);
-                for ($k = $i; $k < $j ; $k++) { 
+                $agrupacion = array(
+                    'nodo' => null,
+                    'infRef' => array(),
+                    'distancia' => 0,
+                    'direccion' => $indicaciones[$i]['direccion'],
+                );
+                for ($k = $i; $k < $j; $k++) {
                     $agrupacion = array(
-                            'nodo' => $indicaciones[$k]['nodo'],
-                            'infRef' => array_unique(array_merge($agrupacion['infRef'], $indicaciones[$k]['infRef'])),
-                            'distancia' => $agrupacion['distancia'] + $indicaciones[$k]['distancia'],
-                            'direccion' => $indicaciones[$k]['direccion']
-                        );
+                        'nodo' => $indicaciones[$k]['nodo'],
+                        'infRef' => array_unique(array_merge($agrupacion['infRef'], $indicaciones[$k]['infRef'])),
+                        'distancia' => $agrupacion['distancia'] + $indicaciones[$k]['distancia'],
+                        'direccion' => $indicaciones[$k]['direccion'],
+                    );
                 }
                 array_push($indicacionesMin, $agrupacion);
-            }else{
+            } else {
                 array_push($indicacionesMin, $indicaciones[$i]);
             }
             $i = $j;
@@ -324,70 +339,11 @@ class MapaRecorridoManager extends BaseManager
         $direccion = $inicio." ".$fin;
         if (strpos($giroDerecha, $direccion)) {
             return "derecha";
-        }elseif (strpos($giroIzquierda, $direccion)) {
+        } elseif (strpos($giroIzquierda, $direccion)) {
             return "izquierda";
-        }else{
+        } else {
             return null;
         }
-    }
-
-    /**
-     * Devuelve un array con indicaciones relativas a la posicion y direccion del usuario
-     *
-     * @param array $secuenciaNodos array con la secuencia de nodos desde el origen hasta el nodo final cercano al servicio.
-     * @return array
-     */
-    private function getIndicaciones($secuenciaNodos)
-    {
-        $vectorIndicaciones = $this->getArrayIndicaciones($secuenciaNodos);
-        $guia = array();
-        // Crea las indicaciones desde el nodo inicial hasta el nodo final
-        for ($i=0; $i < count($vectorIndicaciones) - 1; $i++) { 
-            if ($i == 0) {
-                $lugares = implode(' y ', $vectorIndicaciones[$i+1]['infRef']);
-                $step = sprintf("Camine %s metros hacia adelante, por %s", $vectorIndicaciones[$i+1]['distancia'], $lugares);
-            }else{
-                $giro = $this->getRotacion($vectorIndicaciones[$i]['direccion'], $vectorIndicaciones[$i+1]['direccion']);
-                $lugares = implode(',', $vectorIndicaciones[$i+1]['infRef']);
-                $step = sprintf("Gire a su %s y camine %s metros en esa dirección, Ud recorrera %s", $giro, $vectorIndicaciones[$i+1]['distancia'], $lugares);
-            }
-            array_push($guia, $step);
-        }
-
-        $ultimaDireccion = $vectorIndicaciones[count($vectorIndicaciones)-1]['direccion'];
-
-        return $guia;
-    }
-
-    /**
-     * Devuelve una cadena con la indicación desde el ultimo nodo hacia el servicio.
-     * @param $direccion ultima dirección hasta el nodo final de la ruta
-     * @param integer $nodo ultimo nodo desde el cual se llega al servicio
-     * @param array $arco arco con la información referencial para determinar que direccion debe tomar el usuario
-     * @param integer $idServicio servicio al cual el usuario debe llegar.
-     * @return string
-     */
-    private function getIndicacionFinal($direccion, $nodo, $arco, $idServicio)
-    {
-        if ($arco['from'] == $nodo) {
-            $distancia = $this->getDistanciaAlServicio('from', $idServicio, $arco);
-            $giro = $this->getDireccionEntreNodosAdyacentes($nodo, $arco['to']);
-        }else{
-            $distancia = $this->getDistanciaAlServicio('to', $idServicio, $arco);
-            $giro = $this->getDireccionEntreNodosAdyacentes($nodo, $arco['from']);
-        }
-
-        $posicionRespectoArco = $distancia['direccion'] !== 'der' ? 'derecha' : 'izquierda';
-
-        if ($direccion == $giro) {
-            $instruccion = sprintf("Siga hacia adelante %s metros y a su mano %s esta el servicio", $distancia['distancia'], $posicionRespectoArco);
-        }else{
-            $rotacion = $this->getRotacion($direccion, $distancia['direccion']);
-            $rotacion = $rotacion !== 'der' ? 'derecha' : 'izquierda';
-            $instruccion = sprintf("Gire a su %s, camine %s metros y a su mano %s se encuentra el servicio que ud solicito.", $rotacion, $distancia['distancia'], $posicionRespectoArco);
-        }
-
-        return $instruccion;
     }
 
     /**
@@ -395,44 +351,105 @@ class MapaRecorridoManager extends BaseManager
      * los arcos en los que se encuentra el servicio.
      *
      *  Devuelve un Array con las instrucciones que el usuario debe seguir para llegar a su destino.
+     * @param integer $posicionActual nodo inicial, donde la persona se encuentra.
+     * @param integer $servicio id del servicio
+     * @return array
      */
     public function getRutaCortaAlServicio($posicionActual, $servicio)
     {
         $arcos = $this->getUbicacionServicio($servicio);
+        $instrucciones = array();
         $distancias = array();
         $nodosCercanos = array();
+        $nodosLejanos = array();
 
         foreach ($arcos as $arco) {
-            $distanciaNodoA = $this->getDistanciaTotalEntreNodos($this->getShortestPath($posicionActual, $arco['from']));
-            $distanciaNodoB = $this->getDistanciaTotalEntreNodos($this->getShortestPath($posicionActual, $arco['to']));
-            
-            if ($distanciaNodoA < $distanciaNodoB) {
-                $distanciaMin = $distanciaNodoA + $this->getDistanciaAlServicio('from', $servicio, $arco)['distancia'];
+            $distanciaNodoFrom = $this->getDistanciaTotalEntreNodos(
+                $this->getShortestPath($posicionActual, $arco['from'])
+            );
+            $distanciaNodoTo = $this->getDistanciaTotalEntreNodos($this->getShortestPath($posicionActual, $arco['to']));
+            $distanciaAlServicioPorNodoFrom = $distanciaNodoFrom + $this->getDistanciaAlServicio(
+                    'from',
+                    $servicio,
+                    $arco
+                )['distancia'];
+            $distanciaAlServicioPorNodoTo = $distanciaNodoTo + $this->getDistanciaAlServicio(
+                    'to',
+                    $servicio,
+                    $arco
+                )['distancia'];
+
+            if ($distanciaAlServicioPorNodoFrom < $distanciaAlServicioPorNodoTo) {
+                $distanciaMin = $distanciaAlServicioPorNodoFrom;
                 $nodoCercano = $arco['from'];
-            }else{
-                $distanciaMin = $distanciaNodoB  + $this->getDistanciaAlServicio('to', $servicio, $arco)['distancia'];
+                $nodoLejano = $arco['to'];
+            } else {
+                $distanciaMin = $distanciaAlServicioPorNodoTo;
                 $nodoCercano = $arco['to'];
+                $nodoLejano = $arco['from'];
             }
 
             array_push($distancias, $distanciaMin);
             array_push($nodosCercanos, $nodoCercano);
+            array_push($nodosLejanos, $nodoLejano);
         }
 
-        if (count($distancias) > 0 ) {
-            $path = $this->getShortestPath($posicionActual, $nodosCercanos[array_keys($distancias, min($distancias))[0]]);
-            $direccionFinal = $this->getArrayIndicaciones($path);
-            $direccionFinal = array_pop($direccionFinal)['direccion'];
-            $instruccionFinal = $this->getIndicacionFinal(
-                                    $direccionFinal,
-                                    $nodosCercanos[array_keys($distancias, min($distancias))[0]],
-                                    $arcos[array_keys($distancias, min($distancias))[0]],
-                                    $servicio
-                                );
-            $instrucciones = $this->getIndicaciones($path);
-            array_push($instrucciones, $instruccionFinal);
+        if (count($distancias) > 0) {
+            $indexDistanciaMin = array_keys($distancias, min($distancias))[0];
+            $path = $this->getShortestPath($posicionActual, $nodosLejanos[$indexDistanciaMin]);
+            $arrayIndicaciones = $this->getArrayIndicaciones($path);
+            $ultimoNodo = $path[count($path) - 1];
+            $penultimoNodo = $path[count($path) - 2];
+            $ultimoArco = $this->getArco($penultimoNodo, $ultimoNodo);
+            if ($penultimoNodo == $ultimoArco['from']) {
+                $distanciaAlServicio = $this->getDistanciaAlServicio('from', $servicio, $ultimoArco);
+            } else {
+                $distanciaAlServicio = $this->getDistanciaAlServicio('to', $servicio, $ultimoArco);
+            }
+
+            $ultimaDistancia = $arrayIndicaciones[count($arrayIndicaciones) - 1]['distancia']
+                - $ultimoArco['distancia'] + $distanciaAlServicio['distancia'];
+            $arrayIndicaciones[count($arrayIndicaciones) - 1]['distancia'] = $ultimaDistancia;
+
+            $instrucciones = $this->getIndicaciones($arrayIndicaciones, $distanciaAlServicio['direccion']);
         }
 
         return $instrucciones;
+    }
+
+    /**
+     * Devuelve un array con indicaciones relativas a la posicion y direccion del usuario
+     *
+     * @param array $arrayIndicaciones secuencia de indicaciones hasta el nodo final
+     * @param string $ubicacionRelativaServicio 'izq'|'der' representa a que lado se encuentra el servicio
+     * @return array
+     */
+    public function getIndicaciones($arrayIndicaciones, $ubicacionRelativaServicio)
+    {
+        $guia = array();
+        array_shift($arrayIndicaciones);
+        for ($i = 0; $i < count($arrayIndicaciones); $i++) {
+            $caminar = sprintf(
+                "Camine %s metros por %s",
+                $arrayIndicaciones[$i]['distancia'],
+                implode(", ", $arrayIndicaciones[$i]['infRef'])
+            );
+            array_push($guia, $caminar);
+            if ($i == count($arrayIndicaciones) - 1) {
+                $ubicacion = $ubicacionRelativaServicio == "izq" ? "izquierda" : "derecha";
+                $llegar = sprintf("A su mano %s se encuentra el servicio que solicito.", $ubicacion);
+                array_push($guia, $llegar);
+            } else {
+                $giro = $this->getRotacion(
+                    $arrayIndicaciones[$i]['direccion'],
+                    $arrayIndicaciones[$i + 1]['direccion']
+                );
+                $girar = sprintf("Gire a su %s", $giro);
+                array_push($guia, $girar);
+            }
+        }
+
+        return $guia;
     }
 
     /**
@@ -452,5 +469,21 @@ class MapaRecorridoManager extends BaseManager
         }
 
         return $puntosReferencia;
+    }
+
+    /**
+     * Dado una secuencia de nodos consecutivos valido debe devolver cada uno de los arcos que los conectan.
+     * @param $secuenciaNodos array
+     * @return array $arcos
+     */
+    public function getSecuenciaDeArcos($secuenciaNodos)
+    {
+        $arcos = array();
+        for ($i = 0; $i < count($secuenciaNodos) - 1; $i++) {
+            $arco = $this->getArco($secuenciaNodos[$i], $secuenciaNodos[$i + 1]);
+            array_push($arcos, $arco);
+        }
+
+        return $arcos;
     }
 }

@@ -419,7 +419,7 @@ class MapaRecorridoMock
                             'to' => 3,
                             'id' => 'arco02',
                             'distancia' => 10,
-                            'infRef' => 'Arco Horizontal 1',
+                            'infRef' => 'Arco Horizontal 2',
                             'lugares' => array(
                                 'izq' => array(
                                     array(

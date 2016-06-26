@@ -29,7 +29,6 @@
 
 /app/config/parameters.yml
 /composer.phar
-composer.lock
 
 ######################################
 # archivos a excluir 

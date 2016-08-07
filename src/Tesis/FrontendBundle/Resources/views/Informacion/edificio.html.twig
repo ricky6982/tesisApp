@@ -1,6 +1,10 @@
 {% extends "FrontendBundle:Default:layout.html.twig" %}
 
 {% block contenido %}
+    {% if app.environment == 'dev' %}
+        <h1>Información del Edificio</h1>
+    {% endif %}
+
     <div class="dl-horizontal">
         <dt>Edificio:</dt>
         <dd>{{ info.nombre }}</dd>

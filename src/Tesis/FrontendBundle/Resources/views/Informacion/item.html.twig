@@ -3,13 +3,20 @@
 {% block title %}{{ item.nombre }}{% endblock %}
 
 {% block contenido %}
+    {% if app.environment == 'dev' %}
+        <h1>Descripción del item seleccionado</h1>
+    {% endif %}
 
-{{ item.descripcion }}
-<br>
+    {{ item.descripcion }}
+    <br>
 
-<a href="{{ path('guiame', {'id': item.id }) }}">Guíame hasta aqui</a>
+    <a href="{{ path('informacion_estoy_en', {'id': item.id }) }}">Guíame hasta aqui</a>
 
-<br>
+    <br>
 
-<a href="{{ path('informacion_servicio_detalle', {'id': item.servicio.id }) }}">Volver</a>
+    <div class="volver">
+        <a href="{{ path('informacion_servicio_items', {'id': item.servicio.id }) }}">Volver a lugares de interes</a>
+        <a href="{{ path('informacion_servicios') }}">Volver al listado de servicios</a>
+        <a href="{{ path('informacion_homepage') }}">Volver al menu principal</a>
+    </div>
 {% endblock %}

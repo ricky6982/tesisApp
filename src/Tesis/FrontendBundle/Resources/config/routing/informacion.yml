@@ -10,17 +10,17 @@ informacion_servicios:
     path: /Servicios
     defaults: { _controller: FrontendBundle:Informacion:servicios }
 
-informacion_servicio_detalle:
+informacion_servicio_items:
     path: /Servicio/{id}
-    defaults: { _controller: FrontendBundle:Informacion:servicioDetalle }
+    defaults: { _controller: FrontendBundle:Informacion:servicioItems }
 
-informacion_servicio_item:
+informacion_item_detalle:
     path: /Servicio/Item/{id}
-    defaults: { _controller: FrontendBundle:Informacion:servicioItem }
+    defaults: { _controller: FrontendBundle:Informacion:ItemDetalle }
 
-guiame:
-    path: /Servicio/Item/{id}/guiame
-    defaults: { _controller: FrontendBundle:Informacion:guiame }
+informacion_estoy_en:
+    path: /Servicio/Item/{id}/estoy_en
+    defaults: { _controller: FrontendBundle:Informacion:estoyEn }
 
 indicaciones:
     path: /Servicio/Item/{id}/indicaciones/{puntoInicio}

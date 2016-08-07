@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACI,SAAC,CACG,OAAO,CAAE,KAAK",
+"sources": ["../../../webApp/sass/mobile.scss"],
+"names": [],
+"file": "tesisAppMobile-1.0.0.css"
+}

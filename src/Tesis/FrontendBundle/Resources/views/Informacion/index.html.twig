@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block contenido %}
+    {% if app.environment == 'dev' %}
+        <h1>Main Menu</h1>
+    {% endif %}
+
     <ol role="menubar" aria-haspopup="true" aria-labelledby="fileLabel" aria-label="Información General">
         <li role="option" aria-setsize="4" aria-posinset="1">
             <a href="{{ path('informacion_edificio') }}">Información del Lugar</a>

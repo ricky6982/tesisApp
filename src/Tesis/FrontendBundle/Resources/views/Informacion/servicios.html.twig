@@ -2,10 +2,15 @@
 
 {% block title %}Listado de Servicios{% endblock %}
 {% block contenido %}
+    {% if app.environment == 'dev' %}
+        <h1>Listado de Servicios</h1>
+    {% endif %}
+
     <ul>
         {% for servicio in servicios %}
-        <li><a href="{{ path('informacion_servicio_detalle', {'id': servicio.id }) }}">{{ servicio.nombre }}</a></li>
+        <li><a href="{{ path('informacion_servicio_items', {'id': servicio.id }) }}">{{ servicio.nombre }}</a></li>
         {% endfor %}
     </ul>
-    <a href="{{ path('informacion_homepage') }}">Volver</a>
+
+    <a href="{{ path('informacion_homepage') }}">Volver al menu principal</a>
 {% endblock %}

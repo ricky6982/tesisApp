@@ -1,20 +1,22 @@
 {% extends 'FrontendBundle:Default:layout.html.twig' %}
 
+{% block title %}
+    Servicio {{ servicio.nombre }}
+{% endblock %}    
+
 {% block contenido %}
     {% if app.environment == 'dev' %}
-        <h1>Resultados de la busqueda de servicios</h1>
+        <h1>Listado de Items de un servicio seleccionado</h1>
     {% endif %}
 
-    <h1>Resultado de la busqueda, {{ servicios | length }} elemntos.</h1>
-
     <ul>
-        {% for item in servicios %}
+        {% for item in servicio.items %}
             <li><a href="{{ path('informacion_item_detalle', {'id': item.id }) }}">{{ item.nombre }}</a></li>
         {% endfor %}
     </ul>
 
     <div class="volver">
-        <a href="{{ path('informacion_como_llegar') }}">Volver</a>
+        <a href="{{ path('informacion_servicios') }}">Volver al listado de servicios</a>
         <a href="{{ path('informacion_homepage') }}">Volver al menu principal</a>
     </div>
 {% endblock %}

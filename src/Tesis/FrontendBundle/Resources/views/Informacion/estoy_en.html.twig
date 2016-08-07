@@ -1,21 +1,23 @@
 {% extends "FrontendBundle:Default:layout.html.twig" %}
 
-{% block title %}Indicaciones para llegar a {{ item.nombre }}{% endblock %}
+{% block title %}Guiarme hasta {{ item.nombre }}{% endblock %}
 
 {% block contenido %}
     {% if app.environment == 'dev' %}
-        <h1>Indicaciones</h1>
+        <h1>Ubicación inicial</h1>
     {% endif %}
 
-    <ol>
-        {% for item in indicaciones %}
-            <li>{{ item }}</li>
+    <strong>Estoy en</strong>
+    <ul>
+        {% for puntoRef in puntosReferencia %}
+            <li>
+                <a href="{{ path('indicaciones', {'id': item.id, 'puntoInicio': puntoRef.id }) }}">{{ puntoRef.infRef.titulo }}</a>
+            </li>
         {% endfor %}
-    </ol>
+    </ul>
 
     <div class="volver">
-        <a href="{{ path('informacion_estoy_en', {'id': item.id }) }}">Volver a la selección de ubicación inicial</a>
-        <a href="{{ path('informacion_item_detalle', {'id': item.id }) }}">Volver a la selección de ubicación inicial</a>
+        <a href="{{ path('informacion_item_detalle', {'id': item.id }) }}">Volver al detalle del servicio</a>
         <a href="{{ path('informacion_servicio_items', {'id': item.servicio.id }) }}">Volver a lugares de interes</a>
         <a href="{{ path('informacion_servicios') }}">Volver al listado de servicios</a>
         <a href="{{ path('informacion_homepage') }}">Volver al menu principal</a>

@@ -71,6 +71,7 @@ module.exports = function (grunt){
                 },
                 files: {
                     '<%= builddir %>/css/<%= pkg.name %>Backend-<%= pkg.version %>.css': 'webApp/sass/backend.scss',
+                    '<%= builddir %>/css/<%= pkg.name %>Mobile-<%= pkg.version %>.css': 'webApp/sass/mobile.scss',
                 }
             }
         },
